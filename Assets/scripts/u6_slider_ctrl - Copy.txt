@@ -49,12 +49,10 @@ public class u6_slider_ctrl : MonoBehaviour
                 LogToFile(logMessage2);
                 // Do something specific for this child (e.g., alter its rotation)
                 AlterJ2(J2);
-                // AlterJointRotation(child, slider1.value);
+                AlterJointRotation(child, slider1.value);
             }
         }
-        LogToFile("--------------------------------------------------------");
     }
-
     public void AlterJ2(string J2)
     {
         Transform robotTransform = U6robot3DBox.transform;
@@ -65,17 +63,15 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             // If the child is found, alter its rotation
             child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
-            string LogRotation = $" Quaternion.AngleAxis: {child.name}";
+            string LogRotation= $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
-            LogToFile("--------------------------------------------------------");
         }
         else
         {
             Debug.LogWarning($"Child with name {J2} not found.");
             string LogWarning = $"Child with name {J2} not found. ";
             LogToFile(LogWarning);
-            LogToFile("--------------------------------------------------------");
-
+            
         }
 
         // robotTransform.Find(J2).localRotation =Quaternion.AngleAxis(rotationValue1,Vector3.forward);
@@ -121,7 +117,7 @@ public class u6_slider_ctrl : MonoBehaviour
         }
 
     }
-    private void LogToFile(string logMessage)
+     private void LogToFile(string logMessage)
     {
         using (StreamWriter sw = File.AppendText(logFilePath))
         {

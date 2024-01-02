@@ -1,0 +1,277 @@
+Number of children for original5.1_J2: 2
+Number of children for Armature: 2
+Number of children for Armature.001: 2
+Number of children for Armature.003: 2
+Number of children for Armature.004: 2
+Number of children for Armature.005: 2
+Number of children for Armature.006: 1
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J6.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J5.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J4.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J1.STEP-1: 0
+Found and altering rotation for: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J1.STEP-1
+Child with name xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J1.STEP-1 not found. 
+Number of children for Slider3: 4
+Number of children for Background: 0
+Number of children for Fill Area: 1
+Number of children for Fill: 0
+Number of children for Handle Slide Area: 1
+Number of children for Handle: 0
+Number of children for Joint 4 text: 0
+Number of children for Slider1: 4
+Number of children for Background: 0
+Number of children for Fill Area: 1
+Number of children for Fill: 0
+Number of children for Handle Slide Area: 1
+Number of children for Handle: 0
+Number of children for Joint 2 text: 0
+Number of children for Slider2: 4
+Number of children for Background: 0
+Number of children for Fill Area: 1
+Number of children for Fill: 0
+Number of children for Handle Slide Area: 1
+Number of children for Handle: 0
+Number of children for Joint 3 text : 0
+Number of children for original5.1_J2: 2
+Number of children for Armature: 2
+Number of children for Armature.001: 2
+Number of children for Armature.003: 2
+Number of children for Armature.004: 2
+Number of children for Armature.005: 2
+Number of children for Armature.006: 1
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J6.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J5.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J4.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J1.STEP-1: 0
+Found and altering rotation for: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J1.STEP-1
+Child with name xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J1.STEP-1 not found. 
+Number of children for Slider3: 4
+Number of children for Background: 0
+Number of children for Fill Area: 1
+Number of children for Fill: 0
+Number of children for Handle Slide Area: 1
+Number of children for Handle: 0
+Number of children for Joint 4 text: 0
+Number of children for Slider1: 4
+Number of children for Background: 0
+Number of children for Fill Area: 1
+Number of children for Fill: 0
+Number of children for Handle Slide Area: 1
+Number of children for Handle: 0
+Number of children for Joint 2 text: 0
+Number of children for Slider2: 4
+Number of children for Background: 0
+Number of children for Fill Area: 1
+Number of children for Fill: 0
+Number of children for Handle Slide Area: 1
+Number of children for Handle: 0
+Number of children for Joint 3 text : 0
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
+ Quaternion.AngleAxis: original5.1_J2
