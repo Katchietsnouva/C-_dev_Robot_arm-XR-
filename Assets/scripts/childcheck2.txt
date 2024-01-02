@@ -1,0 +1,79 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class u6_slider_ctrl : MonoBehaviour
+{
+    private Slider slider1;
+    private Slider slider2;
+    private Slider slider3;
+    public GameObject U6robot3DBox;
+    private const string J2_PARAMETER_NAME = "J2val";
+    private const string J3_PARAMETER_NAME = "J3val";
+    private const string J4_PARAMETER_NAME = "J3val";
+
+    void Start()
+    {
+        slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
+        slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
+        slider3 = GameObject.Find("Slider3").GetComponent<Slider>();
+
+        CheckChildCount(transform);
+    }
+
+    public void CheckChildCount(Transform parent)
+    {
+        int childCount = parent.childCount;
+
+        Debug.Log($"Number of children for {parent.name}: {childCount}");
+
+        for (int i = 0; i < childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            CheckChildCount(child); // Recursively check children
+
+            // Check if the child has the specific name you're looking for
+            if (child.name == "J1.STEP-1")
+            {
+                // Do something specific for this child (e.g., alter its rotation)
+                AlterJointRotation(child, slider1.value);
+            }
+            else if (child.name == "J2.STEP-1")
+            {
+                AlterJointRotation(child, slider2.value);
+            }
+            else if (child.name == "J3.STEP-1")
+            {
+                AlterJointRotation(child, slider3.value);
+            }
+        }
+    }
+
+    private void AlterJointRotation(Transform joint, float sliderValue)
+    {
+        // Rotate joint around its local up axis
+        float rotationValue = sliderValue * 360f;
+        joint.localRotation = Quaternion.AngleAxis(rotationValue, Vector3.forward);
+    }
+
+    public void ApplyAnimation()
+    {
+        if (U6robot3DBox != null)
+        {
+            Animator animator = U6robot3DBox.GetComponent<Animator>();
+            if (animator != null)
+            {
+                // Retrieve the current state of the animator
+                AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
+                // Calculate the normalized time to smoothly blend between the current and new state
+                float blendTime = Mathf.Clamp01(currentState.normalizedTime);
+                
+                // Set the blend time for each parameter based on the slider values
+                animator.CrossFade(J2_PARAMETER_NAME, slider1.value, 0, currentState.normalizedTime);
+                animator.CrossFade(J3_PARAMETER_NAME, slider2.value, 0, currentState.normalizedTime);
+                animator.CrossFade(J4_PARAMETER_NAME, slider3.value, 0, currentState.normalizedTime);
+            }
+        }
+    }
+}

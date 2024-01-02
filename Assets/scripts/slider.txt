@@ -147,3 +147,58 @@ public class RobotArmController : MonoBehaviour
         }
     }
 }
+git commit -m 'dev'
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class RobotArmController : MonoBehaviour
+{
+    public Slider slider1;
+    public Slider slider2;
+    public GameObject U6robot3DBox;
+
+    void Update()
+    {
+        if (U6robot3DBox != null)
+        {
+            Transform robotTransform = U6robot3DBox.transform;
+
+            // Rotate joint 1 around its local up axis
+            float rotationValue1 = slider1.value * 360f;
+            robotTransform.GetChild(0).localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+
+            // Rotate joint 2 around its local right axis
+            float rotationValue2 = slider2.value * 360f;
+            robotTransform.GetChild(1).localRotation = Quaternion.AngleAxis(rotationValue2, Vector3.right);
+        }
+    }
+}
+
+
+using UnityEngine;
+
+public class ChildCountChecker : MonoBehaviour
+{
+    void Start()
+    {
+        CheckChildCount(transform);
+    }
+
+    void CheckChildCount(Transform parent)
+    {
+        int childCount = parent.childCount;
+
+        Debug.Log($"Number of children for {parent.name}: {childCount}");
+
+        for (int i = 0; i < childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            CheckChildCount(child); // Recursively check children
+        }
+    }
+}

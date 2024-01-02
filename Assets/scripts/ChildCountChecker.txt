@@ -1,0 +1,121 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
+
+public class ChildCountChecker : MonoBehaviour
+{
+    private string logFilePath; // Path to the log file
+    private Slider slider1;
+    
+
+    void Start()
+    {
+        logFilePath = Application.dataPath + "/childCountLog.txt"; // Set the path for the log file
+        CheckChildCount(transform);
+        slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Log the number of children with each update
+        // CheckChildCount(transform);
+    }
+
+    void CheckChildCount(Transform parent)
+    {
+        int childCount = parent.childCount;
+
+        string logMessage = $"Number of children for {parent.name}: {childCount}";
+
+        Debug.Log(logMessage);
+
+        // Save the log to a file
+        SaveLogToFile(logMessage);
+
+        for (int i = 0; i < childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            CheckChildCount(child); // Recursively check children
+        }
+
+        for (int i = 0; i < childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            Debug.Log($"Child {i}: {child.name}");
+
+            // Check if the child has the specific name you're looking for
+            if (child.name == "J1.STEP-1")
+            {
+                // Do something specific for this child (e.g., alter its rotation)
+                float rotationValue = slider1.value * 360f;
+                child.localRotation = Quaternion.AngleAxis(rotationValue, Vector3.forward);
+            }
+
+            // Recursively check children
+            CheckChildCount(child);
+        }
+    }
+
+    void SaveLogToFile(string logMessage)
+    {
+        // Append the log message to the file
+        using (StreamWriter sw = File.AppendText(logFilePath))
+        {
+            sw.WriteLine(logMessage);
+        }
+    }
+}
+
+
+
+
+// using UnityEngine;
+// using System.IO;
+
+// public class ChildCountChecker : MonoBehaviour
+// {
+//     private string logFilePath; // Path to the log file
+
+//     void Start()
+//     {
+//         logFilePath = Path.Combine(Application.persistentDataPath, "childCountLog.txt"); // Set the path for the log file
+//         CheckChildCount(transform);
+//     }
+
+//     // Update is called once per frame
+//     void Update()
+//     {
+//         // Log the number of children with each update
+//         CheckChildCount(transform);
+//     }
+
+//     void CheckChildCount(Transform parent)
+//     {
+//         int childCount = parent.childCount;
+
+//         string logMessage = $"Number of children for {parent.name}: {childCount}";
+
+//         Debug.Log(logMessage);
+
+//         // Save the log to a file
+//         SaveLogToFile(logMessage);
+
+//         for (int i = 0; i < childCount; i++)
+//         {
+//             Transform child = parent.GetChild(i);
+//             CheckChildCount(child); // Recursively check children
+//         }
+//     }
+
+//     void SaveLogToFile(string logMessage)
+//     {
+//         // Append the log message to the file
+//         using (StreamWriter sw = File.AppendText(logFilePath))
+//         {
+//             sw.WriteLine(logMessage);
+//         }
+//     }
+// }

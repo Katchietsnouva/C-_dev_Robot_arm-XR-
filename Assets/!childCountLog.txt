@@ -1,0 +1,91 @@
+Number of children for original5.1_J2: 2
+Number of children for Armature: 2
+Number of children for Armature.001: 2
+Number of children for Armature.003: 2
+Number of children for Armature.004: 2
+Number of children for Armature.005: 2
+Number of children for Armature.006: 1
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J6.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J5.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J4.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1: 0
+Number of children for Bone: 2
+Number of children for Bone_end: 0
+Number of children for xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J1.STEP-1: 0
+Number of children for Slider1: 4
+Number of children for Background: 0
+Number of children for Fill Area: 1
+Number of children for Fill: 0
+Number of children for Fill: 0
+Number of children for Handle Slide Area: 1
+Number of children for Handle: 0
+Number of children for Handle: 0
+Number of children for Joint 2 text: 0
+Number of children for Background: 0
+Number of children for Fill Area: 1
+Number of children for Fill: 0
+Number of children for Fill: 0
+Number of children for Handle Slide Area: 1
+Number of children for Handle: 0
+Number of children for Handle: 0
+Number of children for Joint 2 text: 0
+
+
+
+
+public void CheckChildCount(Transform parent)
+{
+    int childCount = parent.childCount;
+
+    Debug.Log($"Number of children for {parent.name}: {childCount}");
+
+    for (int i = 0; i < childCount; i++)
+    {
+        Transform child = parent.GetChild(i);
+        Debug.Log($"Checking child: {child.name}");
+        CheckChildCount(child); // Recursively check children
+
+        // Check if the child has the specific name you're looking for
+        string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
+        if (child.name == J2)
+        {
+            Debug.Log($"Found and altering rotation for: {child.name}");
+            // Do something specific for this child (e.g., alter its rotation)
+            AlterJ2(J2);
+            AlterJointRotation(child, slider1.value);
+        }
+    }
+}
+
+public void AlterJ2(string J2)
+{
+    Transform robotTransform = U6robot3DBox.transform;
+    float rotationValue1 = slider1.value * 360f;
+
+    // Find the child with the specified name
+    Transform child = robotTransform.Find(J2);
+
+    if (child != null)
+    {
+        // If the child is found, alter its rotation
+        child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
+    }
+    else
+    {
+        Debug.LogWarning($"Child with name {J2} not found.");
+    }
+}
