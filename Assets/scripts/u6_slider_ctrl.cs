@@ -54,10 +54,11 @@ public class u6_slider_ctrl : MonoBehaviour
 
             // Check if the child has the specific name you're looking for
             string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
-            // string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1";
             string J3 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1";
             string J4 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J4.STEP-1";
             string J5 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J5.STEP-1";
+            string J6 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J6.STEP-1";
+            string J7 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1";
             if (child.name == J2)
             {
                 Debug.Log($"Found and altering rotation for: {child.name}");
@@ -85,6 +86,13 @@ public class u6_slider_ctrl : MonoBehaviour
                 string logMessage2 = $"Found and altering rotation for: {child.name}";
                 LogToFile(logMessage2);
                 AlterJ5(J5);
+            }
+            if (child.name == J6)
+            {
+                Debug.Log($"Found and altering rotation for: {child.name}");
+                string logMessage2 = $"Found and altering rotation for: {child.name}";
+                LogToFile(logMessage2);
+                AlterJ6(J6);
             }
         }
         LogToFile("--------------------------------------------------------");
@@ -188,6 +196,28 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             Debug.LogWarning($"Child with name {J5} not found.");
             string LogWarning = $"Child with name {J5} not found. ";
+            LogToFile(LogWarning);
+            LogToFile("--------------------------------------------------------");
+        }
+    }
+
+    public void AlterJ6(string J6){
+        Transform robotTransform = U6robot3DBox.transform;
+        float rotationValue4 = slider4.value * 360f;
+        // Find the child with the specified name
+        Transform child = robotTransform.Find(J6);
+        if (child != null)
+        {
+            // If the child is found, alter its rotation
+            child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.right);
+            string LogRotation = $" Quaternion.AngleAxis: {child.name}";
+            LogToFile(LogRotation);
+            LogToFile("--------------------------------------------------------");
+        }
+        else
+        {
+            Debug.LogWarning($"Child with name {J6} not found.");
+            string LogWarning = $"Child with name {J6} not found. ";
             LogToFile(LogWarning);
             LogToFile("--------------------------------------------------------");
         }
