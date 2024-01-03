@@ -117,9 +117,12 @@ public class u6_slider_ctrl : MonoBehaviour
             // If the desired joint is found, alter its rotation
             child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
 
-            // Calculate the new position of child of the current joint based on the altered rotation
+            // Calculate the new position of child of the current joint in world based on the altered rotation
+            // Vector3 rotatedOffset = child.localPosition - initialRelativePosition;
+            // Vector3 rotatedOffset = child.Position - initialRelativePosition;
             Vector3 rotatedOffset = child.localPosition - initialRelativePosition;
-            Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
+            // Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
+            Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset + initialRelativePosition);
             // Set the new position
             child.position = newPosition;
 
@@ -137,7 +140,7 @@ public class u6_slider_ctrl : MonoBehaviour
         // robotTransform.Find(J2).localRotation =Quaternion.AngleAxis(rotationValue1,Vector3.forward);
         // robotTransform.GetChild(J1).localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
     }
-
+    
 
     public void AlterJ3(string J3)
     {
@@ -156,7 +159,7 @@ public class u6_slider_ctrl : MonoBehaviour
             Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
             // Set the new position
             child.position = newPosition;
-
+            
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");
@@ -178,17 +181,8 @@ public class u6_slider_ctrl : MonoBehaviour
         Transform child = robotTransform.Find(J4);
         if (child != null)
         {
-            // Get the initial position relative to the parent
-            Vector3 initialRelativePosition = child.localPosition;
-            // If the desired joint is found, alter its rotation
+            // If the child is found, alter its rotation
             child.localRotation = Quaternion.AngleAxis(rotationValue3, Vector3.right);
-
-            // Calculate the new position of child of the current joint based on the altered rotation
-            Vector3 rotatedOffset = child.localPosition - initialRelativePosition;
-            Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
-            // Set the new position
-            child.position = newPosition;
-            
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");
