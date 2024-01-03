@@ -109,20 +109,17 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         Transform robotTransform = U6robot3DBox.transform;
         float rotationValue1 = slider1.value * 360f;
-        // Find the child with the specified name
         Transform child = robotTransform.Find(J2);
         if (child != null)
         {
             // Get the initial position relative to the parent
             Vector3 initialRelativePosition = child.localPosition;
-
-            // If the child is found, alter its rotation
+            // If the desired joint is found, alter its rotation
             child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
 
-            // Calculate the new position based on the altered rotation
+            // Calculate the new position of child of the current joint based on the altered rotation
             Vector3 rotatedOffset = child.localPosition - initialRelativePosition;
             Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
-
             // Set the new position
             child.position = newPosition;
 
@@ -146,12 +143,14 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         Transform robotTransform = U6robot3DBox.transform;
         float rotationValue2 = slider2.value * 360f;
-        // Find the child with the specified name
         Transform child = robotTransform.Find(J3);
         if (child != null)
         {
-            // If the child is found, alter its rotation
+            // Get the initial position relative to the parent
+            Vector3 initialRelativePosition = child.localPosition;
+            // If the desired joint is found, alter its rotation
             child.localRotation = Quaternion.AngleAxis(rotationValue2, Vector3.right);
+
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");
