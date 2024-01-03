@@ -444,6 +444,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105957626}
   m_CullTransparentMesh: 1
+--- !u!1 &156480028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4194656914193316147, guid: fdf60238f1ae4454b96272622e036d37,
+    type: 3}
+  m_PrefabInstance: {fileID: 465576804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &156738727
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,6 +976,7 @@ GameObject:
   m_Component:
   - component: {fileID: 378709649}
   - component: {fileID: 378709650}
+  - component: {fileID: 378709651}
   m_Layer: 5
   m_Name: Slider5
   m_TagString: Untagged
@@ -1051,7 +1058,32 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 378709651}
+        m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
+        m_MethodName: AlterJ6
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+--- !u!114 &378709651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378709648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  U6robot3DBox: {fileID: 156480028}
 --- !u!1 &408154999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,6 +1275,12 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &453650986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -515268386737218992, guid: fdf60238f1ae4454b96272622e036d37,
+    type: 3}
+  m_PrefabInstance: {fileID: 465576804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &454552000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,17 +1470,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fdf60238f1ae4454b96272622e036d37,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.66757905
+      value: 0.312
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdf60238f1ae4454b96272622e036d37,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000000623113
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdf60238f1ae4454b96272622e036d37,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.809691
+      value: -7.422
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdf60238f1ae4454b96272622e036d37,
         type: 3}
@@ -3842,6 +3880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1958001979}
   - component: {fileID: 1958001980}
+  - component: {fileID: 1958001981}
   m_Layer: 5
   m_Name: Slider6
   m_TagString: Untagged
@@ -3923,7 +3962,32 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1958001981}
+        m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
+        m_MethodName: AlterJ7
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+--- !u!114 &1958001981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958001978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  U6robot3DBox: {fileID: 453650986}
 --- !u!1 &1986811391
 GameObject:
   m_ObjectHideFlags: 0
