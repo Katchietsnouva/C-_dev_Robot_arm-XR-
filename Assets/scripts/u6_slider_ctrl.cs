@@ -94,6 +94,13 @@ public class u6_slider_ctrl : MonoBehaviour
                 LogToFile(logMessage2);
                 AlterJ6(J6);
             }
+            if (child.name == J7)
+            {
+                Debug.Log($"Found and altering rotation for: {child.name}");
+                string logMessage2 = $"Found and altering rotation for: {child.name}";
+                LogToFile(logMessage2);
+                AlterJ7(J7);
+            }
         }
         LogToFile("--------------------------------------------------------");
     }
@@ -203,13 +210,13 @@ public class u6_slider_ctrl : MonoBehaviour
 
     public void AlterJ6(string J6){
         Transform robotTransform = U6robot3DBox.transform;
-        float rotationValue4 = slider4.value * 360f;
+        float rotationValue5 = slider5.value * 360f;
         // Find the child with the specified name
         Transform child = robotTransform.Find(J6);
         if (child != null)
         {
             // If the child is found, alter its rotation
-            child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.right);
+            child.localRotation = Quaternion.AngleAxis(rotationValue5, Vector3.right);
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");
@@ -218,6 +225,28 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             Debug.LogWarning($"Child with name {J6} not found.");
             string LogWarning = $"Child with name {J6} not found. ";
+            LogToFile(LogWarning);
+            LogToFile("--------------------------------------------------------");
+        }
+    }
+
+    public void AlterJ7(string J7){
+        Transform robotTransform = U6robot3DBox.transform;
+        float rotationValue6 = slider6.value * 360f;
+        // Find the child with the specified name
+        Transform child = robotTransform.Find(J7);
+        if (child != null)
+        {
+            // If the child is found, alter its rotation
+            child.localRotation = Quaternion.AngleAxis(rotationValue6, Vector3.down);
+            string LogRotation = $" Quaternion.AngleAxis: {child.name}";
+            LogToFile(LogRotation);
+            LogToFile("--------------------------------------------------------");
+        }
+        else
+        {
+            Debug.LogWarning($"Child with name {J7} not found.");
+            string LogWarning = $"Child with name {J7} not found. ";
             LogToFile(LogWarning);
             LogToFile("--------------------------------------------------------");
         }
