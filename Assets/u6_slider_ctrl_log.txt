@@ -15068,3 +15068,415 @@ Number of children for Joint 3 text : 0
 --------------------------------------------------------
  Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
 --------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------
+ Quaternion.AngleAxis: xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1
+--------------------------------------------------------

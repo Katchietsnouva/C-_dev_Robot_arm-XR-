@@ -47,16 +47,22 @@ public class u6_slider_ctrl : MonoBehaviour
             CheckChildCount(child); // Recursively check children
 
             // Check if the child has the specific name you're looking for
-            // string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
-            string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1";
+            string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
+            // string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1";
+            string J3 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1";
             if (child.name == J2)
             {
                 Debug.Log($"Found and altering rotation for: {child.name}");
                 string logMessage2 = $"Found and altering rotation for: {child.name}";
                 LogToFile(logMessage2);
-                // Do something specific for this child (e.g., alter its rotation)
                 AlterJ2(J2);
-                // AlterJointRotation(child, slider1.value);
+            }
+            if (child.name == J3)
+            {
+                Debug.Log($"Found and altering rotation for: {child.name}");
+                string logMessage2 = $"Found and altering rotation for: {child.name}";
+                LogToFile(logMessage2);
+                AlterJ3(J3);
             }
         }
         LogToFile("--------------------------------------------------------");
@@ -72,8 +78,8 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             // If the child is found, alter its rotation
             // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.right);
-            // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
-            child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
+            child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+            // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
             //forward worked almost fine with the 1st 2 arms(J1,J2),
             //up worked perfextly sine with the 3rd one (J1, J2)
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
@@ -86,12 +92,43 @@ public class u6_slider_ctrl : MonoBehaviour
             string LogWarning = $"Child with name {J2} not found. ";
             LogToFile(LogWarning);
             LogToFile("--------------------------------------------------------");
-
         }
-
         // robotTransform.Find(J2).localRotation =Quaternion.AngleAxis(rotationValue1,Vector3.forward);
         // robotTransform.GetChild(J1).localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
     }
+
+
+    public void AlterJ3(string J3)
+    {
+        Transform robotTransform = U6robot3DBox.transform;
+        float rotationValue2 = slider2.value * 360f;
+        // Find the child with the specified name
+        Transform child = robotTransform.Find(J3);
+        if (child != null)
+        {
+            // If the child is found, alter its rotation
+            child.localRotation = Quaternion.AngleAxis(rotationValue2, Vector3.right);
+            // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+            // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
+            //forward worked almost fine with the 1st 2 arms(J1,J2),
+            //up worked perfextly fine with the 3rd one (J1, J2)
+            //rignt worked perfextly fine with the 3rd one (J3)
+            string LogRotation = $" Quaternion.AngleAxis: {child.name}";
+            LogToFile(LogRotation);
+            LogToFile("--------------------------------------------------------");
+        }
+        else
+        {
+            Debug.LogWarning($"Child with name {J3} not found.");
+            string LogWarning = $"Child with name {J3} not found. ";
+            LogToFile(LogWarning);
+            LogToFile("--------------------------------------------------------");
+        }
+    }
+    
+
+
+
 
 
 
