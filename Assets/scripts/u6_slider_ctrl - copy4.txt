@@ -70,9 +70,6 @@ public class u6_slider_ctrl : MonoBehaviour
                 LogToFile(logMessage2);
                 AlterJ3(J3);
             }
-
-
-
             if (child.name == J4)
             {
                 Debug.Log($"Found and altering rotation for: {child.name}");
@@ -191,10 +188,7 @@ public class u6_slider_ctrl : MonoBehaviour
         if (child != null)
         {
             // If the child is found, alter its rotation
-            // child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.up);
-            // i corrected the mirror reflection  of the z axis
-            child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.up) * Quaternion.Euler(180, 0, 0);
-            // child.localRotation = Quaternion.AngleAxis(rotationValue4 - 180f, Vector3.up);
+            child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.up);
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");
@@ -237,11 +231,8 @@ public class u6_slider_ctrl : MonoBehaviour
         Transform child = robotTransform.Find(J7);
         if (child != null)
         {
-            // If the child is found, alter its rotation  
-            // i corrected the mirror reflection  of the z axis
-            child.localRotation = Quaternion.AngleAxis(rotationValue6, Vector3.up) * Quaternion.Euler(180, 0, 0);
-            // child.localRotation = Quaternion.AngleAxis(rotationValue6 - 180f, Vector3.up);
-
+            // If the child is found, alter its rotation
+            child.localRotation = Quaternion.AngleAxis(rotationValue6, Vector3.up);
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");

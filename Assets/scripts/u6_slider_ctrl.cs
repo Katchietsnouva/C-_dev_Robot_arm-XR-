@@ -70,6 +70,9 @@ public class u6_slider_ctrl : MonoBehaviour
                 LogToFile(logMessage2);
                 AlterJ3(J3);
             }
+
+
+
             if (child.name == J4)
             {
                 Debug.Log($"Found and altering rotation for: {child.name}");
@@ -110,14 +113,19 @@ public class u6_slider_ctrl : MonoBehaviour
         Transform child = robotTransform.Find(J2);
         if (child != null)
         {
+            // Get the initial position relative to the parent
+            Vector3 initialRelativePosition = child.localPosition;
+
             // If the child is found, alter its rotation
-            // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.right);
             child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
-            // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
-            // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
-            //forward worked almost fine with the 1st 2 arms(J1,J2),
-            //up worked perfextly fine with the 3rd one (J1, J2)
-            //rignt worked perfextly fine with the 3rd one (J3)
+
+            // Calculate the new position based on the altered rotation
+            Vector3 rotatedOffset = child.localPosition - initialRelativePosition;
+            Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
+
+            // Set the new position
+            child.position = newPosition;
+
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");
@@ -180,7 +188,8 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
-    public void AlterJ5(string J5){
+    public void AlterJ5(string J5)
+    {
         Transform robotTransform = U6robot3DBox.transform;
         float rotationValue4 = slider4.value * 360f;
         // Find the child with the specified name
@@ -188,7 +197,10 @@ public class u6_slider_ctrl : MonoBehaviour
         if (child != null)
         {
             // If the child is found, alter its rotation
-            child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.up);
+            // child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.up);
+            // i corrected the mirror reflection  of the z axis
+            child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.up) * Quaternion.Euler(180, 0, 0);
+            // child.localRotation = Quaternion.AngleAxis(rotationValue4 - 180f, Vector3.up);
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");
@@ -202,7 +214,8 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
-    public void AlterJ6(string J6){
+    public void AlterJ6(string J6)
+    {
         Transform robotTransform = U6robot3DBox.transform;
         float rotationValue5 = slider5.value * 360f;
         // Find the child with the specified name
@@ -224,15 +237,19 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
-    public void AlterJ7(string J7){
+    public void AlterJ7(string J7)
+    {
         Transform robotTransform = U6robot3DBox.transform;
         float rotationValue6 = slider6.value * 360f;
         // Find the child with the specified name
         Transform child = robotTransform.Find(J7);
         if (child != null)
         {
-            // If the child is found, alter its rotation
-            child.localRotation = Quaternion.AngleAxis(rotationValue6, Vector3.up);
+            // If the child is found, alter its rotation  
+            // i corrected the mirror reflection  of the z axis
+            child.localRotation = Quaternion.AngleAxis(rotationValue6, Vector3.up) * Quaternion.Euler(180, 0, 0);
+            // child.localRotation = Quaternion.AngleAxis(rotationValue6 - 180f, Vector3.up);
+
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");
