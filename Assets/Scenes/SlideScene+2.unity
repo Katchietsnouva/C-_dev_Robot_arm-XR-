@@ -3030,6 +3030,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   U6robot3DBox: {fileID: 7205884}
+--- !u!1 &1520841041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8643821318292188842, guid: fdf60238f1ae4454b96272622e036d37,
+    type: 3}
+  m_PrefabInstance: {fileID: 465576804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1540342651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3266,6 +3272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1735468056}
   - component: {fileID: 1735468057}
+  - component: {fileID: 1735468058}
   m_Layer: 5
   m_Name: Slider4
   m_TagString: Untagged
@@ -3347,7 +3354,32 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1735468058}
+        m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
+        m_MethodName: AlterJ5
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+--- !u!114 &1735468058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735468055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  U6robot3DBox: {fileID: 1520841041}
 --- !u!1 &1755913679
 GameObject:
   m_ObjectHideFlags: 0

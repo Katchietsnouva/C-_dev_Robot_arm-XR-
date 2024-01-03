@@ -179,7 +179,7 @@ public class u6_slider_ctrl : MonoBehaviour
         if (child != null)
         {
             // If the child is found, alter its rotation
-            child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.up);
+            child.localRotation = Quaternion.AngleAxis(rotationValue4, Vector3.down);
             string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
             LogToFile("--------------------------------------------------------");
