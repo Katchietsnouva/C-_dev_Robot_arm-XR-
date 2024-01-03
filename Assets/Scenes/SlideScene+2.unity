@@ -2387,7 +2387,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c9671637266e9af4c9578e43dee9092d,
         type: 3}
       propertyPath: m_Name
-      value: original5.1_J2
+      value: original5.1_J4
       objectReference: {fileID: 0}
     - target: {fileID: 5824574927428564374, guid: c9671637266e9af4c9578e43dee9092d,
         type: 3}
@@ -2654,6 +2654,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1310456256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1192903168387474204, guid: c9671637266e9af4c9578e43dee9092d,
+    type: 3}
+  m_PrefabInstance: {fileID: 896105967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1310456260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310456256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  U6robot3DBox: {fileID: 1310456256}
 --- !u!1 &1335408208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,7 +2722,7 @@ GameObject:
   - component: {fileID: 1374957609}
   - component: {fileID: 1374957610}
   m_Layer: 5
-  m_Name: Slider1
+  m_Name: Slider1.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2786,8 +2805,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1374957610}
         m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
-        m_MethodName: ApplyAnimation
-        m_Mode: 1
+        m_MethodName: AlterJ2
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2808,46 +2827,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  U6robot3DBox: {fileID: 1422358654}
+  U6robot3DBox: {fileID: 1310456256}
 --- !u!1 &1422358654 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c9671637266e9af4c9578e43dee9092d,
     type: 3}
   m_PrefabInstance: {fileID: 896105967}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1422358656
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1422358654}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f9efceb0b6d6a6c47b6c0c91f68128cb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1422358658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1422358654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  U6robot3DBox: {fileID: 1422358654}
 --- !u!1 &1540342651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3716,7 +3702,7 @@ GameObject:
   - component: {fileID: 1986811393}
   - component: {fileID: 1986811394}
   m_Layer: 5
-  m_Name: Slider2
+  m_Name: Slider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

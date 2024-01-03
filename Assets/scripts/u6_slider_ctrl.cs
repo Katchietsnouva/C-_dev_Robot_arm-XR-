@@ -23,156 +23,77 @@ public class u6_slider_ctrl : MonoBehaviour
 
         logFilePath = Application.dataPath + "/u6_slider_ctrl_log.txt"; // Set the path for the log file
         // CheckChildCount(transform);
-        string targetChildName = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1";
+        // string targetChildName = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1";
         Transform rootTransform = transform;
         CheckChildCount(rootTransform);
-        Transform foundChild = FindChildRecursive(transform, targetChildName);
+        // Transform foundChild = FindChildRecursive(transform, targetChildName);
 
     }
 
-    // public void CheckChildCount(Transform parent)
-    // {
-    //     int childCount = parent.childCount;
-
-    //     Debug.Log($"Number of children for {parent.name}: {childCount}");
-    //     string logMessage = $"Number of children for {parent.name}: {childCount}";
-    //     LogToFile(logMessage);
-
-    //     for (int i = 0; i < childCount; i++)
-    //     {
-    //         Transform child = parent.GetChild(i);
-    //         Debug.Log($"Checking child: {child.name}");
-    //         string findingchild = $"Checking child: {child.name}";
-    //         LogToFile(findingchild);
-    //         CheckChildCount(child); // Recursively check children
-
-    //         // Check if the child has the specific name you're looking for
-    //         // string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
-    //         string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1";
-    //         if (child.name == J2)
-    //         {
-    //             Debug.Log($"Found and altering rotation for: {child.name}");
-    //             string logMessage2 = $"Found and altering rotation for: {child.name}";
-    //             LogToFile(logMessage2);
-    //             // Do something specific for this child (e.g., alter its rotation)
-    //             AlterJ2(J2);
-    //             // AlterJointRotation(child, slider1.value);
-    //         }
-    //     }
-    //     LogToFile("--------------------------------------------------------");
-    // }
-    public void CheckChildCount(Transform parent, string indentation = "")
+    public void CheckChildCount(Transform parent)
     {
         int childCount = parent.childCount;
 
-        Debug.Log($"{indentation}Number of children for {parent.name}: {childCount}");
-        string logMessage = $"{indentation}Number of children for {parent.name}: {childCount}";
+        Debug.Log($"Number of children for {parent.name}: {childCount}");
+        string logMessage = $"Number of children for {parent.name}: {childCount}";
         LogToFile(logMessage);
 
         for (int i = 0; i < childCount; i++)
         {
             Transform child = parent.GetChild(i);
-            Debug.Log($"{indentation}Checking child: {child.name}");
-            CheckChildCount(child, $"{indentation}\t"); // Recursively check children with increased indentation
+            Debug.Log($"Checking child: {child.name}");
+            string findingchild = $"Checking child: {child.name}";
+            LogToFile(findingchild);
+            CheckChildCount(child); // Recursively check children
 
             // Check if the child has the specific name you're looking for
+            // string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
             string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 Tool head.STEP-1";
             if (child.name == J2)
             {
-                Debug.Log($"{indentation}Found and altering rotation for: {child.name}");
-                string logMessage2 = $"{indentation}Found and altering rotation for: {child.name}";
+                Debug.Log($"Found and altering rotation for: {child.name}");
+                string logMessage2 = $"Found and altering rotation for: {child.name}";
                 LogToFile(logMessage2);
                 // Do something specific for this child (e.g., alter its rotation)
                 AlterJ2(J2);
                 // AlterJointRotation(child, slider1.value);
             }
-            else
-            {
-                Debug.Log($"No children found under parent: {parent.name}");
-                string logMessage3 = $"No children found under parent: {parent.name}";
-                LogToFile(logMessage3);
-            }
-
-            LogToFile("--------------------------------------------------------");
         }
+        LogToFile("--------------------------------------------------------");
     }
-
-    private Transform FindChildRecursive(Transform parent, string childName)
-    {
-        Transform result = null;
-
-        for (int i = 0; i < parent.childCount; i++)
-        {
-            Transform child = parent.GetChild(i);
-
-            // Check if the child's name matches    
-            if (child.name == childName)
-            {
-                result = child;
-                break;
-            }
-
-            // Recursively search through the child's descendants
-            Transform descendant = FindChildRecursive(child, childName);
-            if (descendant != null)
-            {
-                result = descendant;
-                break;
-            }
-        }
-
-        return result;
-    }
-    // public void AlterJ2(string J2)
-    // {
-    //     Transform robotTransform = U6robot3DBox.transform;
-    //     float rotationValue1 = slider1.value * 360f;
-    //     // Find the child with the specified name
-    //     Transform child = robotTransform.Find(J2);
-    //     if (child != null)
-    //     {
-    //         // If the child is found, alter its rotation
-    //         child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.left);
-    //         string LogRotation = $" Quaternion.AngleAxis: {child.name}";
-    //         LogToFile(LogRotation);
-    //         LogToFile("--------------------------------------------------------");
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning($"Child with name {J2} not found.");
-    //         string LogWarning = $"Child with name {J2} not found. ";
-    //         LogToFile(LogWarning);
-    //         LogToFile("--------------------------------------------------------");
-
-    //     }
-
-    //     // robotTransform.Find(J2).localRotation =Quaternion.AngleAxis(rotationValue1,Vector3.forward);
-    //     // robotTransform.GetChild(J1).localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
-    // }
 
     public void AlterJ2(string J2)
     {
         Transform robotTransform = U6robot3DBox.transform;
         float rotationValue1 = slider1.value * 360f;
-
         // Find the child with the specified name
         Transform child = robotTransform.Find(J2);
         if (child != null)
         {
             // If the child is found, alter its rotation
-            child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.left);
-            string LogRotation = $" Quaternion.AngleAxis: {child.name} under parent: {child.parent.name}";
+            // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.right);
+            // child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+            child.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
+            //forward worked almost fine with the 1st 2 arms(J1,J2),
+            //up worked perfextly sine with the 3rd one (J1, J2)
+            string LogRotation = $" Quaternion.AngleAxis: {child.name}";
             LogToFile(LogRotation);
+            LogToFile("--------------------------------------------------------");
         }
         else
         {
-            Debug.LogWarning($"Child with name {J2} not found under parent: {robotTransform.name}");
-            string LogWarning = $"Child with name {J2} not found under parent: {robotTransform.name}";
+            Debug.LogWarning($"Child with name {J2} not found.");
+            string LogWarning = $"Child with name {J2} not found. ";
             LogToFile(LogWarning);
+            LogToFile("--------------------------------------------------------");
+
         }
 
-        LogToFile("--------------------------------------------------------");
+        // robotTransform.Find(J2).localRotation =Quaternion.AngleAxis(rotationValue1,Vector3.forward);
+        // robotTransform.GetChild(J1).localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
     }
+
+
 
     private void AlterJointRotation(Transform joint, float sliderValue)
     {
