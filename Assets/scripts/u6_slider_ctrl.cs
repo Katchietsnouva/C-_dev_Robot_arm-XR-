@@ -67,63 +67,30 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
     }
-
     public void AlterJoints()
-{
-    float rotationValue1 = slider1.value * 360f;
-    AlterJointWithVariables(rotationValue1, parentJointBox, Vector3.zero);
-
-    // Calculate offset position for the child joint (fixed relative to parent)
-    Vector3 childJointOffsetPosition = new Vector3(0, 0, -childJointOffset);
-    AlterJointWithVariables(rotationValue1, childJointBox, childJointOffsetPosition);
-}
-
-public void AlterJointWithVariables(float rotationValue, GameObject jointBox, Vector3 offset)
-{
-    if (jointBox != null)
     {
-        Transform jointTransform = jointBox.transform;
+        float rotationValue1 = slider1.value * 360f;
+        AlterJointWithVariables(rotationValue1, parentJointBox, Vector3.zero);
 
-        // Set both rotation and position for the parent
-        jointTransform.localRotation = Quaternion.AngleAxis(rotationValue, Vector3.up);
-        jointTransform.localPosition = offset;
+        // Calculate offset position for the child joint
+        Vector3 childJointOffsetPosition = Quaternion.Euler(0, rotationValue1, 0) * new Vector3(0, 0, -childJointOffset);
+        AlterJointWithVariables(rotationValue1, childJointBox, childJointOffsetPosition);
+    }
 
-        // Only set position for the child (it inherits rotation from parent)
-        if (jointBox == childJointBox)
+    public void AlterJointWithVariables(float rotationValue, GameObject jointBox, Vector3 offset)
+    {
+        if (jointBox != null)
         {
+            Transform jointTransform = jointBox.transform;
+            jointTransform.localRotation = Quaternion.Euler(0, rotationValue, 0);
             jointTransform.localPosition = offset;
         }
+        else
+        {
+            Debug.LogError("Joint box is null. Please assign it in the Unity Editor.");
+        }
     }
-    else
-    {
-        Debug.LogError("Joint box is null. Please assign it in the Unity Editor.");
-    }
-}}
-
-    // public void AlterJoints()
-    // {
-    //     float rotationValue1 = slider1.value * 360f;
-    //     AlterJointWithVariables(rotationValue1, parentJointBox, Vector3.zero);
-
-    //     // Calculate offset position for the child joint
-    //     Vector3 childJointOffsetPosition = Quaternion.Euler(0, rotationValue1, 0) * new Vector3(0, 0, -childJointOffset);
-    //     AlterJointWithVariables(rotationValue1, childJointBox, childJointOffsetPosition);
-    // }
-
-    // public void AlterJointWithVariables(float rotationValue, GameObject jointBox, Vector3 offset)
-    // {
-    //     if (jointBox != null)
-    //     {
-    //         Transform jointTransform = jointBox.transform;
-    //         jointTransform.localRotation = Quaternion.Euler(0, rotationValue, 0);
-    //         jointTransform.localPosition = offset;
-    //     }
-    //     else
-    //     {
-    //         Debug.LogError("Joint box is null. Please assign it in the Unity Editor.");
-    //     }
-    // }
-// }
+}
 
 
 
