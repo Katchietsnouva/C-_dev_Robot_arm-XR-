@@ -68,7 +68,7 @@ public class u6_slider_ctrl : MonoBehaviour
     // public GameObject parentObjectBox;
     // public GameObject childTransformBox;
     // [SerializeField] private string J2_Box = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
-    [SerializeField] private GameObject ParentJointBox;
+    [SerializeField] private GameObject parentJointBox;
     [SerializeField] private GameObject childJointBox;
     
     private string logFilePath; // Path to the log file
@@ -92,10 +92,12 @@ public class u6_slider_ctrl : MonoBehaviour
 
     public void AlterJ2WithJointVariables(float rotationValue1)
     {
-        if (ParentJointBox != null)
+        if (parentJointBox != null)
         {
-            Transform robotTransform = ParentJointBox.transform;
-            robotTransform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+            Transform robotJ2Transform = parentJointBox.transform;
+            robotJ2Transform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+            Transform robotJ3Transform = childJointBox.transform;
+            robotJ3Transform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
         }
     }
 }
