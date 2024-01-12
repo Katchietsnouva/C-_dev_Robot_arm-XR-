@@ -28,6 +28,7 @@ public class u6_slider_ctrl : MonoBehaviour
         AlterJointWithVariables(rotationValue1, childJointBox, childJointOffsetPosition);
     }
 
+
     public void AlterJointWithVariables(float rotationValue, GameObject jointBox, Vector3 offset)
     {
         if (jointBox != null)
