@@ -48,3 +48,51 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 }
+
+
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class u6_slider_ctrl : MonoBehaviour
+{
+    private Slider slider1;
+    [SerializeField] private GameObject parentJointBox;
+    [SerializeField] private GameObject childJointBox;
+    // private float childJointOffset = 0.155f; // Adjust this value based on your scene
+    private float childJointOffset = (float)(0.855 / 1000.0); // Adjust this value based on your scene
+
+    
+    void Start()
+    {
+        slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
+    }
+
+    public void AlterJoints()
+    {
+        float rotationValue1 = slider1.value * 360f;
+        AlterJointWithVariables(rotationValue1, parentJointBox, Vector3.zero);
+        
+        // Calculate offset position for the child joint
+        Vector3 childJointOffsetPosition = Quaternion.AngleAxis(rotationValue1, Vector3.up) * new Vector3(0,0,-childJointOffset);
+        AlterJointWithVariables(rotationValue1, childJointBox, childJointOffsetPosition);
+    }
+
+    public void AlterJointWithVariables(float rotationValue, GameObject jointBox, Vector3 offset)
+    {
+        if (jointBox != null)
+        {
+            Transform jointTransform = jointBox.transform;
+            jointTransform.localRotation = Quaternion.AngleAxis(rotationValue, Vector3.up);
+            jointTransform.localPosition = offset;
+        }
+        else
+        {
+            Debug.LogError("Joint box is null. Please assign it in the Unity Editor.");
+        }
+    }
+}
