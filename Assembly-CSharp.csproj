@@ -41,6 +41,7 @@
      <Compile Include="Assets\scripts\u6_slider_ctrl.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+     <None Include="Assets\scripts\backup_10_yes.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\scripts\slider.txt" />
      <None Include="Assets\scripts\backup4.txt" />
