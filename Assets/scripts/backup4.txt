@@ -1,0 +1,95 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
+
+public class u6_slider_ctrl : MonoBehaviour
+{
+    private Slider slider1;
+    private Slider slider2;
+    private Slider slider3;
+    private Slider slider4;
+    private Slider slider5;
+    private Slider slider6;
+    [SerializeField] Slider rotationSlider;
+    public GameObject parentObjectBox;
+    public GameObject childTransformBox;
+    private string logFilePath; // Path to the log file
+
+    string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
+    string J3 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J3.STEP-1";
+
+    void Start()
+    {
+        slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
+        slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
+        slider3 = GameObject.Find("Slider3").GetComponent<Slider>();
+        slider4 = GameObject.Find("Slider4").GetComponent<Slider>();
+        slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
+        slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
+        logFilePath = Application.dataPath + "/u6_slider_ctrl_log.txt"; // Set the path for the log file
+    }
+
+    public void ChangeRotation()
+    {
+        RotationListener.value = rotationSlider.value;
+    }
+
+    public void ActivateJoint(string jointName)
+    {
+        Transform robotTransform = parentObjectBox.transform;
+
+        // Assuming slider1 is used for J2 and slider2 is used for J3
+        float rotationValue = 0f;
+
+        if (jointName == J2)
+        {
+            rotationValue = slider1.value * 360f;
+        }
+        else if (jointName == J3)
+        {
+            rotationValue = slider2.value * 360f;
+        }
+        else
+        {
+            Debug.LogWarning($"Unknown joint: {jointName}");
+            return;
+        }
+
+        Transform jointTransform = robotTransform.Find(jointName);
+
+        if (jointTransform != null)
+        {
+            jointTransform.localRotation = Quaternion.AngleAxis(rotationValue, Vector3.up);
+
+            // If J3 is a child of J2
+            if (jointName == J2)
+            {
+                Transform J3Transform = jointTransform.Find(J3);
+                if (J3Transform != null)
+                {
+                    J3Transform.localRotation = Quaternion.AngleAxis(rotationValue, Vector3.right);
+                    // J3Transform.localPosition = new Vector3(0f, 0f, 10f); // Adjust the distance accordingly
+                }
+            }
+
+            string logMessage = $"Activated joint: {jointName}";
+            LogToFile(logMessage);
+        }
+        else
+        {
+            Debug.LogWarning($"Joint with name {jointName} not found.");
+            string logWarning = $"Joint with name {jointName} not found.";
+            LogToFile(logWarning);
+        }
+    }
+
+    private void LogToFile(string logMessage)
+    {
+        using (StreamWriter sw = File.AppendText(logFilePath))
+        {
+            sw.WriteLine(logMessage);
+        }
+    }
+}

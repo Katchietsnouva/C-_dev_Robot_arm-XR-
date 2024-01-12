@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 1374957607}
-  childTransformBox: {fileID: 1690063512}
+  parentObjectBox: {fileID: 7205884}
+  childTransformBox: {fileID: 0}
 --- !u!1 &45617834
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +971,6 @@ GameObject:
   m_Component:
   - component: {fileID: 378709649}
   - component: {fileID: 378709650}
-  - component: {fileID: 378709651}
   m_Layer: 5
   m_Name: Slider5
   m_TagString: Untagged
@@ -1053,33 +1052,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 378709651}
-        m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
-        m_MethodName: AlterJ6
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
---- !u!114 &378709651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378709648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 0}
-  childTransformBox: {fileID: 0}
+      m_Calls: []
 --- !u!1 &408154999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,7 +2040,6 @@ GameObject:
   m_Component:
   - component: {fileID: 866715223}
   - component: {fileID: 866715224}
-  - component: {fileID: 866715225}
   m_Layer: 5
   m_Name: Slider3
   m_TagString: Untagged
@@ -2149,33 +2121,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 866715225}
-        m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
-        m_MethodName: AlterJ4
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
---- !u!114 &866715225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 866715222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 0}
-  childTransformBox: {fileID: 0}
+      m_Calls: []
 --- !u!1 &875861313
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,32 +3154,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558164766}
   m_CullTransparentMesh: 1
---- !u!1 &1690063511 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -6661871933681652331, guid: fdf60238f1ae4454b96272622e036d37,
-    type: 3}
-  m_PrefabInstance: {fileID: 465576804}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1690063512 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -3246885733592256074, guid: fdf60238f1ae4454b96272622e036d37,
-    type: 3}
-  m_PrefabInstance: {fileID: 465576804}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1690063515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690063511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 7205884}
-  childTransformBox: {fileID: 0}
 --- !u!1 &1732286895
 GameObject:
   m_ObjectHideFlags: 0
@@ -3312,7 +3232,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1735468056}
   - component: {fileID: 1735468057}
-  - component: {fileID: 1735468058}
   m_Layer: 5
   m_Name: Slider4
   m_TagString: Untagged
@@ -3394,33 +3313,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1735468058}
-        m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
-        m_MethodName: AlterJ5
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
---- !u!114 &1735468058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735468055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 0}
-  childTransformBox: {fileID: 0}
+      m_Calls: []
 --- !u!1 &1755913679
 GameObject:
   m_ObjectHideFlags: 0
@@ -3883,7 +3776,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1958001979}
   - component: {fileID: 1958001980}
-  - component: {fileID: 1958001981}
   m_Layer: 5
   m_Name: Slider6
   m_TagString: Untagged
@@ -3965,33 +3857,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1958001981}
-        m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
-        m_MethodName: AlterJ7
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
---- !u!114 &1958001981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958001978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 0}
-  childTransformBox: {fileID: 0}
+      m_Calls: []
 --- !u!1 &1986811391
 GameObject:
   m_ObjectHideFlags: 0
@@ -4002,7 +3868,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1986811392}
   - component: {fileID: 1986811393}
-  - component: {fileID: 1986811394}
   m_Layer: 5
   m_Name: Slider2
   m_TagString: Untagged
@@ -4084,33 +3949,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1986811394}
-        m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
-        m_MethodName: AlterJ3
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
---- !u!114 &1986811394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986811391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 0}
-  childTransformBox: {fileID: 0}
+      m_Calls: []
 --- !u!1 &1988476456
 GameObject:
   m_ObjectHideFlags: 0
