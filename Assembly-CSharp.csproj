@@ -60,6 +60,7 @@
      <None Include="Assets\scripts\u6_slider_ctrl - Copy.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\scripts\backup6_min-_ext.txt" />
      <None Include="Assets\scripts\backup2.txt" />
      <None Include="Assets\u6_slider_ctrl_log.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
