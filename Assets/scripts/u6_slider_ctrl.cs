@@ -24,9 +24,10 @@ public class u6_slider_ctrl : MonoBehaviour
 
         // Calculate offset position for the child joint
         // Vector3 childJointOffsetPosition = Quaternion.Euler(0, rotationValue1, 0) * new Vector3(initialChildJointOffset-parentJointRadius, 0, 0);
-        Vector3 childJointOffsetPosition = Quaternion.Euler(0, rotationValue1, 0) * new Vector3(initialChildJointOffset, 0, 0) + new Vector3(parentJointRadius, 0, 0);
+        Vector3 childJointOffsetPosition = Quaternion.Euler(0, rotationValue1, 0) * new Vector3(-initialChildJointOffset, 0, 0) + new Vector3(parentJointRadius, 0, 0);
         AlterJointWithVariables(rotationValue1, childJointBox, childJointOffsetPosition);
     }
+
 
 
     public void AlterJointWithVariables(float rotationValue, GameObject jointBox, Vector3 offset)
