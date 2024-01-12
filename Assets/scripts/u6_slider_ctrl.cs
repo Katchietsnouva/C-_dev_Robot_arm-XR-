@@ -68,12 +68,10 @@ public class u6_slider_ctrl : MonoBehaviour
     // public GameObject parentObjectBox;
     // public GameObject childTransformBox;
     // [SerializeField] private string J2_Box = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
-    [SerializeField] private GameObject J2_Box;
+    [SerializeField] private GameObject ParentJointBox;
+    [SerializeField] private GameObject childJointBox;
     
     private string logFilePath; // Path to the log file
-
-    // Class-level variable J2
-    // string J2 = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
 
     void Start()
     {
@@ -93,25 +91,14 @@ public class u6_slider_ctrl : MonoBehaviour
     }
 
     public void AlterJ2WithJointVariables(float rotationValue1)
-{
-    if (J2_Box != null)
     {
-        Transform robotTransform = J2_Box.transform;
-        // Transform J2Transform = robotTransform.Find(J2_Box);
-        if (robotTransform != null)
+        if (ParentJointBox != null)
         {
+            Transform robotTransform = ParentJointBox.transform;
             robotTransform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
         }
     }
-    else
-    {
-        Debug.LogError("parentObjectBox is null. Please assign it in the Unity Editor.");
-    }
 }
-
-}
-
-
 
 
 

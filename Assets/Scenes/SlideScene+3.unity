@@ -129,20 +129,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 465576804}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7205885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7205884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 7205884}
-  childTransformBox: {fileID: 0}
 --- !u!1 &45617834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,8 +1852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 0}
-  childTransformBox: {fileID: 0}
+  J2_Box: {fileID: 0}
 --- !u!1 &764587803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,8 +2829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 0}
-  childTransformBox: {fileID: 0}
+  J2_Box: {fileID: 0}
 --- !u!1 &1335408208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2979,7 +2963,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1374957610}
         m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
         m_MethodName: AlterJ2
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3000,8 +2984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObjectBox: {fileID: 7205884}
-  childTransformBox: {fileID: 0}
+  J2_Box: {fileID: 7205884}
 --- !u!1 &1540342651
 GameObject:
   m_ObjectHideFlags: 0
