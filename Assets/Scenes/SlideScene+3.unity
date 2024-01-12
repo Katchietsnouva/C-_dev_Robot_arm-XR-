@@ -2964,7 +2964,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1374957610}
         m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
-        m_MethodName: AlterJ2
+        m_MethodName: AlterJoints
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
