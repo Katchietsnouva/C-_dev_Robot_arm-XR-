@@ -62,7 +62,7 @@ public class u6_slider_ctrl : MonoBehaviour
     [SerializeField] private GameObject parentJointBox;
     [SerializeField] private GameObject childJointBox;
     // private float childJointOffset = 0.155f; // Adjust this value based on your scene
-    private float childJointOffset = (float)(0.555 / 1000.0); // Adjust this value based on your scene
+    private float childJointOffset = (float)(0.855 / 1000.0); // Adjust this value based on your scene
 
     
     void Start()
@@ -76,7 +76,7 @@ public class u6_slider_ctrl : MonoBehaviour
         AlterJointWithVariables(rotationValue1, parentJointBox, Vector3.zero);
         
         // Calculate offset position for the child joint
-        Vector3 childJointOffsetPosition = Quaternion.AngleAxis(rotationValue1, Vector3.up) * new Vector3(childJointOffset, 0, 0);
+        Vector3 childJointOffsetPosition = Quaternion.AngleAxis(rotationValue1, Vector3.up) * new Vector3(0,0,-childJointOffset);
         AlterJointWithVariables(rotationValue1, childJointBox, childJointOffsetPosition);
     }
 
