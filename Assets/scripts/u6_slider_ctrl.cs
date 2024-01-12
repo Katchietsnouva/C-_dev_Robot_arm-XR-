@@ -55,52 +55,101 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 
 public class u6_slider_ctrl : MonoBehaviour
 {
     private Slider slider1;
-    private Slider slider2;
-    private Slider slider3;
-    private Slider slider4;
-    private Slider slider5;
-    private Slider slider6;
-    // public GameObject parentObjectBox;
-    // public GameObject childTransformBox;
-    // [SerializeField] private string J2_Box = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
     [SerializeField] private GameObject parentJointBox;
     [SerializeField] private GameObject childJointBox;
-    
-    private string logFilePath; // Path to the log file
+    // private float childJointOffset = 0.155f; // Adjust this value based on your scene
+    private float childJointOffset = (float)(0.155 / 1000.0); // Adjust this value based on your scene
 
+    
     void Start()
     {
         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
-        slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
-        slider3 = GameObject.Find("Slider3").GetComponent<Slider>();
-        slider4 = GameObject.Find("Slider4").GetComponent<Slider>();
-        slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
-        slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
-        logFilePath = Application.dataPath + "/u6_slider_ctrl_log.txt";
     }
 
-    public void AlterJ2()
+    public void AlterJoints()
     {
         float rotationValue1 = slider1.value * 360f;
-        AlterJ2WithJointVariables(rotationValue1);  // Pass only rotationValue1
+        AlterJointWithVariables(rotationValue1, parentJointBox, Vector3.zero);
+        
+        // Calculate offset position for the child joint
+        Vector3 childJointOffsetPosition = Quaternion.AngleAxis(rotationValue1, Vector3.up) * new Vector3(0, 0, childJointOffset);
+        AlterJointWithVariables(rotationValue1, childJointBox, childJointOffsetPosition);
     }
 
-    public void AlterJ2WithJointVariables(float rotationValue1)
+    public void AlterJointWithVariables(float rotationValue, GameObject jointBox, Vector3 offset)
     {
-        if (parentJointBox != null)
+        if (jointBox != null)
         {
-            Transform robotJ2Transform = parentJointBox.transform;
-            robotJ2Transform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
-            Transform robotJ3Transform = childJointBox.transform;
-            robotJ3Transform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+            Transform jointTransform = jointBox.transform;
+            jointTransform.localRotation = Quaternion.AngleAxis(rotationValue, Vector3.up);
+            jointTransform.localPosition = offset;
+        }
+        else
+        {
+            Debug.LogError("Joint box is null. Please assign it in the Unity Editor.");
         }
     }
 }
+
+
+
+
+
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using UnityEngine.UI;
+// using System.IO;
+
+// public class u6_slider_ctrl : MonoBehaviour
+// {
+//     private Slider slider1;
+//     private Slider slider2;
+//     private Slider slider3;
+//     private Slider slider4;
+//     private Slider slider5;
+//     private Slider slider6;
+//     // public GameObject parentObjectBox;
+//     // public GameObject childTransformBox;
+//     // [SerializeField] private string J2_Box = "xArm6(XI1300) xArm6(XI1300) - Copy.STEP-1 J2.STEP-1";
+//     [SerializeField] private GameObject parentJointBox;
+//     [SerializeField] private GameObject childJointBox;
+//     private float childJointOffset = 1.0f; 
+    
+//     private string logFilePath; // Path to the log file
+
+//     void Start()
+//     {
+//         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
+//         slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
+//         slider3 = GameObject.Find("Slider3").GetComponent<Slider>();
+//         slider4 = GameObject.Find("Slider4").GetComponent<Slider>();
+//         slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
+//         slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
+//         logFilePath = Application.dataPath + "/u6_slider_ctrl_log.txt";
+//     }
+
+//     public void AlterJ2()
+//     {
+//         float rotationValue1 = slider1.value * 360f;
+//         AlterJ2WithJointVariables(rotationValue1); 
+//     }
+
+//     public void AlterJ2WithJointVariables(float rotationValue1)
+//     {
+//         if (parentJointBox != null)
+//         {
+//             Transform robotJ2Transform = parentJointBox.transform;
+//             robotJ2Transform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+//             Transform robotJ3Transform = childJointBox.transform;
+//             robotJ3Transform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+//         }
+//     }
+// }
 
 
 
