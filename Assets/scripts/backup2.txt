@@ -143,7 +143,160 @@ public void AlterJ2(string J2, string J3)
         // The position of J3 is automatically updated when J2's position changes
     }
 
-  
+    // public void AlterJ2(string J2)
+    // {
+    //     Transform robotTransform = parentObjectBox.transform;
+    //     float rotationValue1 = slider1.value * 360f;
+    //     Transform J2Transform = robotTransform.Find(J2);
+
+    //     if (J2Transform != null)
+    //     {
+    //         // Get the initial position relative to the parent
+    //         Vector3 initialRelativePosition = J2Transform.localPosition;
+
+    //         // If the desired joint is found, alter its rotation
+    //         J2Transform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+
+    //         // Calculate the new position of child of the current joint in world based on the altered rotation
+    //         Vector3 rotatedOffset = J2Transform.localPosition - initialRelativePosition;
+    //         Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
+
+    //         // Set the new position
+    //         J2Transform.position = newPosition;
+
+    //         // Now, let's assume J3 is a child of J2
+    //         Transform J3Transform = J2Transform.Find("J3"); // Adjust the name accordingly
+    //         if (J3Transform != null)
+    //         {
+    //             // Assuming a simple transformation, adjust the position of J3 based on J2's rotation
+    //             J3Transform.localPosition = new Vector3(0f, 0f, 10f); // Adjust the distance accordingly
+    //         }
+
+    //         string LogRotation = $" Quaternion.AngleAxis: {J2Transform.name}";
+    //         LogToFile(LogRotation);
+    //         LogToFile("--------------------------------------------------------");
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning($"Joint with name {J2} not found.");
+    //         string LogWarning = $"Joint with name {J2} not found. ";
+    //         LogToFile(LogWarning);
+    //         LogToFile("--------------------------------------------------------");
+    //     }
+    // }
+
+    // public void AlterJ3(string J3)
+    // {
+    //     Transform robotTransform = parentObjectBox.transform;
+    //     float rotationValue2 = slider2.value * 360f;
+    //     Transform J3Transform = robotTransform.Find(J3); // Assuming J3 is not a child of J2
+
+    //     if (J3Transform != null)
+    //     {
+    //         // Get the initial position relative to the parent
+    //         Vector3 initialRelativePosition = J3Transform.localPosition;
+
+    //         // If the desired joint is found, alter its rotation
+    //         J3Transform.localRotation = Quaternion.AngleAxis(rotationValue2, Vector3.right);
+
+    //         // Calculate the new position of the current joint in world based on the altered rotation
+    //         Vector3 rotatedOffset = J3Transform.localPosition - initialRelativePosition;
+    //         Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
+
+    //         // Set the new position
+    //         J3Transform.position = newPosition;
+
+    //         string LogRotation = $" Quaternion.AngleAxis: {J3Transform.name}";
+    //         LogToFile(LogRotation);
+    //         LogToFile("--------------------------------------------------------");
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning($"Joint with name {J3} not found.");
+    //         string LogWarning = $"Joint with name {J3} not found. ";
+    //         LogToFile(LogWarning);
+    //         LogToFile("--------------------------------------------------------");
+    //     }
+    // }
+
+
+
+    // public void AlterJ2(string J2)
+    // {
+    //     Transform robotTransform = parentObjectBox.transform;
+    //     float rotationValue1 = slider1.value * 360f;
+    //     Transform J2Transform = robotTransform.Find(J2);
+    //     if (J2Transform != null)
+    //     {
+    //         // Get the initial position relative to the parent
+    //         Vector3 initialRelativePosition = J2Transform.localPosition;
+    //         // If the desired joint is found, alter its rotation
+    //         J2Transform.localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.up);
+
+    //         // Calculate the new position of child of the current joint in world based on the altered rotation
+    //         // Vector3 rotatedOffset = child.localPosition - initialRelativePosition;
+    //         // Vector3 rotatedOffset = child.Position - initialRelativePosition;
+    //         Vector3 rotatedOffset = J2Transform.localPosition - initialRelativePosition;
+    //         // Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
+    //         Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset + initialRelativePosition);
+    //         // Set the new position
+    //         J2Transform.position = newPosition;
+
+    //          // Now, let's assume J3 is a child of J2
+    //     Transform J3Transform = J2Transform.Find("J3"); // Adjust the name accordingly
+    //     if (J3Transform != null)
+    //     {
+    //         // Assuming a simple transformation, adjust the position of J3 based on J2's rotation
+    //         J3Transform.localPosition = new Vector3(0f, 0f, 1); // Adjust the distance accordingly
+    //     }
+
+
+    //         string LogRotation = $" Quaternion.AngleAxis: {J2Transform.name}";
+    //         LogToFile(LogRotation);
+    //         LogToFile("--------------------------------------------------------");
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning($"Child with name {J2} not found.");
+    //         string LogWarning = $"Child with name {J2} not found. ";
+    //         LogToFile(LogWarning);
+    //         LogToFile("--------------------------------------------------------");
+    //     }
+    //     // robotTransform.Find(J2).localRotation =Quaternion.AngleAxis(rotationValue1,Vector3.forward);
+    //     // robotTransform.GetChild(J1).localRotation = Quaternion.AngleAxis(rotationValue1, Vector3.forward);
+    // }
+
+
+    // public void AlterJ3(string J3)
+    // {
+    //     Transform robotTransform = parentObjectBox.transform;
+    //     float rotationValue2 = slider2.value * 360f;
+    //     Transform child = robotTransform.Find(J3);
+    //     if (child != null)
+    //     {
+    //         // Get the initial position relative to the parent
+    //         Vector3 initialRelativePosition = child.localPosition;
+    //         // If the desired joint is found, alter its rotation
+    //         child.localRotation = Quaternion.AngleAxis(rotationValue2, Vector3.right);
+
+    //         // Calculate the new position of child of the current joint based on the altered rotation
+    //         Vector3 rotatedOffset = child.localPosition - initialRelativePosition;
+    //         Vector3 newPosition = robotTransform.TransformPoint(rotatedOffset);
+    //         // Set the new position
+    //         child.position = newPosition;
+
+    //         string LogRotation = $" Quaternion.AngleAxis: {child.name}";
+    //         LogToFile(LogRotation);
+    //         LogToFile("--------------------------------------------------------");
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning($"Child with name {J3} not found.");
+    //         string LogWarning = $"Child with name {J3} not found. ";
+    //         LogToFile(LogWarning);
+    //         LogToFile("--------------------------------------------------------");
+    //     }
+    // }
 
     public void AlterJ4(string J4)
     {
