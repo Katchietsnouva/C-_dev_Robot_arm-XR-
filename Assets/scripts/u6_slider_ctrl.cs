@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class u6_slider_ctrl : MonoBehaviour
 {
     private Slider slider1;
+    private Slider slider2;
     [SerializeField] private GameObject parentJoint_1_Box;
     [SerializeField] private GameObject childJoint_2_Box;
     [SerializeField] private GameObject childJoint_3_Box;
@@ -27,6 +28,7 @@ public class u6_slider_ctrl : MonoBehaviour
     void Start()
     {
         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
+        slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
     }
 
     public void AlterJoints()
