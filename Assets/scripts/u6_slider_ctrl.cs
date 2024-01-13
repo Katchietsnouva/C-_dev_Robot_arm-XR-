@@ -33,18 +33,37 @@ public class u6_slider_ctrl : MonoBehaviour
     public void AlterJoints()
     {
         float rotationValue1 = slider1.value * 360f;
+        float rotationValue2 = slider2.value * 360f;
         // Set the parent's rotation
-        AlterJointWithVariables(rotationValue1, parentJoint_1_Box, Vector3.zero);
-        // Set the childJoint_2_Box's parent to parentJoint_1_Box
-        SetParentAndAlterJointWithVariables(childJoint_2_Box, parentJoint_1_Box, childJoint_2_OffsetX, childJoint_2_OffsetY, 0f);
-        // Set the childJoint_3_Box's parent to childJoint_2_Box
-        SetParentAndAlterJointWithVariables(childJoint_3_Box, childJoint_2_Box, 0f, childJoint_3_OffsetY, childJoint_3_OffsetZ);
-        // Set the childJoint_4_Box's parent to childJoint_3_Box
-        SetParentAndAlterJointWithVariables(childJoint_4_Box, childJoint_3_Box, childJoint_4_OffsetX, childJoint_4_OffsetY, childJoint_4_OffsetZ);
-        // Set the childJoint_5_Box's parent to childJoint_4_Box
-        SetParentAndAlterJointWithVariables(childJoint_5_Box, childJoint_4_Box, 0f, childJoint_5_OffsetY,0f);
-        // Set the endEffJoint_6_Box's parent to childJoint_5_Box
-        SetParentAndAlterJointWithVariables(endEffJoint_6_Box, childJoint_5_Box, 0f, endEffJoint_6_OffsetY, endEffJoint_6_OffsetZ);
+        if (slider1.value > 0f)
+        {
+            AlterJointWithVariables(rotationValue1, parentJoint_1_Box, Vector3.zero);
+            // Set the childJoint_2_Box's parent to parentJoint_1_Box
+            SetParentAndAlterJointWithVariables(childJoint_2_Box, parentJoint_1_Box, childJoint_2_OffsetX, childJoint_2_OffsetY, 0f);
+            // Set the childJoint_3_Box's parent to childJoint_2_Box
+            SetParentAndAlterJointWithVariables(childJoint_3_Box, childJoint_2_Box, 0f, childJoint_3_OffsetY, childJoint_3_OffsetZ);
+            // Set the childJoint_4_Box's parent to childJoint_3_Box
+            SetParentAndAlterJointWithVariables(childJoint_4_Box, childJoint_3_Box, childJoint_4_OffsetX, childJoint_4_OffsetY, childJoint_4_OffsetZ);
+            // Set the childJoint_5_Box's parent to childJoint_4_Box
+            SetParentAndAlterJointWithVariables(childJoint_5_Box, childJoint_4_Box, 0f, childJoint_5_OffsetY, 0f);
+            // Set the endEffJoint_6_Box's parent to childJoint_5_Box
+            SetParentAndAlterJointWithVariables(endEffJoint_6_Box, childJoint_5_Box, 0f, endEffJoint_6_OffsetY, endEffJoint_6_OffsetZ);
+        }
+        if (slider2.value > 0f)
+        {
+            // AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, Vector3.zero);
+            // AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, new Vector3(0f, 0f, 0f));
+            AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, new Vector3(childJoint_2_OffsetX, childJoint_2_OffsetY, 0f));
+            // Set the childJoint_3_Box's parent to childJoint_2_Box
+            SetParentAndAlterJointWithVariables(childJoint_3_Box, childJoint_2_Box, 0f, childJoint_3_OffsetY, childJoint_3_OffsetZ);
+            // Set the childJoint_4_Box's parent to childJoint_3_Box
+            SetParentAndAlterJointWithVariables(childJoint_4_Box, childJoint_3_Box, childJoint_4_OffsetX, childJoint_4_OffsetY, childJoint_4_OffsetZ);
+            // Set the childJoint_5_Box's parent to childJoint_4_Box
+            SetParentAndAlterJointWithVariables(childJoint_5_Box, childJoint_4_Box, 0f, childJoint_5_OffsetY, 0f);
+            // Set the endEffJoint_6_Box's parent to childJoint_5_Box
+            SetParentAndAlterJointWithVariables(endEffJoint_6_Box, childJoint_5_Box, 0f, endEffJoint_6_OffsetY, endEffJoint_6_OffsetZ);
+        }
+
     }
 
     private void SetParentAndAlterJointWithVariables(GameObject child, GameObject newParent, float X, float Y, float Z)
@@ -56,9 +75,9 @@ public class u6_slider_ctrl : MonoBehaviour
             // Adjust local scale to prevent unexpected scaling
             child.transform.localScale = Vector3.one;
             // Alter the local position of the child
-            child.transform.localPosition = new Vector3( X, Y, Z);
+            child.transform.localPosition = new Vector3(X, Y, Z);
             // Alter joint rotation
-            AlterJointWithVariables(0f, child, new Vector3( X, Y, Z));
+            AlterJointWithVariables(0f, child, new Vector3(X, Y, Z));
         }
         else
         {
@@ -72,6 +91,19 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             Transform jointTransform = jointBox.transform;
             jointTransform.localRotation = Quaternion.Euler(0, rotationValue, 0);
+            jointTransform.localPosition = offset;
+        }
+        else
+        {
+            Debug.LogError("Joint box is null. Please assign it in the Unity Editor.");
+        }
+    }
+    public void AlterJointWithVariablesfromJoint2(float rotationValue2, GameObject jointBox, Vector3 offset)
+    {
+        if (jointBox != null)
+        {
+            Transform jointTransform = jointBox.transform;
+            jointTransform.localRotation = Quaternion.Euler(rotationValue2, 0, 0);
             jointTransform.localPosition = offset;
         }
         else
