@@ -70,7 +70,7 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             // AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, Vector3.zero);
             // AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, new Vector3(0f, 0f, 0f));
-            AlterJointWithVariablesfromJoint2(rotationValue3, childJoint_3_Box, new Vector3(childJoint_2_OffsetX, childJoint_2_OffsetY, 0f));
+            AlterJointWithVariablesfromJoint2(rotationValue3, childJoint_3_Box, new Vector3(0f, childJoint_3_OffsetY, childJoint_3_OffsetZ));
 
             // Set the childJoint_4_Box's parent to childJoint_3_Box
             SetParentAndAlterJointWithVariables(childJoint_4_Box, childJoint_3_Box, childJoint_4_OffsetX, childJoint_4_OffsetY, childJoint_4_OffsetZ);
