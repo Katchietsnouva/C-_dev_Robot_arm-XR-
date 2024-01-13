@@ -44,7 +44,7 @@ public class u6_slider_ctrl : MonoBehaviour
         SetParentAndAlterJointWithVariables(childJoint_4_Box, childJoint_3_Box, childJoint_4_OffsetX,childJoint_4_OffsetY, childJoint_4_OffsetZ);
 
         // Set the childJoint_5_Box's parent to childJoint_4_Box
-        SetParentAndAlterJointWithVariables(childJoint_5_Box, childJoint_5_Box, 0f,0f, childJoint_5_OffsetZ);
+        SetParentAndAlterJointWithVariables(childJoint_5_Box, childJoint_4_Box, 0f,0f, childJoint_5_OffsetZ);
 
     }
 
