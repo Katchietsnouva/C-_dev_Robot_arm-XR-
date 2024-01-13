@@ -45,6 +45,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\scripts\slider.txt" />
      <None Include="Assets\scripts\backup4.txt" />
+     <None Include="Assets\scripts\u6_slider_ctrl copy7_best.txt" />
      <None Include="Assets\scripts\backup_9.1_bard_almost.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\scripts\backup7_min_serF.txt" />
@@ -62,11 +63,13 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\scripts\backiup_12_P2Ch_ref.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\scripts\u6_slider_ctrl - Copy.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\scripts\backup12_2ndchild.txt" />
      <None Include="Assets\scripts\backup_9.2_ch_almost.txt" />
+     <None Include="Assets\scripts\backup_13.txt" />
      <None Include="Assets\scripts\backup_11.1_P2ch_ref..txt" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\scripts\backup6_min-_ext.txt" />

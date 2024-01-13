@@ -1852,9 +1852,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentJointBox: {fileID: 0}
-  childJointBox: {fileID: 0}
-  childJoint3Box: {fileID: 0}
+  parentJoint_1_Box: {fileID: 0}
+  childJoint_2_Box: {fileID: 0}
+  childJoint_3_Box: {fileID: 0}
 --- !u!1 &764587803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2837,9 +2837,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentJointBox: {fileID: 0}
-  childJointBox: {fileID: 0}
-  childJoint3Box: {fileID: 0}
+  parentJoint_1_Box: {fileID: 0}
+  childJoint_2_Box: {fileID: 0}
+  childJoint_3_Box: {fileID: 0}
 --- !u!1 &1335408208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,9 +2994,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentJointBox: {fileID: 7205884}
-  childJointBox: {fileID: 1690063511}
-  childJoint3Box: {fileID: 955829682}
+  parentJoint_1_Box: {fileID: 7205884}
+  childJoint_2_Box: {fileID: 1690063511}
+  childJoint_3_Box: {fileID: 955829682}
 --- !u!1 &1540342651
 GameObject:
   m_ObjectHideFlags: 0
