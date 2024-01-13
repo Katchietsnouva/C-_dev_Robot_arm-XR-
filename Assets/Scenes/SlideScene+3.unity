@@ -1854,6 +1854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentJointBox: {fileID: 0}
   childJointBox: {fileID: 0}
+  childJoint3Box: {fileID: 0}
 --- !u!1 &764587803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,6 +2476,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: bd02833569b976a438159eda34cf7a11, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9671637266e9af4c9578e43dee9092d, type: 3}
+--- !u!1 &955829682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8710170633025698697, guid: fdf60238f1ae4454b96272622e036d37,
+    type: 3}
+  m_PrefabInstance: {fileID: 465576804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1152501450
 GameObject:
   m_ObjectHideFlags: 0
@@ -2832,6 +2839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentJointBox: {fileID: 0}
   childJointBox: {fileID: 0}
+  childJoint3Box: {fileID: 0}
 --- !u!1 &1335408208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2988,6 +2996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentJointBox: {fileID: 7205884}
   childJointBox: {fileID: 1690063511}
+  childJoint3Box: {fileID: 955829682}
 --- !u!1 &1540342651
 GameObject:
   m_ObjectHideFlags: 0
