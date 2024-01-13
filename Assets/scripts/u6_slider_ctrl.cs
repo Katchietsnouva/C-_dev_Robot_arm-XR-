@@ -9,9 +9,10 @@ public class u6_slider_ctrl : MonoBehaviour
     [SerializeField] private GameObject parentJoint_1_Box;
     [SerializeField] private GameObject childJoint_2_Box;
     [SerializeField] private GameObject childJoint_3_Box;
-    private float childJoint_2_OffsetX = (float)(0.0754 / 1.0);
+    private float childJoint_2_OffsetX = (float)(-0.0754 / 1.0);
     private float childJoint_2_OffsetY = (float)(0.1124 / 1.0);
-    private float childJoint_3_OffsetY = (float)(0.2858 / 1.0);
+    // private float childJoint_3_OffsetY = (float)(0.2858 / 1.0);
+    private float childJoint_3_OffsetY = (float)(0.553 / 1.0);
     private float childJoint_3_OffsetZ = (float)(0.053 / 1.0);
 
     void Start()
@@ -35,7 +36,7 @@ public class u6_slider_ctrl : MonoBehaviour
     }
 
 
-    private void SetParentAndAlterJointWithVariables(GameObject child, GameObject newParent, float X, float Y, float z)
+    private void SetParentAndAlterJointWithVariables(GameObject child, GameObject newParent, float X, float Y, float Z)
     {
         if (child != null && newParent != null)
         {
@@ -46,10 +47,10 @@ public class u6_slider_ctrl : MonoBehaviour
             child.transform.localScale = Vector3.one;
 
             // Alter the local position of the child
-            child.transform.localPosition = new Vector3(childJoint_2_OffsetX, childJoint_2_OffsetY, 0);
+            child.transform.localPosition = new Vector3( X, Y, Z);
 
             // Alter joint rotation
-            AlterJointWithVariables(0f, child, new Vector3(-childJoint_2_OffsetX, childJoint_2_OffsetY, 0));
+            AlterJointWithVariables(0f, child, new Vector3( X, Y, Z));
 
         }
         else
