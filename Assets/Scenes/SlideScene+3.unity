@@ -1856,6 +1856,8 @@ MonoBehaviour:
   childJoint_2_Box: {fileID: 0}
   childJoint_3_Box: {fileID: 0}
   childJoint_4_Box: {fileID: 0}
+  childJoint_5_Box: {fileID: 0}
+  endEffJoint_6_Box: {fileID: 0}
 --- !u!1 &764587803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,6 +2462,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: original5.1_J4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c9671637266e9af4c9578e43dee9092d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5824574927428564374, guid: c9671637266e9af4c9578e43dee9092d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2798,6 +2805,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: original5.2_J2_rot
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b8fb36d31a0d5be4f9377ea0414c48c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6080955033185142121, guid: b8fb36d31a0d5be4f9377ea0414c48c5,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -2842,6 +2854,8 @@ MonoBehaviour:
   childJoint_2_Box: {fileID: 0}
   childJoint_3_Box: {fileID: 0}
   childJoint_4_Box: {fileID: 0}
+  childJoint_5_Box: {fileID: 0}
+  endEffJoint_6_Box: {fileID: 0}
 --- !u!1 &1335408208
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,6 +3014,8 @@ MonoBehaviour:
   childJoint_2_Box: {fileID: 1690063511}
   childJoint_3_Box: {fileID: 955829682}
   childJoint_4_Box: {fileID: 1547529634}
+  childJoint_5_Box: {fileID: 1701278882}
+  endEffJoint_6_Box: {fileID: 2022642534}
 --- !u!1 &1540342651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3161,6 +3177,12 @@ CanvasRenderer:
 --- !u!1 &1690063511 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6661871933681652331, guid: fdf60238f1ae4454b96272622e036d37,
+    type: 3}
+  m_PrefabInstance: {fileID: 465576804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1701278882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4194656914193316147, guid: fdf60238f1ae4454b96272622e036d37,
     type: 3}
   m_PrefabInstance: {fileID: 465576804}
   m_PrefabAsset: {fileID: 0}
@@ -4073,6 +4095,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002143755}
   m_CullTransparentMesh: 1
+--- !u!1 &2022642534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -515268386737218992, guid: fdf60238f1ae4454b96272622e036d37,
+    type: 3}
+  m_PrefabInstance: {fileID: 465576804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2027885354
 GameObject:
   m_ObjectHideFlags: 0
