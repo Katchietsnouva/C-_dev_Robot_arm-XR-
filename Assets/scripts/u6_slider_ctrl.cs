@@ -35,7 +35,7 @@ public class u6_slider_ctrl : MonoBehaviour
         slider3 = GameObject.Find("Slider3").GetComponent<Slider>();
         slider4 = GameObject.Find("Slider4").GetComponent<Slider>();
         slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
-        // slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
+        slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
     }
 
     public void AlterJoints()
@@ -45,7 +45,7 @@ public class u6_slider_ctrl : MonoBehaviour
         float rotationValue3 = slider3.value * 360f;
         float rotationValue4 = slider4.value * 360f;
         float rotationValue5 = slider5.value * 360f;
-        // float rotationValue6 = slider6.value * 360f;
+        float rotationValue6 = slider6.value * 360f;
         // Set the parent's rotation
         if (slider1.value > 0f)
         {
@@ -105,6 +105,12 @@ public class u6_slider_ctrl : MonoBehaviour
             // Set the endEffJoint_6_Box's parent to childJoint_5_Box
             SetParentAndAlterJointWithVariables(endEffJoint_6_Box, childJoint_5_Box, 0f, endEffJoint_6_OffsetY, endEffJoint_6_OffsetZ);
         }
+        if (slider6.value > 0f)
+        {
+            // AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, Vector3.zero);
+            // AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, new Vector3(0f, 0f, 0f));
+            AlterJointWithVariablesfrom_Joint_4_AND_6(rotationValue6, endEffJoint_6_Box, new Vector3(0f, endEffJoint_6_OffsetY, endEffJoint_6_OffsetZ));
+        }
 
     }
 
@@ -127,12 +133,12 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
-    public void AlterJointWithVariablesfrom_Joint_1(float rotationValue, GameObject jointBox, Vector3 offset)
+    public void AlterJointWithVariablesfrom_Joint_1(float rotationValue_1, GameObject jointBox, Vector3 offset)
     {
         if (jointBox != null)
         {
             Transform jointTransform = jointBox.transform;
-            jointTransform.localRotation = Quaternion.Euler(0, rotationValue, 0);
+            jointTransform.localRotation = Quaternion.Euler(0, rotationValue_1, 0);
             jointTransform.localPosition = offset;
         }
         else
@@ -141,12 +147,12 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
-    public void AlterJointWithVariablesfrom_Joint_2_AND_3_AND_5(float rotationValue2, GameObject jointBox, Vector3 offset)
+    public void AlterJointWithVariablesfrom_Joint_2_AND_3_AND_5(float rotationValue_2_3_5, GameObject jointBox, Vector3 offset)
     {
         if (jointBox != null)
         {
             Transform jointTransform = jointBox.transform;
-            jointTransform.localRotation = Quaternion.Euler(rotationValue2, 0, 0);
+            jointTransform.localRotation = Quaternion.Euler(rotationValue_2_3_5, 0, 0);
             jointTransform.localPosition = offset;
         }
         else
@@ -154,12 +160,12 @@ public class u6_slider_ctrl : MonoBehaviour
             Debug.LogError("Joint box is null. Please assign it in the Unity Editor.");
         }
     }
-    public void AlterJointWithVariablesfrom_Joint_4_AND_6(float rotationValue4, GameObject jointBox, Vector3 offset)
+    public void AlterJointWithVariablesfrom_Joint_4_AND_6(float rotationValue_4_6, GameObject jointBox, Vector3 offset)
     {
         if (jointBox != null)
         {
             Transform jointTransform = jointBox.transform;
-            jointTransform.localRotation = Quaternion.Euler(0, rotationValue4, 0);
+            jointTransform.localRotation = Quaternion.Euler(0, rotationValue_4_6, 0);
             jointTransform.localPosition = offset;
         }
         else
