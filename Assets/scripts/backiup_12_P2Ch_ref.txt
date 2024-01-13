@@ -1,0 +1,91 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class u6_slider_ctrl : MonoBehaviour
+{
+    private Slider slider1;
+    [SerializeField] private GameObject parentJoint_1_Box;
+    [SerializeField] private GameObject childJoint_2_Box;
+    private float initialChildJointOffset = (float)(0.0754 / 100.0);
+    private float parentJoint_1_Radius = (float)(0.0754 / 1.0);
+    private float childJoint_2_height = (float)(0.1124 / 1.0);
+
+    void Start()
+    {
+        slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
+    }
+
+    public void AlterJoints()
+    {
+        float rotationValue1 = slider1.value * 360f;
+
+        // Set the parent's rotation
+        AlterJointWithVariables(rotationValue1, parentJoint_1_Box, Vector3.zero);
+
+        // Set the childJoint_2_Box's parent to parentJoint_1_Box
+        SetParentAndAlterJointWithVariables(childJoint_2_Box, parentJoint_1_Box, parentJoint_1_Radius, childJoint_2_height);
+    }
+
+
+    private void SetParentAndAlterJointWithVariables(GameObject child, GameObject newParent, float parentRadius, float childJoint_2_height)
+    {
+        if (child != null && newParent != null)
+        {
+            // Set the parent of the childJoint_2_Box
+            child.transform.SetParent(newParent.transform, false);
+
+            // Adjust local scale to prevent unexpected scaling
+            child.transform.localScale = Vector3.one;
+
+            // Alter the local position of the childJoint_2_Box in the x-axis
+            child.transform.localPosition = new Vector3(parentRadius, initialChildJointOffset, 0);
+
+            // Alter joint rotation
+            AlterJointWithVariables(0f, child, new Vector3(-parentRadius, childJoint_2_height, 0));
+
+        }
+        else
+        {
+            Debug.LogError("Child or newParent is null. Please assign them in the Unity Editor.");
+        }
+    }
+
+
+    public void AlterJointWithVariables(float rotationValue, GameObject jointBox, Vector3 offset)
+    {
+        if (jointBox != null)
+        {
+            Transform jointTransform = jointBox.transform;
+            jointTransform.localRotation = Quaternion.Euler(0, rotationValue, 0);
+            jointTransform.localPosition = offset;
+        }
+        else
+        {
+            Debug.LogError("Joint box is null. Please assign it in the Unity Editor.");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
