@@ -7,6 +7,7 @@ public class u6_slider_ctrl : MonoBehaviour
 {
     private Slider slider1;
     private Slider slider2;
+    private Slider slider3;
     [SerializeField] private GameObject parentJoint_1_Box;
     [SerializeField] private GameObject childJoint_2_Box;
     [SerializeField] private GameObject childJoint_3_Box;
@@ -28,12 +29,14 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
         slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
+        slider3 = GameObject.Find("Slider3").GetComponent<Slider>();
     }
 
     public void AlterJoints()
     {
         float rotationValue1 = slider1.value * 360f;
         float rotationValue2 = slider2.value * 360f;
+        float rotationValue3 = slider3.value * 360f;
         // Set the parent's rotation
         if (slider1.value > 0f)
         {
@@ -56,6 +59,19 @@ public class u6_slider_ctrl : MonoBehaviour
             AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, new Vector3(childJoint_2_OffsetX, childJoint_2_OffsetY, 0f));
             // Set the childJoint_3_Box's parent to childJoint_2_Box
             SetParentAndAlterJointWithVariables(childJoint_3_Box, childJoint_2_Box, 0f, childJoint_3_OffsetY, childJoint_3_OffsetZ);
+            // Set the childJoint_4_Box's parent to childJoint_3_Box
+            SetParentAndAlterJointWithVariables(childJoint_4_Box, childJoint_3_Box, childJoint_4_OffsetX, childJoint_4_OffsetY, childJoint_4_OffsetZ);
+            // Set the childJoint_5_Box's parent to childJoint_4_Box
+            SetParentAndAlterJointWithVariables(childJoint_5_Box, childJoint_4_Box, 0f, childJoint_5_OffsetY, 0f);
+            // Set the endEffJoint_6_Box's parent to childJoint_5_Box
+            SetParentAndAlterJointWithVariables(endEffJoint_6_Box, childJoint_5_Box, 0f, endEffJoint_6_OffsetY, endEffJoint_6_OffsetZ);
+        }
+        if (slider3.value > 0f)
+        {
+            // AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, Vector3.zero);
+            // AlterJointWithVariablesfromJoint2(rotationValue2, childJoint_2_Box, new Vector3(0f, 0f, 0f));
+            AlterJointWithVariablesfromJoint2(rotationValue3, childJoint_3_Box, new Vector3(childJoint_2_OffsetX, childJoint_2_OffsetY, 0f));
+
             // Set the childJoint_4_Box's parent to childJoint_3_Box
             SetParentAndAlterJointWithVariables(childJoint_4_Box, childJoint_3_Box, childJoint_4_OffsetX, childJoint_4_OffsetY, childJoint_4_OffsetZ);
             // Set the childJoint_5_Box's parent to childJoint_4_Box
