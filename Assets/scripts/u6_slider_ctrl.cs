@@ -9,11 +9,16 @@ public class u6_slider_ctrl : MonoBehaviour
     [SerializeField] private GameObject parentJoint_1_Box;
     [SerializeField] private GameObject childJoint_2_Box;
     [SerializeField] private GameObject childJoint_3_Box;
+    [SerializeField] private GameObject childJoint_4_Box;
     private float childJoint_2_OffsetX = (float)(-0.0754 / 1.0);
     private float childJoint_2_OffsetY = (float)(0.1124 / 1.0);
-    // private float childJoint_3_OffsetY = (float)(0.2858 / 1.0);
-    private float childJoint_3_OffsetY = (float)(0.553 / 1.0);
+    private float childJoint_3_OffsetY = (float)(0.2858 / 1.0);
+    // private float childJoint_3_OffsetY = (float)(0.553 / 1.0);
     private float childJoint_3_OffsetZ = (float)(0.053 / 1.0);
+    private float childJoint_4_OffsetX = (float)(0.068 / 1.0);
+    private float childJoint_4_OffsetY = (float)(-0.171 / 1.0);
+    private float childJoint_4_OffsetZ = (float)(0.08 / 1.0);
+
 
     void Start()
     {
@@ -32,6 +37,9 @@ public class u6_slider_ctrl : MonoBehaviour
 
         // Set the childJoint_3_Box's parent to childJoint_2_Box
         SetParentAndAlterJointWithVariables(childJoint_3_Box, childJoint_2_Box, 0f, childJoint_3_OffsetY, childJoint_3_OffsetZ);
+
+        // Set the childJoint_4_Box's parent to childJoint_3_Box
+        SetParentAndAlterJointWithVariables(childJoint_4_Box, childJoint_3_Box, childJoint_4_OffsetX,childJoint_4_OffsetY, childJoint_4_OffsetZ);
 
     }
 

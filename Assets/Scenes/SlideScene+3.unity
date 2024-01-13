@@ -1855,6 +1855,7 @@ MonoBehaviour:
   parentJoint_1_Box: {fileID: 0}
   childJoint_2_Box: {fileID: 0}
   childJoint_3_Box: {fileID: 0}
+  childJoint_4_Box: {fileID: 0}
 --- !u!1 &764587803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2840,6 +2841,7 @@ MonoBehaviour:
   parentJoint_1_Box: {fileID: 0}
   childJoint_2_Box: {fileID: 0}
   childJoint_3_Box: {fileID: 0}
+  childJoint_4_Box: {fileID: 0}
 --- !u!1 &1335408208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2997,6 +2999,7 @@ MonoBehaviour:
   parentJoint_1_Box: {fileID: 7205884}
   childJoint_2_Box: {fileID: 1690063511}
   childJoint_3_Box: {fileID: 955829682}
+  childJoint_4_Box: {fileID: 1547529634}
 --- !u!1 &1540342651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3073,6 +3076,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540342651}
   m_CullTransparentMesh: 1
+--- !u!1 &1547529634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8643821318292188842, guid: fdf60238f1ae4454b96272622e036d37,
+    type: 3}
+  m_PrefabInstance: {fileID: 465576804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1558164766
 GameObject:
   m_ObjectHideFlags: 0
