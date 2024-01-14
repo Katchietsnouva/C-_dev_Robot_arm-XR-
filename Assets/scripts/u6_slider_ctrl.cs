@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class u6_slider_ctrl : MonoBehaviour
 {
+    public static u6_slider_ctrl Instance { get; private set; }
+
     private Slider slider1;
     private Slider slider2;
     private Slider slider3;
@@ -28,14 +30,27 @@ public class u6_slider_ctrl : MonoBehaviour
     private float endEffJoint_6_OffsetY = (float)(-0.07 / 1.0);
     private float endEffJoint_6_OffsetZ = (float)(0.075 / 1.0);
 
+    private List<RobotKeyframe> keyframes = new List<RobotKeyframe>();
+    private bool isRecording = false;
+
+
+
     void Start()
     {
+        Instance = this;
         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
         slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
         slider3 = GameObject.Find("Slider3").GetComponent<Slider>();
         slider4 = GameObject.Find("Slider4").GetComponent<Slider>();
         slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
         slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
+    }
+    void Update()
+    {
+        if (isRecording)
+        {
+            RecordKeyframe();
+        }
     }
 
     public void AlterJoints()
@@ -173,5 +188,75 @@ public class u6_slider_ctrl : MonoBehaviour
             Debug.LogError("Joint box is null. Please assign it in the Unity Editor.");
         }
     }
+
+    public void StartRecording()
+    {
+        isRecording = true;
+        keyframes.Clear(); // Clear existing keyframes when starting a new recording
+    }
+
+    public void StopRecording()
+    {
+        isRecording = false;
+    }
+
+    public void StartPlayback()
+    {
+        StartCoroutine(Playback());
+    }
+
+    private void RecordKeyframe()
+    {
+        RobotKeyframe keyframe = new RobotKeyframe(
+            slider1.value, slider2.value, slider3.value,
+            slider4.value, slider5.value, slider6.value);
+
+        keyframes.Add(keyframe);
+    }
+
+    private IEnumerator Playback()
+    {
+        foreach (var keyframe in keyframes)
+        {
+            // Set robot positions based on keyframe values Interpolate between keyframes and set robot positions
+            SetRobotPositions(keyframe);
+            yield return null; // Wait for the next frame
+        }
+    }
+
+    private void SetRobotPositions(RobotKeyframe keyframe)
+    { // Update sliders based on keyframe values
+        // Assuming you have a method like AlterJoints, update the sliders based on keyframe values
+        slider1.value = keyframe.Slider1;
+        slider2.value = keyframe.Slider2;
+        slider3.value = keyframe.Slider3;
+        slider4.value = keyframe.Slider4;
+        slider5.value = keyframe.Slider5;
+        slider6.value = keyframe.Slider6;
+
+        // Call the method that updates the robot's joint positions
+        AlterJoints();
+    }
 }
 
+
+
+public struct RobotKeyframe
+{
+    public float Slider1;
+    public float Slider2;
+    public float Slider3;
+    public float Slider4;
+    public float Slider5;
+    public float Slider6;
+
+    public RobotKeyframe(float s1, float s2, float s3, float s4, float s5, float s6)
+    {
+        Slider1 = s1;
+        Slider2 = s2;
+        Slider3 = s3;
+        Slider4 = s4;
+        Slider5 = s5;
+        Slider6 = s6;
+    }
+}
