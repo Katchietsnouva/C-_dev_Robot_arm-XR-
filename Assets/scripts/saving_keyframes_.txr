@@ -7,11 +7,8 @@ using System.IO;
 public class u6_slider_ctrl : MonoBehaviour
 {
     // public static u6_slider_ctrl Instance { get; private set; }
-    private string keyframesFilePath_to_txt;
+    private string keyframesFilePath;
     private string keyframesDataKey = "KeyframesData";
-    private List<RobotKeyframe> keyframes = new List<RobotKeyframe>();
-    private bool isRecording = false;
-
     private Slider slider1;
     private Slider slider2;
     private Slider slider3;
@@ -35,6 +32,9 @@ public class u6_slider_ctrl : MonoBehaviour
     private float childJoint_5_OffsetY = (float)(-.172 / 1.0);
     private float endEffJoint_6_OffsetY = (float)(-0.07 / 1.0);
     private float endEffJoint_6_OffsetZ = (float)(0.075 / 1.0);
+
+    private List<RobotKeyframe> keyframes = new List<RobotKeyframe>();
+    private bool isRecording = false;
 
     [SerializeField] private Button button_1;
     // public Text button_1_Text;
@@ -71,7 +71,7 @@ public class u6_slider_ctrl : MonoBehaviour
         // Attach the listener to the button2 click event
         // button_2.onClick.AddListener(StartPlayback); 
 
-        keyframesFilePath_to_txt = Application.dataPath + "/Keyframes.txt";
+        keyframesFilePath = Application.dataPath + "/Keyframes.txt";
     }
     void Update()
     {
@@ -230,8 +230,7 @@ public class u6_slider_ctrl : MonoBehaviour
         else
         {
             StopRecording();
-            SaveKeyframesTo_txt_File();
-            SaveKeyframes_jsonFormat();
+            SaveKeyframesToFile();
         }
     }
     void UpdateButtonUI()
@@ -295,9 +294,9 @@ public class u6_slider_ctrl : MonoBehaviour
         AlterJoints();
     }
 
-    private void SaveKeyframesTo_txt_File()
+    private void SaveKeyframesToFile()
     {
-        using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
+        using (StreamWriter writer = new StreamWriter(keyframesFilePath))
         {
             foreach (var keyframe in keyframes)
             {
@@ -306,24 +305,14 @@ public class u6_slider_ctrl : MonoBehaviour
             }
         }
 
-        Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
+        Debug.Log("Keyframes saved to file: " + keyframesFilePath);
     }
 
-    private void SaveKeyframes_jsonFormat()
+        private void SaveKeyframes()
     {
         string serializedKeyframes = JsonUtility.ToJson(new KeyframesData(keyframes));
         PlayerPrefs.SetString(keyframesDataKey, serializedKeyframes);
         PlayerPrefs.Save();
-    }
-    [System.Serializable]
-    private struct KeyframesData
-    {
-        public List<RobotKeyframe> keyframes;
-
-        public KeyframesData(List<RobotKeyframe> keyframes)
-        {
-            this.keyframes = keyframes;
-        }
     }
 }
 
