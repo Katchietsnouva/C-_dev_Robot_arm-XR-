@@ -8,6 +8,7 @@ public class u6_slider_ctrl : MonoBehaviour
 {
     // public static u6_slider_ctrl Instance { get; private set; }
     private string keyframesFilePath_to_txt;
+    private string keyframesDataKey = "KeyframesData";
     private List<RobotKeyframe> keyframes = new List<RobotKeyframe>();
     private bool isRecording = false;
 
@@ -37,7 +38,7 @@ public class u6_slider_ctrl : MonoBehaviour
 
     [SerializeField] private Button button_1;
     // public Text button_1_Text;
-    // public Text button_1_Text_T;// Reference to the Text component of button
+    public Text button_1_Text_T;// Reference to the Text component of button
     private Image button_1_Image;// Reference to the Image component of button
     [SerializeField] private Button button_2;
 
@@ -64,7 +65,7 @@ public class u6_slider_ctrl : MonoBehaviour
 
         button_1 = GameObject.Find("Button").GetComponent<Button>();
         button_1_Image = button_1.GetComponent<Image>();
-        // button_1_Text_T = button_1.GetComponent<Text>();
+        button_1_Text_T = button_1.GetComponent<Text>();
         // Attach the listener to the button1 click event
         // button.onClick.AddListener(ToggleRecording); 
         button_2 = GameObject.Find("Button2").GetComponent<Button>();
@@ -231,14 +232,14 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             StopRecording();
             SaveKeyframesTo_txt_File();
-            // SaveKeyframes_jsonFormat();
+            SaveKeyframes_jsonFormat();
         }
     }
     void UpdateButtonUI()
     {
         // Update button UI
-        // button_1_Text_T.text = isRecording ? "Recording" : "Start Recording";
-        // button_1_Text_T.color = isRecording ? recordingColor : initialColor;
+        button_1_Text_T.text = isRecording ? "Recording" : "Start Recording";
+        button_1_Text_T.color = isRecording ? recordingColor : initialColor;
         button_1_Image.color = isRecording ? recordingColorBG : initialColorBG;
         // buttonColors.normalColor = isRecording ? recordingColor : initialColor;
         // button.colors = buttonColors;
@@ -307,6 +308,35 @@ public class u6_slider_ctrl : MonoBehaviour
         }
 
         Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
+    }
+
+    private void SaveKeyframes_jsonFormat()
+    {
+        string serializedKeyframes = JsonUtility.ToJson(new KeyframesData(keyframes));
+        PlayerPrefs.SetString(keyframesDataKey, serializedKeyframes);
+        PlayerPrefs.Save();
+        // Save to a file
+        SaveKeyframesToFile(new KeyframesData(keyframes));
+    }
+    [System.Serializable]
+    private struct KeyframesData
+    {
+        public List<RobotKeyframe> keyframes;
+
+        public KeyframesData(List<RobotKeyframe> keyframes)
+        {
+            this.keyframes = keyframes;
+        }
+    }
+    private void SaveKeyframesToFile(KeyframesData keyframesData)
+    {
+        string filePath = Path.Combine(Application.dataPath, "keyframes.json");
+        string serializedData = JsonUtility.ToJson(keyframesData);
+
+        File.WriteAllText(filePath, serializedData);
+        Debug.Log($"Keyframes data saved to: {filePath}");
+        Debug.Log($"Persistent Data Path: {Application.dataPath}");
+
     }
 }
 

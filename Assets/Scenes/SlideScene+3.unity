@@ -1257,7 +1257,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 1701278882}
   endEffJoint_6_Box: {fileID: 2022642534}
   button_1: {fileID: 0}
-  button_1_Text: {fileID: 0}
   button_2: {fileID: 0}
 --- !u!1 &408154999
 GameObject:
@@ -2114,7 +2113,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 0}
   endEffJoint_6_Box: {fileID: 0}
   button_1: {fileID: 0}
-  button_1_Text: {fileID: 0}
   button_2: {fileID: 0}
 --- !u!1 &764587803
 GameObject:
@@ -2482,7 +2480,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 1701278882}
   endEffJoint_6_Box: {fileID: 2022642534}
   button_1: {fileID: 0}
-  button_1_Text: {fileID: 0}
   button_2: {fileID: 0}
 --- !u!1 &875861313
 GameObject:
@@ -2916,7 +2913,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 0}
   endEffJoint_6_Box: {fileID: 0}
   button_1: {fileID: 0}
-  button_1_Text: {fileID: 0}
   button_2: {fileID: 920402323}
 --- !u!114 &920402323
 MonoBehaviour:
@@ -3385,7 +3381,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 0}
   endEffJoint_6_Box: {fileID: 0}
   button_1: {fileID: 0}
-  button_1_Text: {fileID: 0}
   button_2: {fileID: 0}
 --- !u!1 &1335408208
 GameObject:
@@ -3548,7 +3543,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 1701278882}
   endEffJoint_6_Box: {fileID: 2022642534}
   button_1: {fileID: 0}
-  button_1_Text: {fileID: 0}
   button_2: {fileID: 0}
 --- !u!1 &1540342651
 GameObject:
@@ -3912,7 +3906,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 1701278882}
   endEffJoint_6_Box: {fileID: 2022642534}
   button_1: {fileID: 0}
-  button_1_Text: {fileID: 0}
   button_2: {fileID: 0}
 --- !u!1 &1755913679
 GameObject:
@@ -4423,7 +4416,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 0}
   endEffJoint_6_Box: {fileID: 0}
   button_1: {fileID: 1912841119}
-  button_1_Text: {fileID: 783992509}
   button_2: {fileID: 0}
 --- !u!114 &1912841119
 MonoBehaviour:
@@ -4643,7 +4635,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 1701278882}
   endEffJoint_6_Box: {fileID: 2022642534}
   button_1: {fileID: 0}
-  button_1_Text: {fileID: 0}
   button_2: {fileID: 0}
 --- !u!1 &1986811391
 GameObject:
@@ -4769,7 +4760,6 @@ MonoBehaviour:
   childJoint_5_Box: {fileID: 1701278882}
   endEffJoint_6_Box: {fileID: 2022642534}
   button_1: {fileID: 0}
-  button_1_Text: {fileID: 0}
   button_2: {fileID: 0}
 --- !u!1 &1988476456
 GameObject:
