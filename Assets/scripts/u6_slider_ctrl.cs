@@ -284,7 +284,7 @@ public class u6_slider_ctrl : MonoBehaviour
     public void StartPlayback()
     {
         StartCoroutine(Playback());
-        // button_2_Image.color = isPlayingPlayback ? recordingColor : initialColor;
+        button_2_Image.color = recordingColor;
         Debug.Log("Starting Playback");
     }
 
