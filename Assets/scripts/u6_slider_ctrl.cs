@@ -79,6 +79,10 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             RecordKeyframe();
         }
+        if (!isRecording && keyframes.Count > 0)
+        {
+            SaveKeyframesTo_txt_File();
+        }
     }
 
     public void AlterJoints()
@@ -230,7 +234,7 @@ public class u6_slider_ctrl : MonoBehaviour
         else
         {
             StopRecording();
-            SaveKeyframesTo_txt_File();
+            // SaveKeyframesTo_txt_File();
             // SaveKeyframes_jsonFormat();
         }
     }
@@ -269,16 +273,43 @@ public class u6_slider_ctrl : MonoBehaviour
             slider4.value, slider5.value, slider6.value);
 
         keyframes.Add(keyframe);
+        Debug.Log("Recorded keyframe: " + keyframe.Slider1 + " " + keyframe.Slider2 +
+          " " + keyframe.Slider3 + " " + keyframe.Slider4 + " " +
+           keyframe.Slider5 + " " + keyframe.Slider6);
     }
 
     private IEnumerator Playback()
     {
-        foreach (var keyframe in keyframes)
+        // Read keyframes from the file
+        List<RobotKeyframe> playbackKeyframes = LoadKeyframesFrom_txt_File();
+
+        foreach (var keyframe in playbackKeyframes)
         {
-            // Set robot positions based on keyframe values Interpolate between keyframes and set robot positions
             SetRobotPositions(keyframe);
             yield return null; // Wait for the next frame
         }
+    }
+
+    private List<RobotKeyframe> LoadKeyframesFrom_txt_File()
+    {
+        List<RobotKeyframe> loadedKeyframes = new List<RobotKeyframe>();
+        using (StreamReader reader = new StreamReader(keyframesFilePath_to_txt))
+        {
+            while (!reader.EndOfStream)
+            {
+                string[] values = reader.ReadLine().Split(' ');
+                float s1 = float.Parse(values[0]);
+                float s2 = float.Parse(values[1]);
+                float s3 = float.Parse(values[2]);
+                float s4 = float.Parse(values[3]);
+                float s5 = float.Parse(values[4]);
+                float s6 = float.Parse(values[5]);
+
+                loadedKeyframes.Add(new RobotKeyframe(s1, s2, s3, s4, s5, s6));
+            }
+        }
+
+        return loadedKeyframes;
     }
 
     private void SetRobotPositions(RobotKeyframe keyframe)
