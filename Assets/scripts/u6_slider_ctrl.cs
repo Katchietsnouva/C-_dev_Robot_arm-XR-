@@ -49,6 +49,7 @@ public class u6_slider_ctrl : MonoBehaviour
         slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
 
         buttonText = button.GetComponentInChildren<Text>();
+            UpdateButtonUI(); // Initialize button text based on initial recording state
         button.onClick.AddListener(ToggleRecording);
     }
     void Update()
