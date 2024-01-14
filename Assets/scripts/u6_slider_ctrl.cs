@@ -27,7 +27,7 @@ public class u6_slider_ctrl : MonoBehaviour
     [SerializeField] private GameObject childJoint_4_Box;
     [SerializeField] private GameObject childJoint_5_Box;
     [SerializeField] private GameObject endEffJoint_6_Box;
-    private float[] initialSliderValues = { 1f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f };
+    private float[] initialSliderValues = { 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.9f };
 
     private float childJoint_2_OffsetX = (float)(-0.0754 / 1.0);
     private float childJoint_2_OffsetY = (float)(0.1124 / 1.0);
