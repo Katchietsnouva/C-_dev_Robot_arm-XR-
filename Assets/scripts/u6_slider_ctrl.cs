@@ -27,7 +27,7 @@ public class u6_slider_ctrl : MonoBehaviour
     [SerializeField] private GameObject childJoint_4_Box;
     [SerializeField] private GameObject childJoint_5_Box;
     [SerializeField] private GameObject endEffJoint_6_Box;
-    private float[] initialSliderValues = { 0f, 0.9f, 1.0f, 1.0f, 0.0f, 0.0f };
+    private float[] initialSliderValues = { 1f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f };
 
     private float childJoint_2_OffsetX = (float)(-0.0754 / 1.0);
     private float childJoint_2_OffsetY = (float)(0.1124 / 1.0);
@@ -69,7 +69,7 @@ public class u6_slider_ctrl : MonoBehaviour
         slider4 = GameObject.Find("Slider4").GetComponent<Slider>();
         slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
         slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
-        
+
         for (int i = 0; i < Mathf.Min(initialSliderValues.Length, 6); i++)
         {
             SetSliderValue(GetSliderByIndex(i + 1), initialSliderValues[i]);
@@ -87,8 +87,12 @@ public class u6_slider_ctrl : MonoBehaviour
         button_3 = GameObject.Find("Button3").GetComponent<Button>();
         button_3_Image = button_3.GetComponent<Image>();
     }
-
-     private Slider GetSliderByIndex(int index)
+    private void SetSliderValue(Slider slider, float value)
+    {
+        slider.value = value;
+        AlterJoints(); // Or any other necessary actions when altering a slider
+    }
+    private Slider GetSliderByIndex(int index)
     {
         switch (index)
         {
@@ -104,11 +108,7 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
-     private void SetSliderValue(Slider slider, float value)
-    {
-        slider.value = value;
-        AlterJoints(); // Or any other necessary actions when altering a slider
-    }
+
     void Update()
     {
         if (isRecording)
@@ -400,72 +400,72 @@ public class u6_slider_ctrl : MonoBehaviour
 
 
 
-public void TogglePlayback()
-{
-    if (isPlaybackPaused)
+    public void TogglePlayback()
     {
-        StartCoroutine(ResumePlayback());
-        Debug.Log("Resuming Playback");
-        button_3_Image.color = initialColor;
-    }
-    else
-    {
-        StartCoroutine(PausePlayback());
-        Debug.Log("Pausing Playback");
-        button_3_Image.color = recordingColor;
-    }
-
-    isPlaybackPaused = !isPlaybackPaused;
-}
-
-private IEnumerator PausePlayback()
-{
-    while (true)
-    {
-        yield return null; // Wait for the next frame
-
-        // Add any additional logic you may need when playback is paused
-        // For example, you might want to freeze the robot's animation.
-    }
-}
-
-private IEnumerator ResumePlayback()
-{
-    List<RobotKeyframe> playbackKeyframes = LoadKeyframesFrom_txt_File();
-
-    float startTime = Time.time;
-    float elapsedTime = 0f;
-
-    for (int i = 0; i < playbackKeyframes.Count - 1; i++)
-    {
-        while (elapsedTime < 1.0f)
+        if (isPlaybackPaused)
         {
-            if (!isPlaybackPaused)
-            {
-                float t = elapsedTime;
-
-                // Interpolate between the current keyframe and the next keyframe
-                RobotKeyframe interpolatedKeyframe = InterpolateKeyframes(playbackKeyframes[i], playbackKeyframes[i + 1], t);
-
-                // Set robot positions based on interpolated keyframe values
-                SetRobotPositions(interpolatedKeyframe);
-
-                elapsedTime = (Time.time - startTime) / 1.0f; // Normalize to 0-1 range
-
-                yield return null; // Wait for the next frame
-            }
-            else
-            {
-                yield return null; // Wait for the next frame while paused
-            }
+            StartCoroutine(ResumePlayback());
+            Debug.Log("Resuming Playback");
+            button_3_Image.color = initialColor;
+        }
+        else
+        {
+            StartCoroutine(PausePlayback());
+            Debug.Log("Pausing Playback");
+            button_3_Image.color = recordingColor;
         }
 
-        elapsedTime = 0f; // Reset elapsed time for the next keyframe
-        startTime = Time.time; // Reset start time for the next keyframe
+        isPlaybackPaused = !isPlaybackPaused;
     }
 
-    isPlaybackPaused = false; // Reset the paused state after playback completes
-}
+    private IEnumerator PausePlayback()
+    {
+        while (true)
+        {
+            yield return null; // Wait for the next frame
+
+            // Add any additional logic you may need when playback is paused
+            // For example, you might want to freeze the robot's animation.
+        }
+    }
+
+    private IEnumerator ResumePlayback()
+    {
+        List<RobotKeyframe> playbackKeyframes = LoadKeyframesFrom_txt_File();
+
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+
+        for (int i = 0; i < playbackKeyframes.Count - 1; i++)
+        {
+            while (elapsedTime < 1.0f)
+            {
+                if (!isPlaybackPaused)
+                {
+                    float t = elapsedTime;
+
+                    // Interpolate between the current keyframe and the next keyframe
+                    RobotKeyframe interpolatedKeyframe = InterpolateKeyframes(playbackKeyframes[i], playbackKeyframes[i + 1], t);
+
+                    // Set robot positions based on interpolated keyframe values
+                    SetRobotPositions(interpolatedKeyframe);
+
+                    elapsedTime = (Time.time - startTime) / 1.0f; // Normalize to 0-1 range
+
+                    yield return null; // Wait for the next frame
+                }
+                else
+                {
+                    yield return null; // Wait for the next frame while paused
+                }
+            }
+
+            elapsedTime = 0f; // Reset elapsed time for the next keyframe
+            startTime = Time.time; // Reset start time for the next keyframe
+        }
+
+        isPlaybackPaused = false; // Reset the paused state after playback completes
+    }
 
 
 
