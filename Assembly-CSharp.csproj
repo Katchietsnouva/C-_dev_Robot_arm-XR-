@@ -50,7 +50,7 @@
      <None Include="Assets\scripts\backup4.txt" />
      <None Include="Assets\scripts\u6_slider_ctrl copy7_best.txt" />
      <None Include="Assets\scripts\backup_9.1_bard_almost.txt" />
-     <None Include="Assets\scripts\backup_16_bestest.txt" />
+     <None Include="Assets\scripts\backup_16.1_variant_selfmoving.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\scripts\backup7_min_serF.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
@@ -97,6 +97,7 @@
      <None Include="Assets\scripts\u6_slider_ctrl -copy3.txt" />
      <None Include="Assets\!childCountLog.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+     <None Include="Assets\scripts\backup_16_variant_selfmoving.txt" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

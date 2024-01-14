@@ -279,6 +279,7 @@ public class u6_slider_ctrl : MonoBehaviour
         Debug.Log("Starting Playback");
     }
 
+
     private IEnumerator Playback()
     {
         // Read keyframes from the file
@@ -287,7 +288,7 @@ public class u6_slider_ctrl : MonoBehaviour
         
         foreach (var keyframe in playbackKeyframes)
         {
-        Debug.Log($"Slider1: {keyframe.Slider1}, Slider2: {keyframe.Slider2}, Slider3: {keyframe.Slider3}, Slider4: {keyframe.Slider4}, Slider5: {keyframe.Slider5}, Slider6: {keyframe.Slider6}");
+        Debug.Log($"Joint 1 rotation: {keyframe.Slider1}, Joint 2 rotation: {keyframe.Slider2}, Joint 3 rotation: {keyframe.Slider3}, Joint 4 rotation: {keyframe.Slider4}, Joint 5 rotation: {keyframe.Slider5}, End Effector rotation: {keyframe.Slider6}");
             // SetRobotPositions(keyframe);
             // yield return null; // Wait for the next frame
             // Interpolate between keyframes and set robot positions
