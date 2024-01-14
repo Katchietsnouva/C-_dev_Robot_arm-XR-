@@ -54,6 +54,7 @@ public class u6_slider_ctrl : MonoBehaviour
 
     void Start()
     {
+        keyframesFilePath_to_txt = Application.dataPath + "/Keyframes.txt";
         // Instance = this;
         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
         slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
@@ -71,7 +72,7 @@ public class u6_slider_ctrl : MonoBehaviour
         // Attach the listener to the button2 click event
         // button_2.onClick.AddListener(StartPlayback); 
 
-        keyframesFilePath_to_txt = Application.dataPath + "/Keyframes.txt";
+
     }
     void Update()
     {
@@ -314,6 +315,8 @@ public class u6_slider_ctrl : MonoBehaviour
         string serializedKeyframes = JsonUtility.ToJson(new KeyframesData(keyframes));
         PlayerPrefs.SetString(keyframesDataKey, serializedKeyframes);
         PlayerPrefs.Save();
+        // Save to a file
+        SaveKeyframesToFile(new KeyframesData(keyframes));
     }
     [System.Serializable]
     private struct KeyframesData
@@ -324,6 +327,16 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             this.keyframes = keyframes;
         }
+    }
+    private void SaveKeyframesToFile(KeyframesData keyframesData)
+    {
+        string filePath = Path.Combine(Application.dataPath, "keyframes.json");
+        string serializedData = JsonUtility.ToJson(keyframesData);
+
+        File.WriteAllText(filePath, serializedData);
+        Debug.Log($"Keyframes data saved to: {filePath}");
+        Debug.Log($"Persistent Data Path: {Application.dataPath}");
+
     }
 }
 
