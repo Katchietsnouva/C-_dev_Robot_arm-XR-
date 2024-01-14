@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class u6_slider_ctrl : MonoBehaviour
 {
-    public static u6_slider_ctrl Instance { get; private set; }
+    // public static u6_slider_ctrl Instance { get; private set; }
 
     private Slider slider1;
     private Slider slider2;
@@ -33,34 +33,29 @@ public class u6_slider_ctrl : MonoBehaviour
     private List<RobotKeyframe> keyframes = new List<RobotKeyframe>();
     private bool isRecording = false;
 
-
+    [SerializeField] private Button button;
+    private Text buttonText;
+    private Color initialColor = Color.green;
+    private Color recordingColor = Color.red;
 
     void Start()
     {
-        Instance = this;
+        // Instance = this;
         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
         slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
         slider3 = GameObject.Find("Slider3").GetComponent<Slider>();
         slider4 = GameObject.Find("Slider4").GetComponent<Slider>();
         slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
         slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
+
+        buttonText = button.GetComponentInChildren<Text>();
+        button.onClick.AddListener(ToggleRecording);
     }
     void Update()
     {
         if (isRecording)
         {
             RecordKeyframe();
-        }
-    }
-        void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject); // Ensure only one instance exists
         }
     }
 
@@ -200,11 +195,44 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
+
+
+    public void ToggleRecording()
+    {
+        isRecording = !isRecording;
+        UpdateButtonUI();
+        // Update button UI
+        buttonText.text = isRecording ? "Recording" : "Start Recording";
+        buttonText.color = isRecording ? recordingColor : initialColor;
+        if (isRecording)
+        {
+            // u6_slider_ctrl.Instance.StartRecording();
+            StartRecording();
+        }
+        else
+        {
+            // u6_slider_ctrl.Instance.StopRecording();
+            StopRecording();
+        }
+    }
+
     public void StartRecording()
     {
         isRecording = true;
         keyframes.Clear(); // Clear existing keyframes when starting a new recording
     }
+    void UpdateButtonUI()
+    {
+        buttonText.text = isRecording ? "Recording" : "Start Recording";
+        buttonText.color = isRecording ? recordingColor : initialColor;
+    }
+
+
+
+
+
+
+
 
     public void StopRecording()
     {

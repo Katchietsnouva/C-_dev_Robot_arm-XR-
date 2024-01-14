@@ -27,11 +27,11 @@ public class RecordingButton : MonoBehaviour
         buttonText.color = isRecording ? recordingColor : initialColor;
         if (isRecording)
         {
-            u6_slider_ctrl.Instance.StartRecording();
+            // u6_slider_ctrl.Instance.StartRecording();
         }
         else
         {
-            u6_slider_ctrl.Instance.StopRecording();
+            // u6_slider_ctrl.Instance.StopRecording();
         }
     }
 
