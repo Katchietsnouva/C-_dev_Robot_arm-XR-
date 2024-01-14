@@ -316,8 +316,8 @@ public class u6_slider_ctrl : MonoBehaviour
     public void StartPlayback()
     {
         StartCoroutine(Playback());
-        button_2_Image.color = recordingColor;
         Debug.Log("Starting Playback");
+        button_2_Image.color = recordingColor;
     }
 
 
@@ -326,6 +326,7 @@ public class u6_slider_ctrl : MonoBehaviour
         // Read keyframes from the file
         List<RobotKeyframe> playbackKeyframes = LoadKeyframesFrom_txt_File();
         Debug.Log(playbackKeyframes);
+
 
         foreach (var keyframe in playbackKeyframes)
         {
