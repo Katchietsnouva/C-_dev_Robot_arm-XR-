@@ -34,7 +34,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isRecording = false;
 
     [SerializeField] private Button button;
-    private Text buttonText;
+    public Text buttonText;
     private Color initialColor = Color.green;
     private Color recordingColor = Color.red;
 
@@ -48,9 +48,13 @@ public class u6_slider_ctrl : MonoBehaviour
         slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
         slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
 
-        buttonText = button.GetComponentInChildren<Text>();
-            UpdateButtonUI(); // Initialize button text based on initial recording state
-        button.onClick.AddListener(ToggleRecording);
+        // button = GameObject.Find("Button").GetComponent<Button>();
+
+        // Text buttonText = button.GetComponentInChildren<Text>();
+        // buttonText = transform.Find("Text").GetComponent<Text>();
+        // Initialize button text based on initial recording state
+        // UpdateButtonUI(); 
+        // button.onClick.AddListener(ToggleRecording);
     }
     void Update()
     {
@@ -224,6 +228,7 @@ public class u6_slider_ctrl : MonoBehaviour
     }
     void UpdateButtonUI()
     {
+        
         buttonText.text = isRecording ? "Recording" : "Start Recording";
         buttonText.color = isRecording ? recordingColor : initialColor;
     }
