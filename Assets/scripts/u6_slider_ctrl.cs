@@ -13,6 +13,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private Slider slider4;
     private Slider slider5;
     private Slider slider6;
+    private Image buttonImage;// Reference to the Image component of button
     [SerializeField] private GameObject parentJoint_1_Box;
     [SerializeField] private GameObject childJoint_2_Box;
     [SerializeField] private GameObject childJoint_3_Box;
@@ -37,6 +38,13 @@ public class u6_slider_ctrl : MonoBehaviour
     public Text buttonText;
     private Color initialColor = Color.green;
     private Color recordingColor = Color.red;
+    private Color initialColorBG = Color.white;
+    private Color recordingColorBG = Color.black;
+    
+    // private Color initialColor = Color.white;  // Set the initial color to white
+    private ColorBlock buttonColors;
+
+
 
     void Start()
     {
@@ -48,13 +56,19 @@ public class u6_slider_ctrl : MonoBehaviour
         slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
         slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
 
-        // button = GameObject.Find("Button").GetComponent<Button>();
+        button = GameObject.Find("Button").GetComponent<Button>();
+        // buttonColors = button.colors;
+        // Get the Image component attached to the button
+        buttonImage = button.GetComponent<Image>();
+
 
         // Text buttonText = button.GetComponentInChildren<Text>();
         // buttonText = transform.Find("Text").GetComponent<Text>();
         // Initialize button text based on initial recording state
         // UpdateButtonUI(); 
         // button.onClick.AddListener(ToggleRecording);
+        // Set the button color based on the recording state
+
     }
     void Update()
     {
@@ -201,7 +215,6 @@ public class u6_slider_ctrl : MonoBehaviour
     }
 
 
-
     public void ToggleRecording()
     {
         isRecording = !isRecording;
@@ -209,6 +222,10 @@ public class u6_slider_ctrl : MonoBehaviour
         // Update button UI
         buttonText.text = isRecording ? "Recording" : "Start Recording";
         buttonText.color = isRecording ? recordingColor : initialColor;
+        buttonImage.color = isRecording ? recordingColorBG : initialColorBG;
+        // buttonColors.normalColor = isRecording ? recordingColor : initialColor;
+        // button.colors = buttonColors;
+        
         if (isRecording)
         {
             // u6_slider_ctrl.Instance.StartRecording();
@@ -228,15 +245,12 @@ public class u6_slider_ctrl : MonoBehaviour
     }
     void UpdateButtonUI()
     {
-        
         buttonText.text = isRecording ? "Recording" : "Start Recording";
         buttonText.color = isRecording ? recordingColor : initialColor;
+        // Set the button color based on the recording state
+        buttonColors.normalColor = isRecording ? recordingColor : initialColor;
+        
     }
-
-
-
-
-
 
 
 
@@ -249,6 +263,7 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         StartCoroutine(Playback());
     }
+
 
     private void RecordKeyframe()
     {
