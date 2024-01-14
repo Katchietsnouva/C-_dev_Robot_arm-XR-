@@ -13,6 +13,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private string keyframesFilePath_to_txt;
     private List<RobotKeyframe> keyframes = new List<RobotKeyframe>();
     private bool isRecording = false;
+    private bool isPlaybackPaused = false;
 
     private Slider slider1;
     private Slider slider2;
@@ -43,9 +44,12 @@ public class u6_slider_ctrl : MonoBehaviour
     // public Text button_1_Text_T;// Reference to the Text component of button
     private Image button_1_Image;// Reference to the Image component of button
     [SerializeField] private Button button_2;
+    private Image button_2_Image;
+    [SerializeField] private Button button_3;
+    private Image button_3_Image;
 
-    private Color initialColor = Color.green;
-    private Color recordingColor = Color.red;
+    private Color initialColor = Color.white;
+    private Color recordingColor = Color.green;
     private Color initialColorBG = Color.grey;
     private Color recordingColorBG = Color.black;
 
@@ -71,8 +75,11 @@ public class u6_slider_ctrl : MonoBehaviour
         // Attach the listener to the button1 click event
         // button.onClick.AddListener(ToggleRecording); 
         button_2 = GameObject.Find("Button2").GetComponent<Button>();
+        button_2_Image = button_2.GetComponent<Image>();
         // Attach the listener to the button2 click event
         // button_2.onClick.AddListener(StartPlayback); 
+        button_3 = GameObject.Find("Button3").GetComponent<Button>();
+        button_3_Image = button_3.GetComponent<Image>();
 
 
     }
@@ -180,7 +187,7 @@ public class u6_slider_ctrl : MonoBehaviour
         else
         {
             Debug.LogError("Child or newParent is null. Please assign them in the Unity Editor.");
-        }   
+        }
     }
 
     public void AlterJointWithVariablesfrom_Joint_1(float rotationValue_1, GameObject jointBox, Vector3 offset)
@@ -275,7 +282,9 @@ public class u6_slider_ctrl : MonoBehaviour
     }
 
     public void StartPlayback()
-    {   StartCoroutine(Playback());
+    {
+        StartCoroutine(Playback());
+        // button_2_Image.color = isPlayingPlayback ? recordingColor : initialColor;
         Debug.Log("Starting Playback");
     }
 
@@ -285,45 +294,45 @@ public class u6_slider_ctrl : MonoBehaviour
         // Read keyframes from the file
         List<RobotKeyframe> playbackKeyframes = LoadKeyframesFrom_txt_File();
         Debug.Log(playbackKeyframes);
-        
+
         foreach (var keyframe in playbackKeyframes)
         {
-        Debug.Log($"Joint 1 rotation: {keyframe.Slider1}, Joint 2 rotation: {keyframe.Slider2}, Joint 3 rotation: {keyframe.Slider3}, Joint 4 rotation: {keyframe.Slider4}, Joint 5 rotation: {keyframe.Slider5}, End Effector rotation: {keyframe.Slider6}");
+            Debug.Log($"Joint 1 rotation: {keyframe.Slider1}, Joint 2 rotation: {keyframe.Slider2}, Joint 3 rotation: {keyframe.Slider3}, Joint 4 rotation: {keyframe.Slider4}, Joint 5 rotation: {keyframe.Slider5}, End Effector rotation: {keyframe.Slider6}");
             // SetRobotPositions(keyframe);
             // yield return null; // Wait for the next frame
             // Interpolate between keyframes and set robot positions
-        float duration = 1.0f; // Adjust the duration of each keyframe
-        float startTime = Time.time;
-        float elapsedTime = 0f;
+            float duration = 0.0001f; // Adjust the duration of each keyframe
+            float startTime = Time.time;
+            float elapsedTime = 0f;
 
-        while (elapsedTime < duration)
-        {
-            float t = elapsedTime / duration;
-            
-            // Interpolate between the current keyframe and the next keyframe
-            RobotKeyframe interpolatedKeyframe = InterpolateKeyframes(keyframe, playbackKeyframes[math.min(playbackKeyframes.Count - 1, playbackKeyframes.IndexOf(keyframe) + 1)], t);
+            while (elapsedTime < duration)
+            {
+                float t = elapsedTime / duration;
 
-            // Set robot positions based on interpolated keyframe values
-            SetRobotPositions(interpolatedKeyframe);
+                // Interpolate between the current keyframe and the next keyframe
+                RobotKeyframe interpolatedKeyframe = InterpolateKeyframes(keyframe, playbackKeyframes[math.min(playbackKeyframes.Count - 1, playbackKeyframes.IndexOf(keyframe) + 1)], t);
 
-            elapsedTime = Time.time - startTime;
+                // Set robot positions based on interpolated keyframe values
+                SetRobotPositions(interpolatedKeyframe);
 
-            yield return null; // Wait for the next frame
-        }
+                elapsedTime = Time.time - startTime;
+
+                yield return null; // Wait for the next frame
+            }
         }
     }
     private RobotKeyframe InterpolateKeyframes(RobotKeyframe start, RobotKeyframe end, float t)
-{
-    // Linear interpolation between two keyframes
-    return new RobotKeyframe(
-        Mathf.Lerp(start.Slider1, end.Slider1, t),
-        Mathf.Lerp(start.Slider2, end.Slider2, t),
-        Mathf.Lerp(start.Slider3, end.Slider3, t),
-        Mathf.Lerp(start.Slider4, end.Slider4, t),
-        Mathf.Lerp(start.Slider5, end.Slider5, t),
-        Mathf.Lerp(start.Slider6, end.Slider6, t)
-    );
-}
+    {
+        // Linear interpolation between two keyframes
+        return new RobotKeyframe(
+            Mathf.Lerp(start.Slider1, end.Slider1, t),
+            Mathf.Lerp(start.Slider2, end.Slider2, t),
+            Mathf.Lerp(start.Slider3, end.Slider3, t),
+            Mathf.Lerp(start.Slider4, end.Slider4, t),
+            Mathf.Lerp(start.Slider5, end.Slider5, t),
+            Mathf.Lerp(start.Slider6, end.Slider6, t)
+        );
+    }
 
     private List<RobotKeyframe> LoadKeyframesFrom_txt_File()
     {
@@ -343,7 +352,6 @@ public class u6_slider_ctrl : MonoBehaviour
                 loadedKeyframes.Add(new RobotKeyframe(s1, s2, s3, s4, s5, s6));
             }
         }
-
         return loadedKeyframes;
     }
 
@@ -361,6 +369,83 @@ public class u6_slider_ctrl : MonoBehaviour
         AlterJoints();
     }
 
+
+
+
+
+
+public void TogglePlayback()
+{
+    if (isPlaybackPaused)
+    {
+        StartCoroutine(ResumePlayback());
+        Debug.Log("Resuming Playback");
+        button_3_Image.color = initialColor;
+    }
+    else
+    {
+        StartCoroutine(PausePlayback());
+        Debug.Log("Pausing Playback");
+        button_3_Image.color = recordingColor;
+    }
+
+    isPlaybackPaused = !isPlaybackPaused;
+}
+
+private IEnumerator PausePlayback()
+{
+    while (true)
+    {
+        yield return null; // Wait for the next frame
+
+        // Add any additional logic you may need when playback is paused
+        // For example, you might want to freeze the robot's animation.
+    }
+}
+
+private IEnumerator ResumePlayback()
+{
+    List<RobotKeyframe> playbackKeyframes = LoadKeyframesFrom_txt_File();
+
+    float startTime = Time.time;
+    float elapsedTime = 0f;
+
+    for (int i = 0; i < playbackKeyframes.Count - 1; i++)
+    {
+        while (elapsedTime < 1.0f)
+        {
+            if (!isPlaybackPaused)
+            {
+                float t = elapsedTime;
+
+                // Interpolate between the current keyframe and the next keyframe
+                RobotKeyframe interpolatedKeyframe = InterpolateKeyframes(playbackKeyframes[i], playbackKeyframes[i + 1], t);
+
+                // Set robot positions based on interpolated keyframe values
+                SetRobotPositions(interpolatedKeyframe);
+
+                elapsedTime = (Time.time - startTime) / 1.0f; // Normalize to 0-1 range
+
+                yield return null; // Wait for the next frame
+            }
+            else
+            {
+                yield return null; // Wait for the next frame while paused
+            }
+        }
+
+        elapsedTime = 0f; // Reset elapsed time for the next keyframe
+        startTime = Time.time; // Reset start time for the next keyframe
+    }
+
+    isPlaybackPaused = false; // Reset the paused state after playback completes
+}
+
+
+
+
+
+
     private void SaveKeyframesTo_txt_File()
     {
         using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
@@ -375,6 +460,10 @@ public class u6_slider_ctrl : MonoBehaviour
         Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
     }
 }
+
+
+
+
 
 
 
