@@ -14,7 +14,6 @@ public class u6_slider_ctrl : MonoBehaviour
     private List<RobotKeyframe> keyframes = new List<RobotKeyframe>();
     private bool isRecording = false;
     private bool isPlaybackPaused = false;
-
     private Slider slider1;
     private Slider slider2;
     private Slider slider3;
@@ -28,6 +27,8 @@ public class u6_slider_ctrl : MonoBehaviour
     [SerializeField] private GameObject childJoint_4_Box;
     [SerializeField] private GameObject childJoint_5_Box;
     [SerializeField] private GameObject endEffJoint_6_Box;
+    private float[] initialSliderValues = { 0f, 0.9f, 1.0f, 1.0f, 0.0f, 0.0f };
+
     private float childJoint_2_OffsetX = (float)(-0.0754 / 1.0);
     private float childJoint_2_OffsetY = (float)(0.1124 / 1.0);
     private float childJoint_3_OffsetY = (float)(0.2858 / 1.0);
@@ -68,6 +69,11 @@ public class u6_slider_ctrl : MonoBehaviour
         slider4 = GameObject.Find("Slider4").GetComponent<Slider>();
         slider5 = GameObject.Find("Slider5").GetComponent<Slider>();
         slider6 = GameObject.Find("Slider6").GetComponent<Slider>();
+        
+        for (int i = 0; i < Mathf.Min(initialSliderValues.Length, 6); i++)
+        {
+            SetSliderValue(GetSliderByIndex(i + 1), initialSliderValues[i]);
+        }
 
         button_1 = GameObject.Find("Button").GetComponent<Button>();
         button_1_Image = button_1.GetComponent<Image>();
@@ -80,8 +86,28 @@ public class u6_slider_ctrl : MonoBehaviour
         // button_2.onClick.AddListener(StartPlayback); 
         button_3 = GameObject.Find("Button3").GetComponent<Button>();
         button_3_Image = button_3.GetComponent<Image>();
+    }
 
+     private Slider GetSliderByIndex(int index)
+    {
+        switch (index)
+        {
+            case 1: return slider1;
+            case 2: return slider2;
+            case 3: return slider3;
+            case 4: return slider4;
+            case 5: return slider5;
+            case 6: return slider6;
+            default:
+                Debug.LogError("Invalid slider index");
+                return null;
+        }
+    }
 
+     private void SetSliderValue(Slider slider, float value)
+    {
+        slider.value = value;
+        AlterJoints(); // Or any other necessary actions when altering a slider
     }
     void Update()
     {

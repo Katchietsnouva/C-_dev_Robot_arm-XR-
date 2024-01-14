@@ -352,7 +352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
+  m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &105957626
@@ -2523,11 +2523,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2027885356}
   m_FillRect: {fileID: 1755913680}
   m_HandleRect: {fileID: 2027885355}
-  m_Direction: 0
-  m_MinValue: 0
+  m_Direction: 1
+  m_MinValue: 0.4
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.4
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2997,7 +2997,7 @@ MonoBehaviour:
   endEffJoint_6_Box: {fileID: 2022642534}
   button_1: {fileID: 1912841119}
   button_2: {fileID: 920402323}
-  button_3: {fileID: 0}
+  button_3: {fileID: 1619867340}
 --- !u!114 &920402323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4661,7 +4661,7 @@ MonoBehaviour:
   endEffJoint_6_Box: {fileID: 2022642534}
   button_1: {fileID: 1912841119}
   button_2: {fileID: 920402323}
-  button_3: {fileID: 0}
+  button_3: {fileID: 1619867340}
 --- !u!114 &1912841119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4968,10 +4968,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 2091885188}
   m_HandleRect: {fileID: 764587804}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: 0.6
+  m_MaxValue: 1.35
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
