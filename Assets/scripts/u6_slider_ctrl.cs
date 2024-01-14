@@ -38,9 +38,9 @@ public class u6_slider_ctrl : MonoBehaviour
     public Text buttonText;
     private Color initialColor = Color.green;
     private Color recordingColor = Color.red;
-    private Color initialColorBG = Color.white;
+    private Color initialColorBG = Color.grey;
     private Color recordingColorBG = Color.black;
-    
+
     // private Color initialColor = Color.white;  // Set the initial color to white
     private ColorBlock buttonColors;
 
@@ -219,13 +219,6 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         isRecording = !isRecording;
         UpdateButtonUI();
-        // Update button UI
-        buttonText.text = isRecording ? "Recording" : "Start Recording";
-        buttonText.color = isRecording ? recordingColor : initialColor;
-        buttonImage.color = isRecording ? recordingColorBG : initialColorBG;
-        // buttonColors.normalColor = isRecording ? recordingColor : initialColor;
-        // button.colors = buttonColors;
-        
         if (isRecording)
         {
             // u6_slider_ctrl.Instance.StartRecording();
@@ -237,21 +230,22 @@ public class u6_slider_ctrl : MonoBehaviour
             StopRecording();
         }
     }
+    void UpdateButtonUI()
+    {
+        // Update button UI
+        buttonText.text = isRecording ? "Recording" : "Start Recording";
+        buttonText.color = isRecording ? recordingColor : initialColor;
+        buttonImage.color = isRecording ? recordingColorBG : initialColorBG;
+        // buttonColors.normalColor = isRecording ? recordingColor : initialColor;
+        // button.colors = buttonColors;
+        buttonColors.normalColor = isRecording ? recordingColor : initialColor;
 
+    }
     public void StartRecording()
     {
         isRecording = true;
         keyframes.Clear(); // Clear existing keyframes when starting a new recording
     }
-    void UpdateButtonUI()
-    {
-        buttonText.text = isRecording ? "Recording" : "Start Recording";
-        buttonText.color = isRecording ? recordingColor : initialColor;
-        // Set the button color based on the recording state
-        buttonColors.normalColor = isRecording ? recordingColor : initialColor;
-        
-    }
-
 
 
     public void StopRecording()
