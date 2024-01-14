@@ -27,7 +27,7 @@ public class u6_slider_ctrl : MonoBehaviour
     [SerializeField] private GameObject childJoint_4_Box;
     [SerializeField] private GameObject childJoint_5_Box;
     [SerializeField] private GameObject endEffJoint_6_Box;
-    private float[] initialSliderValues = { 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.9f };
+    private float[] initialSliderValues = { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.9f };
 
     private float childJoint_2_OffsetX = (float)(-0.0754 / 1.0);
     private float childJoint_2_OffsetY = (float)(0.1124 / 1.0);
@@ -48,6 +48,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private Image button_2_Image;
     [SerializeField] private Button button_3;
     private Image button_3_Image;
+    [SerializeField] private Button button_4;
 
     private Color initialColor = Color.white;
     private Color recordingColor = Color.green;
@@ -86,6 +87,7 @@ public class u6_slider_ctrl : MonoBehaviour
         // button_2.onClick.AddListener(StartPlayback); 
         button_3 = GameObject.Find("Button3").GetComponent<Button>();
         button_3_Image = button_3.GetComponent<Image>();
+        button_4 = GameObject.Find("Button4").GetComponent<Button>();
     }
     private void SetSliderValue(Slider slider, float value)
     {
@@ -106,6 +108,10 @@ public class u6_slider_ctrl : MonoBehaviour
                 Debug.LogError("Invalid slider index");
                 return null;
         }
+    }
+    public void ResetToInitialValues()
+    {
+        Start(); // Call the Start function to reset to initial values
     }
 
 
