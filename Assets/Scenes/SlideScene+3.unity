@@ -2889,9 +2889,9 @@ RectTransform:
   m_Father: {fileID: 1792769207}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 400, y: 50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920402322
@@ -2906,13 +2906,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentJoint_1_Box: {fileID: 0}
-  childJoint_2_Box: {fileID: 0}
-  childJoint_3_Box: {fileID: 0}
-  childJoint_4_Box: {fileID: 0}
-  childJoint_5_Box: {fileID: 0}
-  endEffJoint_6_Box: {fileID: 0}
-  button_1: {fileID: 0}
+  parentJoint_1_Box: {fileID: 7205884}
+  childJoint_2_Box: {fileID: 1690063511}
+  childJoint_3_Box: {fileID: 955829682}
+  childJoint_4_Box: {fileID: 1547529634}
+  childJoint_5_Box: {fileID: 1701278882}
+  endEffJoint_6_Box: {fileID: 2022642534}
+  button_1: {fileID: 1912841119}
   button_2: {fileID: 920402323}
 --- !u!114 &920402323
 MonoBehaviour:
@@ -4394,7 +4394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 400, y: 50}
+  m_AnchoredPosition: {x: 400, y: 100}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912841118
@@ -4409,14 +4409,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdb4f3a1b412c845962534b7ea1487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentJoint_1_Box: {fileID: 0}
-  childJoint_2_Box: {fileID: 0}
-  childJoint_3_Box: {fileID: 0}
-  childJoint_4_Box: {fileID: 0}
-  childJoint_5_Box: {fileID: 0}
-  endEffJoint_6_Box: {fileID: 0}
+  parentJoint_1_Box: {fileID: 7205884}
+  childJoint_2_Box: {fileID: 1690063511}
+  childJoint_3_Box: {fileID: 955829682}
+  childJoint_4_Box: {fileID: 1547529634}
+  childJoint_5_Box: {fileID: 1701278882}
+  endEffJoint_6_Box: {fileID: 2022642534}
   button_1: {fileID: 1912841119}
-  button_2: {fileID: 0}
+  button_2: {fileID: 920402323}
 --- !u!114 &1912841119
 MonoBehaviour:
   m_ObjectHideFlags: 0
