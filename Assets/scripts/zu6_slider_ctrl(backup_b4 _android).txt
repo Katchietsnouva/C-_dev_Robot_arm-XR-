@@ -9,10 +9,6 @@ using System;
 
 public class u6_slider_ctrl : MonoBehaviour
 {
-    // for android 
-    private string rootFolderName = "robot_app";
-    private string subFolderName = "user_data";
-    private string fileName = "Keyframes.txt";
     // public static u6_slider_ctrl Instance { get; private set; }
     private string keyframesFilePath_to_txt;
     private List<RobotKeyframe> keyframes = new List<RobotKeyframe>();
@@ -66,10 +62,7 @@ public class u6_slider_ctrl : MonoBehaviour
 
     void Start()
     {
-        // for android 
-        keyframesFilePath_to_txt = GetFilePath();
-        // for windows 
-        // keyframesFilePath_to_txt = Application.dataPath + "/Keyframes.txt";
+        keyframesFilePath_to_txt = Application.dataPath + "/Keyframes.txt";
         // Instance = this;
         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
         slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
@@ -96,51 +89,6 @@ public class u6_slider_ctrl : MonoBehaviour
         button_3_Image = button_3.GetComponent<Image>();
         button_4 = GameObject.Find("Button4").GetComponent<Button>();
     }
-    //android
-    private string GetFilePath()
-    {
-        string rootPath = Path.Combine(Application.persistentDataPath, rootFolderName);
-        string subFolderPath = Path.Combine(rootPath, subFolderName);
-        string filePath = Path.Combine(subFolderPath, fileName);
-
-        return filePath;
-    }
-    private void CreateFoldersAndFile()
-    {
-        string rootPath = Path.Combine(Application.persistentDataPath, rootFolderName);
-        string subFolderPath = Path.Combine(rootPath, subFolderName);
-
-        if (!Directory.Exists(rootPath))
-        {
-            Directory.CreateDirectory(rootPath);
-        }
-
-        if (!Directory.Exists(subFolderPath))
-        {
-            Directory.CreateDirectory(subFolderPath);
-        }
-
-        // You can create the file here if needed
-        // string filePath = Path.Combine(subFolderPath, fileName);
-        // File.WriteAllText(filePath, "Initial content");
-    }
-    private void SaveKeyframesToFile()
-    {
-        CreateFoldersAndFile(); // Ensure folders and file exist
-        using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
-        {
-            foreach (var keyframe in keyframes)
-            {
-                // Write each keyframe data to the file
-                writer.WriteLine($"{keyframe.Slider1} {keyframe.Slider2} {keyframe.Slider3} {keyframe.Slider4} {keyframe.Slider5} {keyframe.Slider6}");
-            }
-        }
-
-        Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
-    }
-
-
-
     private void SetSliderValue(Slider slider, float value)
     {
         slider.value = value;
@@ -175,10 +123,7 @@ public class u6_slider_ctrl : MonoBehaviour
         }
         if (!isRecording && keyframes.Count > 0)
         {
-            //for windows
             SaveKeyframesTo_txt_File();
-            //for android
-            SaveKeyframesToFile();
         }
     }
 
@@ -533,7 +478,7 @@ public class u6_slider_ctrl : MonoBehaviour
 
 
 
-    //for windows
+
     private void SaveKeyframesTo_txt_File()
     {
         using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
