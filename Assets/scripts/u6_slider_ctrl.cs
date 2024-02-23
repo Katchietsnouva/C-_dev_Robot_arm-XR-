@@ -113,8 +113,70 @@ public class u6_slider_ctrl : MonoBehaviour
         button_4 = GameObject.Find("Button4").GetComponent<Button>();
 
         // SERVER realated interactions
-        StartNetworking();
+        button_EnableNetworking = GameObject.Find("Button_EnableNetworking").GetComponent<Button>();
+        button_SetMode = GameObject.Find("Button_SetMode").GetComponent<Button>();
+
+        button_EnableNetworking.onClick.AddListener(ToggleNetworking);
+        button_SetMode.onClick.AddListener(ToggleClientServerMode);
+        // StartNetworking();
     }
+    private void ToggleNetworking()
+    {
+        isNetworkingEnabled = !isNetworkingEnabled;
+
+        if (isNetworkingEnabled)
+        {
+            StartNetworking(); // Enable networking
+        }
+        else
+        {
+            StopNetworking(); // Disable networking
+        }
+
+        // Optionally, update UI based on networking status
+        button_EnableNetworking.GetComponent<Image>().color = isNetworkingEnabled ? Color.green : Color.white;
+    }
+
+    // SERVER realated interactions
+    private void ToggleClientServerMode()
+    {
+        isClientMode = !isClientMode;
+
+        if (isClientMode)
+        {
+            // Implement logic to set the device as a client
+            // For example, connect to the server
+            SetClientMode();
+        }
+        else
+        {
+            // Implement logic to set the device as a server
+            // For example, start listening for clients
+            SetServerMode();
+        }
+
+        // Optionally, update UI based on mode
+        // e.g., button_SetMode.GetComponent<Image>().color = isClientMode ? Color.blue : Color.red;
+    }
+
+    private void SetClientMode()
+    {
+        // Implement logic to set the device as a client
+        tcpClient = new TcpClient();
+        tcpClient.Connect(serverIPAddress, port);
+
+        // Optionally, start a thread to listen for data from the server
+        new Thread(() => { ListenForServerData(tcpClient); }).Start();
+    }
+
+    private void SetServerMode()
+    {
+        // Implement logic to set the device as a server
+        tcpListener = new TcpListener(IPAddress.Any, port);
+        tcpListener.Start();
+        new Thread(ListenForClients).Start();
+    }
+
     // SERVER realated interactions
     private void StartNetworking()
     {
@@ -140,6 +202,13 @@ public class u6_slider_ctrl : MonoBehaviour
             // Optionally, you can start a thread to listen for data from the server
             new Thread(() => { ListenForServerData(tcpClient); }).Start();
         }
+    }
+
+
+    // SERVER realated interactions
+    private void StopNetworking()
+    {
+        // Implement logic to stop networking (e.g., close connections, stop threads)
     }
     // SERVER realated interactions
     private void ListenForClients()
