@@ -106,7 +106,7 @@ public class serverCode : MonoBehaviour
             for (int i = 0; i < sliderValues.Length; i++)
             {
                 float sliderValue = float.Parse(sliderValues[i]);
-                SetSliderValue(GetSliderByIndex(i + 1), sliderValue);
+                // SetSliderValue(GetSliderByIndex(i + 1), sliderValue);
             }
 
             // Call AlterJoints or any other method to update the robot arm
@@ -115,4 +115,29 @@ public class serverCode : MonoBehaviour
     }
 
     // Existing code for sliders, AlterJoints, and other functionalities
+
+    void Update()
+    {
+        // server related code
+        if (!CheckIfServer())
+        {
+            // Implement client logic here
+            // Read slider changes and send them to the server
+            // Example: Send slider values to the server
+        }
+    }
+    // server related code
+    private bool CheckIfServer()
+    {
+        // Implement logic to check if the device should act as a server
+        // Return true for server, false for client
+        // Example: Use a tickle button or any other input method
+        return false; // Change this based on your logic
+    }
+
+    public void AlterJoints()
+    {
+        // pass;
+    }
+
 }
