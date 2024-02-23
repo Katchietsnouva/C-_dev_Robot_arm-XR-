@@ -103,9 +103,10 @@ public class u6_slider_ctrl : MonoBehaviour
         button_3_Image = button_3.GetComponent<Image>();
         button_4 = GameObject.Find("Button4").GetComponent<Button>();
 
-        // SERVER interactions
+        // SERVER realated interactions
         StartNetworking();
     }
+    // SERVER realated interactions
     private void StartNetworking()
     {
         int port = 12345; // Use a different port for each device
@@ -120,18 +121,22 @@ public class u6_slider_ctrl : MonoBehaviour
         else
         {
             // Start client
-            tcpClient = new TcpClient("server_ip_address", port);
+            // tcpClient = new TcpClient("server_ip_address", port);
+            tcpClient = new TcpClient("192.168.0.100", port);
+
         }
     }
+    // SERVER realated interactions
     private void ListenForClients()
     {
         while (true)
         {
             TcpClient tcpClient = tcpListener.AcceptTcpClient();
             new Thread(HandleClient).Start(tcpClient);
+            Debug.Log("Client connected: " + ((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address.ToString());
         }
     }
-
+    // SERVER realated interactions
     private void HandleClient(object obj)
     {
         TcpClient tcpClient = (TcpClient)obj;
@@ -243,6 +248,21 @@ public class u6_slider_ctrl : MonoBehaviour
             //for android
             SaveKeyframesToFile();
         }
+        // server related code
+        if (!CheckIfServer())
+        {
+            // Implement client logic here
+            // Read slider changes and send them to the server
+            // Example: Send slider values to the server
+        }
+    }
+    // server related code
+    private bool CheckIfServer()
+    {
+        // Implement logic to check if the device should act as a server
+        // Return true for server, false for client
+        // Example: Use a tickle button or any other input method
+        return false; // Change this based on your logic
     }
 
     public void AlterJoints()
