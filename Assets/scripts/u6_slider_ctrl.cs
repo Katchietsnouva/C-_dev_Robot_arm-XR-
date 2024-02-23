@@ -13,9 +13,13 @@ using System.Threading;
 
 public class u6_slider_ctrl : MonoBehaviour
 {
-    // server interactions
+    // SERVER related interactions
     private TcpListener tcpListener;
     private TcpClient tcpClient;
+    private bool isServer = false;
+    private string serverIPAddress = "192.168.0.100"; // Replace with your actual server IP address
+    private int port = 12345;
+
     // for android 
     private string rootFolderName = "robot_app";
     private string subFolderName = "user_data";
@@ -109,12 +113,14 @@ public class u6_slider_ctrl : MonoBehaviour
     // SERVER realated interactions
     private void StartNetworking()
     {
-        int port = 12345; // Use a different port for each device
+        // int port = 12345; // Use a different port for each device
+        isServer = CheckIfServer();
 
-        if (CheckIfServer())
+        if (isServer)
         {
             // Start server
             tcpListener = new TcpListener(IPAddress.Any, port);
+            // tcpListener = new TcpListener(IPAddress.Any, port);
             tcpListener.Start();
             new Thread(ListenForClients).Start();
         }
@@ -122,8 +128,12 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             // Start client
             // tcpClient = new TcpClient("server_ip_address", port);
-            tcpClient = new TcpClient("192.168.0.100", port);
+            // tcpClient = new TcpClient("192.168.0.100", port);
+            tcpClient = new TcpClient();
+            tcpClient.Connect(serverIPAddress, port);
 
+            // Optionally, you can start a thread to listen for data from the server
+            new Thread(() => { ListenForServerData(tcpClient); }).Start();
         }
     }
     // SERVER realated interactions
@@ -131,21 +141,71 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         while (true)
         {
-            TcpClient tcpClient = tcpListener.AcceptTcpClient();
-            new Thread(HandleClient).Start(tcpClient);
-            Debug.Log("Client connected: " + ((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address.ToString());
+            // TcpClient client = tcpListener.AcceptTcpClient();
+            // new Thread(HandleClient).Start(tcpClient);
+            TcpClient client = tcpListener.AcceptTcpClient();
+            new Thread(() => { HandleClient(client); }).Start();
+            Debug.Log("Client connected: " + ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
+            // Example: Update a UI Text element with server information
+            // serverStatusText.text = "Server Status: Connected";
         }
     }
     // SERVER realated interactions
     private void HandleClient(object obj)
     {
-        TcpClient tcpClient = (TcpClient)obj;
-        NetworkStream clientStream = tcpClient.GetStream();
+        TcpClient client = (TcpClient)obj;
+        NetworkStream clientStream = client.GetStream();
 
         // Implement server logic for receiving data from the client
-        // and updating sliders accordingly
         // Example: Read data from clientStream and update sliders
+        // You can call a method like UpdateSlidersFromNetworkData(data) to handle the received data
     }
+
+    // Optional: Listen for data from the server if this instance is a client
+    private void ListenForServerData(TcpClient client)
+    {
+        NetworkStream clientStream = client.GetStream();
+        StreamReader reader = new StreamReader(clientStream);
+
+        while (true)
+        {
+            try
+            {
+                string data = reader.ReadLine();
+                if (data != null)
+                {
+                    Debug.Log("Received data from server: " + data);
+                    // Handle the received data, e.g., UpdateSlidersFromNetworkData(data)
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Debug.LogError("Error while reading data from server: " + ex.Message);
+                break;
+            }
+        }
+    }
+
+    // Optional: Implement a method to update sliders based on received network data
+    private void UpdateSlidersFromNetworkData(string data)
+    {
+        // Parse the data and update sliders accordingly
+        // Example: Split data into slider values and update sliders
+        string[] sliderValues = data.Split(' ');
+        if (sliderValues.Length == 6)
+        {
+            for (int i = 0; i < sliderValues.Length; i++)
+            {
+                float sliderValue = float.Parse(sliderValues[i]);
+                SetSliderValue(GetSliderByIndex(i + 1), sliderValue);
+            }
+
+            // Call AlterJoints or any other method to update the robot arm
+            AlterJoints();
+        }
+    }
+
 
     //android
     private string GetFilePath()
