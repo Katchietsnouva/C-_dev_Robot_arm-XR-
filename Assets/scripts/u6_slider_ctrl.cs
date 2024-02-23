@@ -14,7 +14,8 @@ using System.Threading;
 public class u6_slider_ctrl : MonoBehaviour
 {
     // server interactions
-
+    private TcpListener tcpListener;
+    private TcpClient tcpClient;
     // for android 
     private string rootFolderName = "robot_app";
     private string subFolderName = "user_data";
@@ -101,7 +102,46 @@ public class u6_slider_ctrl : MonoBehaviour
         button_3 = GameObject.Find("Button3").GetComponent<Button>();
         button_3_Image = button_3.GetComponent<Image>();
         button_4 = GameObject.Find("Button4").GetComponent<Button>();
+
+        // SERVER interactions
+        StartNetworking();
     }
+    private void StartNetworking()
+    {
+        int port = 12345; // Use a different port for each device
+
+        if (CheckIfServer())
+        {
+            // Start server
+            tcpListener = new TcpListener(IPAddress.Any, port);
+            tcpListener.Start();
+            new Thread(ListenForClients).Start();
+        }
+        else
+        {
+            // Start client
+            tcpClient = new TcpClient("server_ip_address", port);
+        }
+    }
+    private void ListenForClients()
+    {
+        while (true)
+        {
+            TcpClient tcpClient = tcpListener.AcceptTcpClient();
+            new Thread(HandleClient).Start(tcpClient);
+        }
+    }
+
+    private void HandleClient(object obj)
+    {
+        TcpClient tcpClient = (TcpClient)obj;
+        NetworkStream clientStream = tcpClient.GetStream();
+
+        // Implement server logic for receiving data from the client
+        // and updating sliders accordingly
+        // Example: Read data from clientStream and update sliders
+    }
+
     //android
     private string GetFilePath()
     {
