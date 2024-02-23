@@ -6,13 +6,15 @@ using System.IO;
 using Unity.Mathematics;
 using System;
 
-public class u6_slider_ctrl : MonoBehaviour
+public class AndroidFileManager : MonoBehaviour
 {
     // ... (Your existing code)
 
     private string rootFolderName = "robot_app";
     private string subFolderName = "user_data";
     private string fileName = "Keyframes.txt";
+    private string keyframesFilePath_to_txt;
+    private List<RobotKeyframe> keyframes = new List<RobotKeyframe>();
 
     void Start()
     {

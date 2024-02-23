@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\scripts\android_manager.cs" />
      <Compile Include="Assets\scripts\u6_ctrl_.cs" />
      <Compile Include="Assets\scripts\u6_buttons_ctrl.cs" />
      <Compile Include="Assets\scripts\bed.cs" />
@@ -43,6 +44,7 @@
      <Compile Include="Assets\scripts\u6_slider_ctrl.cs" />
      <Compile Include="Assets\scripts\RecordingButton.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+     <Compile Include="Assets\scripts\android.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\scripts\backup_10_yes.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -77,6 +79,7 @@
      <None Include="Assets\scripts\backup_9.2_ch_almost.txt" />
      <None Include="Assets\scripts\backup_11.1_P2ch_ref..txt" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\scripts\zu6_slider_ctrl(backup_b4 _android).txt" />
      <None Include="Assets\scripts\backup6_min-_ext.txt" />
      <None Include="Assets\scripts\backup2.txt" />
      <None Include="Assets\u6_slider_ctrl_log.txt" />

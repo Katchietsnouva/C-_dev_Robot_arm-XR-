@@ -4,11 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using Unity.Mathematics;
+//server interactions
 using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 
 
 public class u6_slider_ctrl : MonoBehaviour
 {
+    // server interactions
+
     // for android 
     private string rootFolderName = "robot_app";
     private string subFolderName = "user_data";
@@ -193,7 +199,7 @@ public class u6_slider_ctrl : MonoBehaviour
         if (!isRecording && keyframes.Count > 0)
         {
             //for windows
-            // SaveKeyframesTo_txt_File();
+            SaveKeyframesTo_txt_File();
             //for android
             SaveKeyframesToFile();
         }
