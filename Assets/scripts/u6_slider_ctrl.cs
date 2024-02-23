@@ -105,6 +105,7 @@ public class u6_slider_ctrl : MonoBehaviour
 
         return filePath;
     }
+    //adroid
     private void CreateFoldersAndFile()
     {
         string rootPath = Path.Combine(Application.persistentDataPath, rootFolderName);
@@ -124,9 +125,25 @@ public class u6_slider_ctrl : MonoBehaviour
         // string filePath = Path.Combine(subFolderPath, fileName);
         // File.WriteAllText(filePath, "Initial content");
     }
+    // for adroid
     private void SaveKeyframesToFile()
     {
         CreateFoldersAndFile(); // Ensure folders and file exist
+        using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
+        {
+            foreach (var keyframe in keyframes)
+            {
+                // Write each keyframe data to the file
+                writer.WriteLine($"{keyframe.Slider1} {keyframe.Slider2} {keyframe.Slider3} {keyframe.Slider4} {keyframe.Slider5} {keyframe.Slider6}");
+            }
+        }
+
+        Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
+    }
+    
+    //for windows
+    private void SaveKeyframesTo_txt_File()
+    {
         using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
         {
             foreach (var keyframe in keyframes)
@@ -176,7 +193,7 @@ public class u6_slider_ctrl : MonoBehaviour
         if (!isRecording && keyframes.Count > 0)
         {
             //for windows
-            SaveKeyframesTo_txt_File();
+            // SaveKeyframesTo_txt_File();
             //for android
             SaveKeyframesToFile();
         }
@@ -533,20 +550,6 @@ public class u6_slider_ctrl : MonoBehaviour
 
 
 
-    //for windows
-    private void SaveKeyframesTo_txt_File()
-    {
-        using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
-        {
-            foreach (var keyframe in keyframes)
-            {
-                // Write each keyframe data to the file
-                writer.WriteLine($"{keyframe.Slider1} {keyframe.Slider2} {keyframe.Slider3} {keyframe.Slider4} {keyframe.Slider5} {keyframe.Slider6}");
-            }
-        }
-
-        Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
-    }
 }
 
 
