@@ -14,6 +14,11 @@ using System.Threading;
 public class u6_slider_ctrl : MonoBehaviour
 {
     // SERVER related interactions
+    [SerializeField] private Button button_EnableNetworking;
+    [SerializeField] private Button button_SetMode;
+
+    private bool isNetworkingEnabled = false;
+    private bool isClientMode = false;
     private TcpListener tcpListener;
     private TcpClient tcpClient;
     private bool isServer = false;
