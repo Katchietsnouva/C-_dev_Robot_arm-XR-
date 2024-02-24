@@ -144,14 +144,12 @@ public class u6_slider_ctrl : MonoBehaviour
 
         if (isClientMode)
         {
-            // Implement logic to set the device as a client
-            // For example, connect to the server
+            // Implement logic to set the device as a client eg, connect to the server
             SetClientMode();
         }
         else
         {
-            // Implement logic to set the device as a server
-            // For example, start listening for clients
+            // Implement logic to set the device as a server eg start listening for clients
             SetServerMode();
         }
 
