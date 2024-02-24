@@ -152,6 +152,7 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             // Implement logic to set the device as a client eg, connect to the server
             SetClientMode();
+            // SetClientMode();
         }
 
         // Optionally, update UI based on mode
@@ -605,10 +606,6 @@ public class u6_slider_ctrl : MonoBehaviour
     }
 
 
-
-
-
-
     public void TogglePlayback()
     {
         if (isPlaybackPaused)
@@ -676,7 +673,9 @@ public class u6_slider_ctrl : MonoBehaviour
         isPlaybackPaused = false; // Reset the paused state after playback completes
     }
 
-        //android
+    
+    
+    //android
     private string GetFilePath()
     {
         string rootPath = Path.Combine(Application.persistentDataPath, rootFolderName);
@@ -735,9 +734,6 @@ public class u6_slider_ctrl : MonoBehaviour
 
         Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
     }
-
-
-
 
 
 }
