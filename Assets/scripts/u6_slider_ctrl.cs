@@ -18,10 +18,10 @@ public class u6_slider_ctrl : MonoBehaviour
     [SerializeField] private Button button_SetMode;
 
     private bool isNetworkingEnabled = false;
-    private bool isClientMode = false;
+    private bool isServer = false;
+    // private bool isClientMode = false;
     private TcpListener tcpListener;
     private TcpClient tcpClient;
-    private bool isServer = false;
     private string serverIPAddress = "192.168.0.100"; // Replace with your actual server IP address
     private int port = 12345;
 
@@ -140,21 +140,22 @@ public class u6_slider_ctrl : MonoBehaviour
     // SERVER realated interactions
     private void ToggleClientServerMode()
     {
-        isClientMode = !isClientMode;
+        isServer = !isServer;
+        // isClientMode = !isClientMode;
 
-        if (isClientMode)
-        {
-            // Implement logic to set the device as a client eg, connect to the server
-            SetClientMode();
-        }
-        else
+        if (isServer)
         {
             // Implement logic to set the device as a server eg start listening for clients
             SetServerMode();
         }
+        else
+        {
+            // Implement logic to set the device as a client eg, connect to the server
+            SetClientMode();
+        }
 
         // Optionally, update UI based on mode
-        button_SetMode.GetComponent<Image>().color = isClientMode ? Color.blue : Color.red;
+        button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
     }
 
     private void SetClientMode()
@@ -268,67 +269,6 @@ public class u6_slider_ctrl : MonoBehaviour
             // Call AlterJoints or any other method to update the robot arm
             AlterJoints();
         }
-    }
-
-
-    //android
-    private string GetFilePath()
-    {
-        string rootPath = Path.Combine(Application.persistentDataPath, rootFolderName);
-        string subFolderPath = Path.Combine(rootPath, subFolderName);
-        string filePath = Path.Combine(subFolderPath, fileName);
-
-        return filePath;
-    }
-    //adroid
-    private void CreateFoldersAndFile()
-    {
-        string rootPath = Path.Combine(Application.persistentDataPath, rootFolderName);
-        string subFolderPath = Path.Combine(rootPath, subFolderName);
-
-        if (!Directory.Exists(rootPath))
-        {
-            Directory.CreateDirectory(rootPath);
-        }
-
-        if (!Directory.Exists(subFolderPath))
-        {
-            Directory.CreateDirectory(subFolderPath);
-        }
-
-        // You can create the file here if needed
-        // string filePath = Path.Combine(subFolderPath, fileName);
-        // File.WriteAllText(filePath, "Initial content");
-    }
-    // for adroid
-    private void SaveKeyframesToFile()
-    {
-        CreateFoldersAndFile(); // Ensure folders and file exist
-        using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
-        {
-            foreach (var keyframe in keyframes)
-            {
-                // Write each keyframe data to the file
-                writer.WriteLine($"{keyframe.Slider1} {keyframe.Slider2} {keyframe.Slider3} {keyframe.Slider4} {keyframe.Slider5} {keyframe.Slider6}");
-            }
-        }
-
-        Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
-    }
-    
-    //for windows
-    private void SaveKeyframesTo_txt_File()
-    {
-        using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
-        {
-            foreach (var keyframe in keyframes)
-            {
-                // Write each keyframe data to the file
-                writer.WriteLine($"{keyframe.Slider1} {keyframe.Slider2} {keyframe.Slider3} {keyframe.Slider4} {keyframe.Slider5} {keyframe.Slider6}");
-            }
-        }
-
-        Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
     }
 
 
@@ -734,6 +674,66 @@ public class u6_slider_ctrl : MonoBehaviour
         }
 
         isPlaybackPaused = false; // Reset the paused state after playback completes
+    }
+
+        //android
+    private string GetFilePath()
+    {
+        string rootPath = Path.Combine(Application.persistentDataPath, rootFolderName);
+        string subFolderPath = Path.Combine(rootPath, subFolderName);
+        string filePath = Path.Combine(subFolderPath, fileName);
+
+        return filePath;
+    }
+    //adroid
+    private void CreateFoldersAndFile()
+    {
+        string rootPath = Path.Combine(Application.persistentDataPath, rootFolderName);
+        string subFolderPath = Path.Combine(rootPath, subFolderName);
+
+        if (!Directory.Exists(rootPath))
+        {
+            Directory.CreateDirectory(rootPath);
+        }
+
+        if (!Directory.Exists(subFolderPath))
+        {
+            Directory.CreateDirectory(subFolderPath);
+        }
+
+        // You can create the file here if needed
+        // string filePath = Path.Combine(subFolderPath, fileName);
+        // File.WriteAllText(filePath, "Initial content");
+    }
+    // for adroid
+    private void SaveKeyframesToFile()
+    {
+        CreateFoldersAndFile(); // Ensure folders and file exist
+        using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
+        {
+            foreach (var keyframe in keyframes)
+            {
+                // Write each keyframe data to the file
+                writer.WriteLine($"{keyframe.Slider1} {keyframe.Slider2} {keyframe.Slider3} {keyframe.Slider4} {keyframe.Slider5} {keyframe.Slider6}");
+            }
+        }
+
+        Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
+    }
+    
+    //for windows
+    private void SaveKeyframesTo_txt_File()
+    {
+        using (StreamWriter writer = new StreamWriter(keyframesFilePath_to_txt))
+        {
+            foreach (var keyframe in keyframes)
+            {
+                // Write each keyframe data to the file
+                writer.WriteLine($"{keyframe.Slider1} {keyframe.Slider2} {keyframe.Slider3} {keyframe.Slider4} {keyframe.Slider5} {keyframe.Slider6}");
+            }
+        }
+
+        Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
     }
 
 
