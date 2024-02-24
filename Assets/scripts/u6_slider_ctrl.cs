@@ -156,7 +156,7 @@ public class u6_slider_ctrl : MonoBehaviour
         }
 
         // Optionally, update UI based on mode
-        // e.g., button_SetMode.GetComponent<Image>().color = isClientMode ? Color.blue : Color.red;
+        button_SetMode.GetComponent<Image>().color = isClientMode ? Color.blue : Color.red;
     }
 
     private void SetClientMode()
