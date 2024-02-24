@@ -161,7 +161,9 @@ public class u6_slider_ctrl : MonoBehaviour
 
     private void SetClientMode()
     {
-        // Implement logic to set the device as a client
+        // start client; Implement logic to set the device as a client
+        // tcpClient = new TcpClient("server_ip_address", port);
+        // tcpClient = new TcpClient("192.168.0.100", port);
         tcpClient = new TcpClient();
         tcpClient.Connect(serverIPAddress, port);
 
@@ -173,6 +175,7 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         // Implement logic to set the device as a server
         tcpListener = new TcpListener(IPAddress.Any, port);
+        // tcpListener = new TcpListener(IPAddress.Any, port);
         tcpListener.Start();
         new Thread(ListenForClients).Start();
     }
@@ -185,22 +188,11 @@ public class u6_slider_ctrl : MonoBehaviour
 
         if (isServer)
         {
-            // Start server
-            tcpListener = new TcpListener(IPAddress.Any, port);
-            // tcpListener = new TcpListener(IPAddress.Any, port);
-            tcpListener.Start();
-            new Thread(ListenForClients).Start();
+            SetServerMode();
         }
         else
         {
-            // Start client
-            // tcpClient = new TcpClient("server_ip_address", port);
-            // tcpClient = new TcpClient("192.168.0.100", port);
-            tcpClient = new TcpClient();
-            tcpClient.Connect(serverIPAddress, port);
-
-            // Optionally, you can start a thread to listen for data from the server
-            new Thread(() => { ListenForServerData(tcpClient); }).Start();
+            SetClientMode();
         }
     }
 
