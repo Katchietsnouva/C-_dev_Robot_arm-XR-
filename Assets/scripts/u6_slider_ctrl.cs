@@ -152,7 +152,6 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             // Implement logic to set the device as a client eg, connect to the server
             SetClientMode();
-            // SetClientMode();
         }
 
         // Optionally, update UI based on mode
