@@ -139,29 +139,48 @@ public class u6_slider_ctrl : MonoBehaviour
     public void ToggleNetworking()
     {
         isNetworkingEnabled = !isNetworkingEnabled;
-
+        if (isNetworkingEnabled)
+        {
+            Debug.Log("Networking Enabled");
+        }
+        
         if (!isNetworkingEnabled)
         {
             StopNetworking(); // Disable networking
+            Debug.Log("Networking disabled");
         }
         button_EnableNetworking.GetComponent<Image>().color = isNetworkingEnabled ? Color.green : Color.white;
     }
 
-    // Linked  to button_SetMode
+    // Linked  to button_SetMod
     public void ToggleClientServerMode()
     {
-        isServer = !isServer; // isClientMode = !isClientMode;
+        // if (isServer && isNetworkingEnabled)
+        // else if (!isServer && isNetworkingEnabled)
+        isServer = !isServer; // Toggle server mode
+        Debug.Log("Pressed. isServer: " + isServer + ", isNetworkingEnabled: " + isNetworkingEnabled);
 
-        if (isServer && isNetworkingEnabled)
+        if (isNetworkingEnabled)
         {
-            // Implement logic to set the device as a server eg start listening for clients
-            StartServer();
+            if (isServer)
+            {
+                // Implement logic to set the device as a server eg start listening for clients
+                Debug.Log("Server and Networking Enabled. Setting up");
+                StartServer();
+            }
+            else
+            {
+                // Implement logic to set the device as a client eg, connect to the server
+                Debug.Log("Client and Networking Enabled. Setting up");
+                SetClientMode();
+            }
         }
-        else if (!isServer && isNetworkingEnabled)
+        else
         {
-            // Implement logic to set the device as a client eg, connect to the server
-            SetClientMode();
+            // Networking is not enabled
+            Debug.Log("Networking is not enabled");
         }
+
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
     }
 
