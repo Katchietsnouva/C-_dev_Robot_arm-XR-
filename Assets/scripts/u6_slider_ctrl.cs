@@ -141,44 +141,53 @@ public class u6_slider_ctrl : MonoBehaviour
         isNetworkingEnabled = !isNetworkingEnabled;
         if (isNetworkingEnabled)
         {
-            Debug.Log("Networking Enabled");
+            Debug.Log("Networking Enabled" + isNetworkingEnabled );
         }
         
         if (!isNetworkingEnabled)
         {
             StopNetworking(); // Disable networking
-            Debug.Log("Networking disabled");
+            Debug.Log("Networking disabled"+ isNetworkingEnabled);
         }
         button_EnableNetworking.GetComponent<Image>().color = isNetworkingEnabled ? Color.green : Color.white;
     }
 
     // Linked  to button_SetMod
+      // if (isServer && isNetworkingEnabled)
+        // else if (!isServer && isNetworkingEnabled)
+        
     public void ToggleClientServerMode()
     {
-        // if (isServer && isNetworkingEnabled)
-        // else if (!isServer && isNetworkingEnabled)
         isServer = !isServer; // Toggle server mode
         Debug.Log("Pressed. isServer: " + isServer + ", isNetworkingEnabled: " + isNetworkingEnabled);
 
-        if (isNetworkingEnabled)
+        if (isServer)
         {
-            if (isServer)
+            // Implement logic to set the device as a server eg start listening for clients
+            Debug.Log("Server Mode");
+            if (isNetworkingEnabled)
             {
-                // Implement logic to set the device as a server eg start listening for clients
-                Debug.Log("Server and Networking Enabled. Setting up");
+                Debug.Log("Networking Enabled. Setting up");
                 StartServer();
             }
             else
             {
-                // Implement logic to set the device as a client eg, connect to the server
-                Debug.Log("Client and Networking Enabled. Setting up");
-                SetClientMode();
+                Debug.Log("Networking is not enabled");
             }
         }
         else
         {
-            // Networking is not enabled
-            Debug.Log("Networking is not enabled");
+            // Implement logic to set the device as a client eg, connect to the server
+            Debug.Log("Client Mode");
+            if (isNetworkingEnabled)
+            {
+                Debug.Log("Networking Enabled. Setting up");
+                SetClientMode();
+            }
+            else
+            {
+                Debug.Log("Networking is not enabled");
+            }
         }
 
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
@@ -347,35 +356,6 @@ public class u6_slider_ctrl : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        if (isRecording)
-        {
-            RecordKeyframe();
-        }
-        if (!isRecording && keyframes.Count > 0)
-        {
-            //for windows
-            SaveKeyframesTo_txt_File();
-            //for android
-            SaveKeyframesToFile();
-        }
-        // server related code
-        if (!CheckIfServer())
-        {
-            // Implement client logic here
-            // Read slider changes and send them to the server
-            // Example: Send slider values to the server
-        }
-    }
-    // server related code
-    private bool CheckIfServer()
-    {
-        // Implement logic to check if the device should act as a server
-        // Return true for server, false for client
-        // Example: Use a tickle button or any other input method
-        return false; // Change this based on your logic
-    }
 
     public void AlterJoints()
     {
