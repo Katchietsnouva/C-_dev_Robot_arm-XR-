@@ -160,83 +160,50 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         isServer = !isServer; // Toggle server mode
         Debug.Log("Pressed. isServer: " + isServer + ", isNetworkingEnabled: " + isNetworkingEnabled);
-
         if (isServer)
         {
-            // Implement logic to set the device as a server eg start listening for clients
             Debug.Log("Server Mode");
-            StartServer();
-            if (isNetworkingEnabled)
-            {
-                Debug.Log("Networking Enabled. Setting up");
-                // StartServer();
-            }
-            else
-            {
-                Debug.Log("Networking is not enabled");
-            }
+            StartCoroutine(StartServerCoroutine());
         }
         else
         {
-            // Implement logic to set the device as a client eg, connect to the server
             Debug.Log("Client Mode");
-            if (isNetworkingEnabled)
-            {
-                Debug.Log("Networking Enabled. Setting up");
-                // SetClientMode();
-            }
-            else
-            {
-                Debug.Log("Networking is not enabled");
-            }
+            // SetClientMode();
         }
-
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
     }
 
-    private void StartServer()
+    private IEnumerator StartServerCoroutine()
     {
-        // tcpListener = new TcpListener(IPAddress.Any, port);;
-        // tcpListener.Start();
-        // new Thread(ListenForClients).Start();
         try
         {
-            // // Create a UDP server
-            // udpServer = new UdpClient(serverPort);
-
-            // Start listening for responses in a separate thread
-              // Create a UDP client for broadcasting
             UdpClient udpClient = new UdpClient();
             udpClient.EnableBroadcast = true;
-            // Broadcast address and port
-            IPAddress broadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
-            // IPAddress broadcastAddress = GetBroadcastAddress(GetLocalIpAddress());
+            IPAddress broadcastAddress = IPAddress.Parse("192.168.0.255");
             int broadcastPort = 12345;
 
-            // Send a broadcast message
             string broadcastMessage = "DISCOVER";
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpClient.Send(bytes, bytes.Length, new IPEndPoint(broadcastAddress, broadcastPort));
 
             Debug.Log($"Broadcast message '{broadcastMessage}' sent to {broadcastAddress}:{broadcastPort}");
-            // Listen for responses
+
             IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
 
-            // ListenForResponses();
             while (true)
             {
                 try
                 {
-                    byte[] responseBytes = udpServer.Receive(ref remoteEndPoint);
+                    byte[] responseBytes = udpClient.Receive(ref remoteEndPoint);
                     string responseMessage = Encoding.ASCII.GetString(responseBytes);
-
-                    // Handle the received response (e.g., print to console)
                     Debug.Log($"Received response from {remoteEndPoint.Address}: {responseMessage}");
                 }
                 catch (Exception ex)
                 {
                     Debug.LogError($"Error listening for responses: {ex.Message}");
                 }
+
+                yield return null; // Yield to the next frame
             }
         }
         catch (Exception ex)
@@ -244,6 +211,7 @@ public class u6_slider_ctrl : MonoBehaviour
             Debug.LogError($"Error starting server: {ex.Message}");
         }
     }
+
 
     
     private void SetClientMode()
