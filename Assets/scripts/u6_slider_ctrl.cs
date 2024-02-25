@@ -376,6 +376,8 @@ public class u6_slider_ctrl : MonoBehaviour
             // Read slider changes and send them to the server
             // Example: Send slider values to the server
         }
+        isNetworkingEnabled = isNetworkingEnabled;
+        Debug.Log(isNetworkingEnabled);
     }
     // server related code
     private bool CheckIfServer()
