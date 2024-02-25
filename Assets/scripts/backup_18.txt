@@ -156,7 +156,6 @@ public class u6_slider_ctrl : MonoBehaviour
         // else if (!isServer && isNetworkingEnabled)
 
     // public void ToggleClientServerMode(bool isNetworkingEnabled)
-    
     public void ToggleClientServerMode()
     {
         isServer = !isServer; // Toggle server mode
@@ -165,7 +164,6 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             Debug.Log("Server Mode");
             StartServer();
-            StartCoroutine(ServerCoroutine());
         }
         else
         {
@@ -175,23 +173,23 @@ public class u6_slider_ctrl : MonoBehaviour
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
     }
 
-    private IEnumerator ServerCoroutine()
-    {
-        while (true)
-        {
-            ListenForResponses();
-            yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
-        }
-    }
-
     private void StartServer()
     {
+        // tcpListener = new TcpListener(IPAddress.Any, port);;
+        // tcpListener.Start();
+        // new Thread(ListenForClients).Start();
         try
         {
+            // // Create a UDP server
+            // udpServer = new UdpClient(serverPort);
+
+            // Start listening for responses in a separate thread
+              // Create a UDP client for broadcasting
             UdpClient udpClient = new UdpClient();
             udpClient.EnableBroadcast = true;
             // Broadcast address and port
             IPAddress broadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
+            // IPAddress broadcastAddress = GetBroadcastAddress(GetLocalIpAddress());
             int broadcastPort = 12345;
 
             // Send a broadcast message
@@ -200,6 +198,25 @@ public class u6_slider_ctrl : MonoBehaviour
             udpClient.Send(bytes, bytes.Length, new IPEndPoint(broadcastAddress, broadcastPort));
 
             Debug.Log($"Broadcast message '{broadcastMessage}' sent to {broadcastAddress}:{broadcastPort}");
+            // Listen for responses
+            IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+
+            // ListenForResponses();
+            while (true)
+            {
+                try
+                {
+                    byte[] responseBytes = udpServer.Receive(ref remoteEndPoint);
+                    string responseMessage = Encoding.ASCII.GetString(responseBytes);
+
+                    // Handle the received response (e.g., print to console)
+                    Debug.Log($"Received response from {remoteEndPoint.Address}: {responseMessage}");
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error listening for responses: {ex.Message}");
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -207,27 +224,6 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
-    private void ListenForResponses()
-    {
-        try
-        {
-            UdpClient udpServer = new UdpClient(serverPort);
-            IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
-
-            while (udpServer.Available > 0)
-            {
-                byte[] responseBytes = udpServer.Receive(ref remoteEndPoint);
-                string responseMessage = Encoding.ASCII.GetString(responseBytes);
-
-                // Handle the received response (e.g., print to console)
-                Debug.Log($"Received response from {remoteEndPoint.Address}: {responseMessage}");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error listening for responses: {ex.Message}");
-        }
-    }
     
     private void SetClientMode()
     {
@@ -238,6 +234,24 @@ public class u6_slider_ctrl : MonoBehaviour
     }
 
 
+    private void ListenForResponses()
+    {
+    //     while (true)
+    //     {
+    //         try
+    //         {
+    //             byte[] responseBytes = udpServer.Receive(ref remoteEndPoint);
+    //             string responseMessage = Encoding.ASCII.GetString(responseBytes);
+
+    //             // Handle the received response (e.g., print to console)
+    //             Debug.Log($"Received response from {remoteEndPoint.Address}: {responseMessage}");
+    //         }
+    //         catch (Exception ex)
+    //         {
+    //             Debug.LogError($"Error listening for responses: {ex.Message}");
+    //         }
+    //     }
+    }
 
     // SERVER realated interactions
     private void StopNetworking()
