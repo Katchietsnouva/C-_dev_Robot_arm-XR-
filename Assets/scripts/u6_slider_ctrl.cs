@@ -194,14 +194,6 @@ public class u6_slider_ctrl : MonoBehaviour
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
     }
 
-    private void SetClientMode()
-    {
-        tcpClient = new TcpClient();
-        tcpClient.Connect(serverIPAddress, port);
-        // Optionally, start a thread to listen for data from the server
-        new Thread(() => { ListenForServerData(tcpClient); }).Start();
-    }
-
     private void StartServer()
     {
         // tcpListener = new TcpListener(IPAddress.Any, port);;
@@ -252,6 +244,16 @@ public class u6_slider_ctrl : MonoBehaviour
             Debug.LogError($"Error starting server: {ex.Message}");
         }
     }
+
+    
+    private void SetClientMode()
+    {
+        tcpClient = new TcpClient();
+        tcpClient.Connect(serverIPAddress, port);
+        // Optionally, start a thread to listen for data from the server
+        new Thread(() => { ListenForServerData(tcpClient); }).Start();
+    }
+
 
     private void ListenForResponses()
     {
