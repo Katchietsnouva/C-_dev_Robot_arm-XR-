@@ -186,14 +186,19 @@ public class u6_slider_ctrl : MonoBehaviour
                 yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
             }
         }
+        // Stop the server when isServer is false
+        udpServer.Close();
+        udpServer = null; // Reset to null after closing
     }
 
     private void StartServer()
     {
         try
         {
-            UdpClient udpClient = new UdpClient();
-            udpClient.EnableBroadcast = true;
+            // No need to create a new UdpClient here
+            // UdpClient udpClient = new UdpClient();
+            // udpClient.EnableBroadcast = true;
+            udpServer.EnableBroadcast = true;
             // Broadcast address and port
             IPAddress broadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
             int broadcastPort = 12345;
@@ -201,7 +206,8 @@ public class u6_slider_ctrl : MonoBehaviour
             // Send a broadcast message
             string broadcastMessage = "DISCOVER";
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
-            udpClient.Send(bytes, bytes.Length, new IPEndPoint(broadcastAddress, broadcastPort));
+            udpServer.Send(bytes, bytes.Length, new IPEndPoint(broadcastAddress, broadcastPort));
+            // udpClient.Send(bytes, bytes.Length, new IPEndPoint(broadcastAddress, broadcastPort));
 
             Debug.Log($"Broadcast message '{broadcastMessage}' sent to {broadcastAddress}:{broadcastPort}");
         }
