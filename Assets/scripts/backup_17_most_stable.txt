@@ -112,49 +112,41 @@ public class u6_slider_ctrl : MonoBehaviour
         button_3_Image = button_3.GetComponent<Image>();
         button_4 = GameObject.Find("Button4").GetComponent<Button>();
 
+         // button_EnableNetworking.onClick.AddListener(ToggleNetworking);
+        // button_SetMode.onClick.AddListener(ToggleClientServerMode);
+        // StartNetworking();
+
         // SERVER realated interactions
         button_EnableNetworking = GameObject.Find("Button_EnableNetworking").GetComponent<Button>();
         button_SetMode = GameObject.Find("Button_SetMode").GetComponent<Button>();
-
-        button_EnableNetworking.onClick.AddListener(ToggleNetworking);
-        button_SetMode.onClick.AddListener(ToggleClientServerMode);
-        // StartNetworking();
     }
-    private void ToggleNetworking()
+    // Linked to button_EnableNetworking
+    public void ToggleNetworking()
     {
         isNetworkingEnabled = !isNetworkingEnabled;
 
-        if (isNetworkingEnabled)
-        {
-            StartNetworking(); // Enable networking
-        }
-        else
+        if (!isNetworkingEnabled)
         {
             StopNetworking(); // Disable networking
         }
-
-        // Optionally, update UI based on networking status
         button_EnableNetworking.GetComponent<Image>().color = isNetworkingEnabled ? Color.green : Color.white;
     }
 
-    // SERVER realated interactions
-    private void ToggleClientServerMode()
+    // Linked  to button_SetMode
+    public void ToggleClientServerMode()
     {
-        isServer = !isServer;
-        // isClientMode = !isClientMode;
+        isServer = !isServer; // isClientMode = !isClientMode;
 
-        if (isServer)
+        if (isServer && isNetworkingEnabled)
         {
             // Implement logic to set the device as a server eg start listening for clients
             SetServerMode();
         }
-        else
+        else if (!isServer && isNetworkingEnabled)
         {
             // Implement logic to set the device as a client eg, connect to the server
             SetClientMode();
         }
-
-        // Optionally, update UI based on mode
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
     }
 
@@ -165,7 +157,6 @@ public class u6_slider_ctrl : MonoBehaviour
         // tcpClient = new TcpClient("192.168.0.100", port);
         tcpClient = new TcpClient();
         tcpClient.Connect(serverIPAddress, port);
-
         // Optionally, start a thread to listen for data from the server
         new Thread(() => { ListenForServerData(tcpClient); }).Start();
     }
@@ -178,23 +169,6 @@ public class u6_slider_ctrl : MonoBehaviour
         tcpListener.Start();
         new Thread(ListenForClients).Start();
     }
-
-    // SERVER realated interactions
-    private void StartNetworking()
-    {
-        // int port = 12345; // Use a different port for each device
-        isServer = CheckIfServer();
-
-        if (isServer)
-        {
-            SetServerMode();
-        }
-        else
-        {
-            SetClientMode();
-        }
-    }
-
 
     // SERVER realated interactions
     private void StopNetworking()
@@ -220,7 +194,6 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         TcpClient client = (TcpClient)obj;
         NetworkStream clientStream = client.GetStream();
-
         // Implement server logic for receiving data from the client
         // Example: Read data from clientStream and update sliders
         // You can call a method like UpdateSlidersFromNetworkData(data) to handle the received data
@@ -533,7 +506,6 @@ public class u6_slider_ctrl : MonoBehaviour
         foreach (var keyframe in playbackKeyframes)
         {
             Debug.Log($"Joint 1 rotation: {keyframe.Slider1}, Joint 2 rotation: {keyframe.Slider2}, Joint 3 rotation: {keyframe.Slider3}, Joint 4 rotation: {keyframe.Slider4}, Joint 5 rotation: {keyframe.Slider5}, End Effector rotation: {keyframe.Slider6}");
-            // SetRobotPositions(keyframe);
             // yield return null; // Wait for the next frame
             // Interpolate between keyframes and set robot positions
             float duration = 0.0001f; // Adjust the duration of each keyframe

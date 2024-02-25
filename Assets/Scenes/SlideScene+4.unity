@@ -2556,7 +2556,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 801864689}
         m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
-        m_MethodName: StartPlayback
+        m_MethodName: ToggleNetworking
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4506,7 +4506,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1707263468}
         m_TargetAssemblyTypeName: u6_slider_ctrl, Assembly-CSharp
-        m_MethodName: ResetToInitialValues
+        m_MethodName: ToggleClientServerMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -10,6 +10,17 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
+//server dot net
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+using System.Net.NetworkInformation;
+using Newtonsoft.Json;
+
+
 
 public class u6_slider_ctrl : MonoBehaviour
 {
@@ -20,6 +31,10 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isNetworkingEnabled = false;
     private bool isServer = false;
     // private bool isClientMode = false;
+    // UDP Server fields
+    private UdpClient udpServer;
+    private int serverPort = 12345;
+
     private TcpListener tcpListener;
     private TcpClient tcpClient;
     private string serverIPAddress = "192.168.0.100"; // Replace with your actual server IP address
@@ -112,13 +127,13 @@ public class u6_slider_ctrl : MonoBehaviour
         button_3_Image = button_3.GetComponent<Image>();
         button_4 = GameObject.Find("Button4").GetComponent<Button>();
 
+         // button_EnableNetworking.onClick.AddListener(ToggleNetworking);
+        // button_SetMode.onClick.AddListener(ToggleClientServerMode);
+        // StartNetworking();
+
         // SERVER realated interactions
         button_EnableNetworking = GameObject.Find("Button_EnableNetworking").GetComponent<Button>();
         button_SetMode = GameObject.Find("Button_SetMode").GetComponent<Button>();
-
-        // button_EnableNetworking.onClick.AddListener(ToggleNetworking);
-        // button_SetMode.onClick.AddListener(ToggleClientServerMode);
-        // StartNetworking();
     }
     // Linked to button_EnableNetworking
     public void ToggleNetworking()
@@ -135,13 +150,12 @@ public class u6_slider_ctrl : MonoBehaviour
     // Linked  to button_SetMode
     public void ToggleClientServerMode()
     {
-        isServer = !isServer;
-        // isClientMode = !isClientMode;
+        isServer = !isServer; // isClientMode = !isClientMode;
 
         if (isServer && isNetworkingEnabled)
         {
             // Implement logic to set the device as a server eg start listening for clients
-            SetServerMode();
+            StartServer();
         }
         else if (!isServer && isNetworkingEnabled)
         {
@@ -153,49 +167,89 @@ public class u6_slider_ctrl : MonoBehaviour
 
     private void SetClientMode()
     {
-        // start client; Implement logic to set the device as a client
-        // tcpClient = new TcpClient("server_ip_address", port);
-        // tcpClient = new TcpClient("192.168.0.100", port);
         tcpClient = new TcpClient();
         tcpClient.Connect(serverIPAddress, port);
         // Optionally, start a thread to listen for data from the server
         new Thread(() => { ListenForServerData(tcpClient); }).Start();
     }
 
-    private void SetServerMode()
+    private void StartServer()
     {
-        // Implement logic to set the device as a server
-        tcpListener = new TcpListener(IPAddress.Any, port);
-        // tcpListener = new TcpListener(IPAddress.Any, port);
-        tcpListener.Start();
-        new Thread(ListenForClients).Start();
+        // tcpListener = new TcpListener(IPAddress.Any, port);;
+        // tcpListener.Start();
+        // new Thread(ListenForClients).Start();
+        try
+        {
+            // Create a UDP server
+            udpServer = new UdpClient(serverPort);
+
+            // Start listening for responses in a separate thread
+            ListenForResponses();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error starting server: {ex.Message}");
+        }
     }
 
     // SERVER realated interactions
     private void StopNetworking()
     {
         // Implement logic to stop networking (e.g., close connections, stop threads)
+        // For example, you can check if _tcpListener or _tcpClient is not null and close them.
+        if (tcpListener != null)
+        {
+            tcpListener.Stop();
+        }
+
+        if (tcpClient != null)
+        {
+            tcpClient.Close();
+        }
     }
-    // SERVER realated interactions
     private void ListenForClients()
     {
         while (true)
         {
             // TcpClient client = tcpListener.AcceptTcpClient();
-            // new Thread(HandleClient).Start(tcpClient);
-            TcpClient client = tcpListener.AcceptTcpClient();
-            new Thread(() => { HandleClient(client); }).Start();
-            Debug.Log("Client connected: " + ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
+            // new Thread(() => { HandleClient(client); }).Start();
+            // Debug.Log("Client connected: " + ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
             // Example: Update a UI Text element with server information
             // serverStatusText.text = "Server Status: Connected";
         }
     }
-    // SERVER realated interactions
+    private void ListenForResponses()
+    {
+        while (true)
+        {
+            try
+            {
+                // Listen for responses
+                IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                byte[] responseBytes = udpServer.Receive(ref remoteEndPoint);
+                string responseMessage = Encoding.ASCII.GetString(responseBytes);
+
+                // Handle the received response (e.g., print to console)
+                Debug.Log($"Received response from {remoteEndPoint.Address}: {responseMessage}");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error listening for responses: {ex.Message}");
+            }
+        }
+    }
+    private void OnDestroy()
+    {
+        // Clean up resources when the GameObject is destroyed
+        if (udpServer != null)
+        {
+            udpServer.Close();
+        }
+    }
     private void HandleClient(object obj)
     {
         TcpClient client = (TcpClient)obj;
         NetworkStream clientStream = client.GetStream();
-
         // Implement server logic for receiving data from the client
         // Example: Read data from clientStream and update sliders
         // You can call a method like UpdateSlidersFromNetworkData(data) to handle the received data
