@@ -157,55 +157,19 @@ public class u6_slider_ctrl : MonoBehaviour
         // else if (!isServer && isNetworkingEnabled)
 
     
-    public void ToggleClientServerMode(bool isNetworkingEnabled)
-    {
-        isServer = !isServer; // Toggle server mode
-        Debug.Log("Pressed. isServer: " + isServer + ", isNetworkingEnabled: " + isNetworkingEnabled);
-
-        if (isServer)
-        {
-            // Implement logic to set the device as a server e.g., start listening for clients
-            Debug.Log("Server Mode");
-            if (isNetworkingEnabled)
-            {
-                Debug.Log("Networking Enabled. Setting up");
-                // StartServer();
-            }
-            else
-            {
-                Debug.Log("Networking is not enabled");
-            }
-        }
-        else
-        {
-            // Implement logic to set the device as a client e.g., connect to the server
-            Debug.Log("Client Mode");
-            if (isNetworkingEnabled)
-            {
-                Debug.Log("Networking Enabled. Setting up");
-                // SetClientMode();
-            }
-            else
-            {
-                Debug.Log("Networking is not enabled");
-            }
-        }
-
-        button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
-    } 
-    // public void ToggleClientServerMode()
+    // public void ToggleClientServerMode(bool isNetworkingEnabled)
     // {
     //     isServer = !isServer; // Toggle server mode
     //     Debug.Log("Pressed. isServer: " + isServer + ", isNetworkingEnabled: " + isNetworkingEnabled);
 
     //     if (isServer)
     //     {
-    //         // Implement logic to set the device as a server eg start listening for clients
+    //         // Implement logic to set the device as a server e.g., start listening for clients
     //         Debug.Log("Server Mode");
     //         if (isNetworkingEnabled)
     //         {
     //             Debug.Log("Networking Enabled. Setting up");
-    //             StartServer();
+    //             // StartServer();
     //         }
     //         else
     //         {
@@ -214,12 +178,12 @@ public class u6_slider_ctrl : MonoBehaviour
     //     }
     //     else
     //     {
-    //         // Implement logic to set the device as a client eg, connect to the server
+    //         // Implement logic to set the device as a client e.g., connect to the server
     //         Debug.Log("Client Mode");
     //         if (isNetworkingEnabled)
     //         {
     //             Debug.Log("Networking Enabled. Setting up");
-    //             SetClientMode();
+    //             // SetClientMode();
     //         }
     //         else
     //         {
@@ -228,7 +192,44 @@ public class u6_slider_ctrl : MonoBehaviour
     //     }
 
     //     button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
-    // }
+    // } 
+
+    public void ToggleClientServerMode()
+    {
+        isServer = !isServer; // Toggle server mode
+        Debug.Log("Pressed. isServer: " + isServer + ", isNetworkingEnabled: " + isNetworkingEnabled);
+
+        if (isServer)
+        {
+            // Implement logic to set the device as a server eg start listening for clients
+            Debug.Log("Server Mode");
+            if (isNetworkingEnabled)
+            {
+                Debug.Log("Networking Enabled. Setting up");
+                StartServer();
+            }
+            else
+            {
+                Debug.Log("Networking is not enabled");
+            }
+        }
+        else
+        {
+            // Implement logic to set the device as a client eg, connect to the server
+            Debug.Log("Client Mode");
+            if (isNetworkingEnabled)
+            {
+                Debug.Log("Networking Enabled. Setting up");
+                SetClientMode();
+            }
+            else
+            {
+                Debug.Log("Networking is not enabled");
+            }
+        }
+
+        button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
+    }
 
     private void SetClientMode()
     {
