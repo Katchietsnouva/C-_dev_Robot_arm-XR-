@@ -143,10 +143,9 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             Debug.Log("Networking Enabled" + isNetworkingEnabled );
         }
-        
-        if (!isNetworkingEnabled)
+        else
         {
-            StopNetworking(); // Disable networking
+            // StopNetworking(); // Disable networking
             Debug.Log("Networking disabled"+ isNetworkingEnabled);
         }
         button_EnableNetworking.GetComponent<Image>().color = isNetworkingEnabled ? Color.green : Color.white;
@@ -166,10 +165,11 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             // Implement logic to set the device as a server eg start listening for clients
             Debug.Log("Server Mode");
+            StartServer();
             if (isNetworkingEnabled)
             {
                 Debug.Log("Networking Enabled. Setting up");
-                StartServer();
+                // StartServer();
             }
             else
             {
@@ -183,7 +183,7 @@ public class u6_slider_ctrl : MonoBehaviour
             if (isNetworkingEnabled)
             {
                 Debug.Log("Networking Enabled. Setting up");
-                SetClientMode();
+                // SetClientMode();
             }
             else
             {
@@ -209,16 +209,67 @@ public class u6_slider_ctrl : MonoBehaviour
         // new Thread(ListenForClients).Start();
         try
         {
-            // Create a UDP server
-            udpServer = new UdpClient(serverPort);
+            // // Create a UDP server
+            // udpServer = new UdpClient(serverPort);
 
             // Start listening for responses in a separate thread
-            ListenForResponses();
+              // Create a UDP client for broadcasting
+            UdpClient udpClient = new UdpClient();
+            udpClient.EnableBroadcast = true;
+            // Broadcast address and port
+            IPAddress broadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
+            // IPAddress broadcastAddress = GetBroadcastAddress(GetLocalIpAddress());
+            int broadcastPort = 12345;
+
+            // Send a broadcast message
+            string broadcastMessage = "DISCOVER";
+            byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
+            udpClient.Send(bytes, bytes.Length, new IPEndPoint(broadcastAddress, broadcastPort));
+
+            Debug.Log($"Broadcast message '{broadcastMessage}' sent to {broadcastAddress}:{broadcastPort}");
+            // Listen for responses
+            IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+
+            // ListenForResponses();
+            while (true)
+            {
+                try
+                {
+                    byte[] responseBytes = udpServer.Receive(ref remoteEndPoint);
+                    string responseMessage = Encoding.ASCII.GetString(responseBytes);
+
+                    // Handle the received response (e.g., print to console)
+                    Debug.Log($"Received response from {remoteEndPoint.Address}: {responseMessage}");
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error listening for responses: {ex.Message}");
+                }
+            }
         }
         catch (Exception ex)
         {
             Debug.LogError($"Error starting server: {ex.Message}");
         }
+    }
+
+    private void ListenForResponses()
+    {
+    //     while (true)
+    //     {
+    //         try
+    //         {
+    //             byte[] responseBytes = udpServer.Receive(ref remoteEndPoint);
+    //             string responseMessage = Encoding.ASCII.GetString(responseBytes);
+
+    //             // Handle the received response (e.g., print to console)
+    //             Debug.Log($"Received response from {remoteEndPoint.Address}: {responseMessage}");
+    //         }
+    //         catch (Exception ex)
+    //         {
+    //             Debug.LogError($"Error listening for responses: {ex.Message}");
+    //         }
+    //     }
     }
 
     // SERVER realated interactions
@@ -247,26 +298,7 @@ public class u6_slider_ctrl : MonoBehaviour
             // serverStatusText.text = "Server Status: Connected";
         }
     }
-    private void ListenForResponses()
-    {
-        while (true)
-        {
-            try
-            {
-                // Listen for responses
-                IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
-                byte[] responseBytes = udpServer.Receive(ref remoteEndPoint);
-                string responseMessage = Encoding.ASCII.GetString(responseBytes);
 
-                // Handle the received response (e.g., print to console)
-                Debug.Log($"Received response from {remoteEndPoint.Address}: {responseMessage}");
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"Error listening for responses: {ex.Message}");
-            }
-        }
-    }
     private void OnDestroy()
     {
         // Clean up resources when the GameObject is destroyed
@@ -376,8 +408,6 @@ public class u6_slider_ctrl : MonoBehaviour
             // Read slider changes and send them to the server
             // Example: Send slider values to the server
         }
-        isNetworkingEnabled = isNetworkingEnabled;
-        Debug.Log(isNetworkingEnabled);
     }
     // server related code
     private bool CheckIfServer()
@@ -391,7 +421,6 @@ public class u6_slider_ctrl : MonoBehaviour
 
     public void AlterJoints()
     {
-        Debug.Log(isNetworkingEnabled);
         float rotationValue1 = slider1.value * 360f;
         float rotationValue2 = slider2.value * 360f;
         float rotationValue3 = slider3.value * 360f;
