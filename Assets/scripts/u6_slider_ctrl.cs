@@ -25,6 +25,7 @@ using Newtonsoft.Json;
 public class u6_slider_ctrl : MonoBehaviour
 {
     // SERVER related interactions
+    private UdpClient udpServer; 
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
 
@@ -32,7 +33,6 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isServer = false;
     // private bool isClientMode = false;
     // UDP Server fields
-    private UdpClient udpServer;
     private int serverPort = 12345;
 
     private TcpListener tcpListener;
@@ -177,10 +177,14 @@ public class u6_slider_ctrl : MonoBehaviour
 
     private IEnumerator ServerCoroutine()
     {
-        while (true)
+        if (udpServer == null) // Only start if it's not already running
         {
-            ListenForResponses();
-            yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
+            udpServer = new UdpClient(serverPort);
+            while (isServer)
+            {
+                ListenForResponses();
+                yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
+            }
         }
     }
 
@@ -211,7 +215,7 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         try
         {
-            UdpClient udpServer = new UdpClient(serverPort);
+            // UdpClient udpServer = new UdpClient(serverPort);
             IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
 
             while (udpServer.Available > 0)
