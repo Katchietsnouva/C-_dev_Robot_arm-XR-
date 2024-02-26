@@ -198,7 +198,11 @@ public class u6_slider_ctrl : MonoBehaviour
             // No need to create a new UdpClient here
             // UdpClient udpClient = new UdpClient();
             // udpClient.EnableBroadcast = true;
-            udpServer.EnableBroadcast = true;
+            if (udpServer == null)
+            {
+                udpServer = new UdpClient(serverPort);
+                udpServer.EnableBroadcast = true;
+            }
             // Broadcast address and port
             IPAddress broadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
             int broadcastPort = 12345;
