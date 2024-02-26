@@ -146,6 +146,15 @@ public class u6_slider_ctrl : MonoBehaviour
 
         if (pipeServer != null)
         {
+            if (pipeServer.IsConnected)
+            {
+                pipeServer.Disconnect();
+            }
+            pipeServer.Close();
+        }
+
+        if (pipeServer != null)
+        {
             pipeServer.Disconnect();
             pipeServer.Close();
         }
@@ -169,16 +178,20 @@ public class u6_slider_ctrl : MonoBehaviour
                     yield return StartCoroutine(StartServerCoroutine());
                     Debug.Log("Server Mode");
                 }
-                else
+                if (!isServerServerEnabled())
                 {
                     // Implement client logic here if needed
+                    StopServer()
                     Debug.Log("Client Mode");
                 }
+                else{
+                    Debug.Log("some "isServerServerEnabled" error ")
+                }
             }
-            // if (IsNetworkingEnabled())
-            // {            
-            //     StopNetworking()
-            // }
+            if (!IsNetworkingEnabled())
+            {            
+                StopNetworking()
+            }
             yield return new WaitForSeconds(1f); // Adjust the interval as needed
         }
        
@@ -272,12 +285,29 @@ public class u6_slider_ctrl : MonoBehaviour
     // SERVER realated interactions
     private void StopNetworking()
     {
-     // Implement logic to stop networking (e.g., close connections, stop threads)
-        // Disconnect and stop the server
-        pipeServer.Disconnect();
-        
+        StopServer()
     }
 
+    private void StopServer()
+    {
+        if (udpServer != null)
+        {
+            udpServer.Close();
+            udpServer = null;
+        }
+
+        if (pipeServer != null)
+        {
+            if (pipeServer.IsConnected)
+            {
+                pipeServer.Disconnect();
+            }
+            pipeServer.Close();
+            pipeServer = null;
+        }
+    }
+
+    
     private void SetClientMode()
     {
     //     tcpClient = new TcpClient();

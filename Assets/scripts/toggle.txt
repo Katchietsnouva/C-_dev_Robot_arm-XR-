@@ -78,7 +78,15 @@
 
 
 
+    private void StopNetworking()
+    {
+     // Implement logic to stop networking (e.g., close connections, stop threads)
+        // Disconnect and stop the server
+        // pipeServer.Disconnect();
         
+    }
+
+
     public void ToggleClientServerMode()
     {
         isServer = !isServer; // Toggle server mode
