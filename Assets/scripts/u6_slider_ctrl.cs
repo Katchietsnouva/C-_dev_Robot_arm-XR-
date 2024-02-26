@@ -35,10 +35,10 @@ public class u6_slider_ctrl : MonoBehaviour
     // UDP Server fields
     private int serverPort = 12345;
 
-    private TcpListener tcpListener;
-    private TcpClient tcpClient;
-    private string serverIPAddress = "192.168.0.100"; // Replace with your actual server IP address
-    private int port = 12345;
+    // private TcpListener tcpListener;
+    // private TcpClient tcpClient;
+    // private string serverIPAddress = "192.168.0.100"; // Replace with your actual server IP address
+    // private int port = 12345;
 
     // for android 
     private string rootFolderName = "robot_app";
@@ -241,28 +241,28 @@ public class u6_slider_ctrl : MonoBehaviour
     
     private void SetClientMode()
     {
-        tcpClient = new TcpClient();
-        tcpClient.Connect(serverIPAddress, port);
-        // Optionally, start a thread to listen for data from the server
-        new Thread(() => { ListenForServerData(tcpClient); }).Start();
+    //     tcpClient = new TcpClient();
+    //     tcpClient.Connect(serverIPAddress, port);
+    //     // Optionally, start a thread to listen for data from the server
+    //     new Thread(() => { ListenForServerData(tcpClient); }).Start();
     }
 
 
-
+ 
     // SERVER realated interactions
     private void StopNetworking()
     {
         // Implement logic to stop networking (e.g., close connections, stop threads)
         // For example, you can check if _tcpListener or _tcpClient is not null and close them.
-        if (tcpListener != null)
-        {
-            tcpListener.Stop();
-        }
+        // if (tcpListener != null)
+        // {
+        //     tcpListener.Stop();
+        // }
 
-        if (tcpClient != null)
-        {
-            tcpClient.Close();
-        }
+        // if (tcpClient != null)
+        // {
+        //     tcpClient.Close();
+        // }
     }
     private void ListenForClients()
     {
