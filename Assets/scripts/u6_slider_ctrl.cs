@@ -4,24 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using Unity.Mathematics;
-//server interactions
+//server interactions //server dot net
 using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-
-//server dot net
-using System;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 using System.Net.NetworkInformation;
 using Newtonsoft.Json;
-
-
-using System;
 using System.IO.Pipes;
 
     
@@ -29,20 +19,16 @@ public class u6_slider_ctrl : MonoBehaviour
 {
     // SERVER related interactions
     private const string pipeName = "UnityToResponderPipe";
+    private bool isNetworkingEnabled = false;
+    private bool isServer = false;
+    private int serverPort = 12345;
     private UdpClient udpServer; 
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
 
-    private bool isNetworkingEnabled = false;
-    private bool isServer = false;
-    // private bool isClientMode = false;
-    // UDP Server fields
-    private int serverPort = 12345;
-
     // private TcpListener tcpListener;
     // private TcpClient tcpClient;
     // private string serverIPAddress = "192.168.0.100"; // Replace with your actual server IP address
-    // private int port = 12345;
 
     // for android 
     private string rootFolderName = "robot_app";
@@ -97,8 +83,6 @@ public class u6_slider_ctrl : MonoBehaviour
     // private Color initialColor = Color.white;  // Set the initial color to white
     private ColorBlock buttonColors;
 
-
-
     void Start()
     {
         // for android 
@@ -138,70 +122,84 @@ public class u6_slider_ctrl : MonoBehaviour
         // SERVER realated interactions
         button_EnableNetworking = GameObject.Find("Button_EnableNetworking").GetComponent<Button>();
         button_SetMode = GameObject.Find("Button_SetMode").GetComponent<Button>();
+        StartCoroutine(NetworkingCoroutine());
+        
+    }
+    
+    private IEnumerator NetworkingCoroutine()
+    {
+        while (true)
+        {
+            if (IsNetworkingEnabled())
+            Debug.Log("worked eventually");
+            {
+                if (isServer)
+                {
+                    StartServer();
+                }
+                else
+                {
+                    // Implement client logic here if needed
+                }
+            }
+            yield return new WaitForSeconds(1f); // Adjust the interval as needed
+        }
+        // while (true)
+        // {
+        //     if (!isServer)
+        //     {
+        //         StartServer();
+        //     }
+        //     yield return new WaitForSeconds(1f); // Adjust the interval as needed
+
+        //     if (udpServer == null) // Only start if it's not already running
+        //     {
+        //         udpServer = new UdpClient(serverPort);
+        //         while (isServer)
+        //         {
+        //             ListenForResponses();
+        //             yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
+        //         }
+        //     }
+        //     // Stop the server when isServer is false
+        //     udpServer.Close();
+        //     udpServer = null; // Reset to null after closing
+        //     }
     }
     // Linked to button_EnableNetworking
     public void ToggleNetworking()
     {
-        isNetworkingEnabled = !isNetworkingEnabled;
-        if (isNetworkingEnabled)
-        {
-            Debug.Log("Networking Enabled" + isNetworkingEnabled );
-        }
-        else
-        {
-            // StopNetworking(); // Disable networking
-            Debug.Log("Networking disabled"+ isNetworkingEnabled);
-        }
-        button_EnableNetworking.GetComponent<Image>().color = isNetworkingEnabled ? Color.green : Color.white;
+        bool newState = !IsNetworkingEnabled();
+        // isNetworkingEnabled = !isNetworkingEnabled;
+        button_EnableNetworking.GetComponent<Image>().color = newState ? Color.green : Color.white;
+    }
+    private bool IsNetworkingEnabled()
+    {
+        return button_EnableNetworking.GetComponent<Image>().color == Color.green;
     }
 
     // Linked  to button_SetMod
-      // if (isServer && isNetworkingEnabled)
-        // else if (!isServer && isNetworkingEnabled)
-
+    //if (isServer && isNetworkingEnabled)
     // public void ToggleClientServerMode(bool isNetworkingEnabled)
-    
     public void ToggleClientServerMode()
     {
         isServer = !isServer; // Toggle server mode
-        Debug.Log("Pressed. isServer: " + isServer + ", isNetworkingEnabled: " + isNetworkingEnabled);
+        button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
+        Debug.Log("Pressed. isServer: " + isServerServerEnabled() + ", isNetworkingEnabled: " + IsNetworkingEnabled());
         if (isServer)
         {
             Debug.Log("Server Mode");
-            StartCoroutine(StartServerCoroutine());
+            // StartCoroutine(StartServerCoroutine());
         }
         else
         {
             Debug.Log("Client Mode");
             // SetClientMode();
         }
-        button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
     }
-
-    private IEnumerator StartServerCoroutine()
+    private bool isServerServerEnabled()
     {
-        while (true)
-        {
-            if (!isServer)
-            {
-                StartServer();
-            }
-            yield return new WaitForSeconds(1f); // Adjust the interval as needed
-
-            if (udpServer == null) // Only start if it's not already running
-            {
-                udpServer = new UdpClient(serverPort);
-                while (isServer)
-                {
-                    ListenForResponses();
-                    yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
-                }
-            }
-            // Stop the server when isServer is false
-            udpServer.Close();
-            udpServer = null; // Reset to null after closing
-            }
-            
+        return button_SetMode.GetComponent<Image>().color == Color.red;
     }
 
     private void StartServer()
@@ -276,15 +274,15 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             udpServer.Close();
             // Disconnect and stop the server
-            pipeServer.Disconnect();
+            // pipeServer.Disconnect();
         }
     }
     // SERVER realated interactions
     private void StopNetworking()
     {
      // Implement logic to stop networking (e.g., close connections, stop threads)
-        Disconnect and stop the server
-        pipeServer.Disconnect();
+        // Disconnect and stop the server
+        // pipeServer.Disconnect();
         
     }
 
