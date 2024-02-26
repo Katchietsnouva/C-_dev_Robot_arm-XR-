@@ -164,6 +164,10 @@ public class u6_slider_ctrl : MonoBehaviour
                     Debug.Log("Client Mode");
                 }
             }
+            // if (IsNetworkingEnabled())
+            // {            
+            //     StopNetworking()
+            // }
             yield return new WaitForSeconds(1f); // Adjust the interval as needed
         }
         
@@ -223,23 +227,6 @@ public class u6_slider_ctrl : MonoBehaviour
     // public void ToggleClientServerMode(bool isNetworkingEnabled)
     // private void StartServer()
     // private IEnumerator StartSererCoroutine()
-    // {
-    //     // try
-    //     // {
-    //     if (udpServer == null)
-    //     {
-    //         udpServer = new UdpClient(serverPort);
-    //         udpServer.EnableBroadcast = true;
-    //     }
-    //     // Broadcast address and port
-    //     IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
-    //     int networkBroadcastPort = 12345;
-
-    //     // Send a broadcast message
-    //     string broadcastMessage = "DISCOVER";
-    //     byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
-    //     udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-    //     Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
         
     //     // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
     //     // using (StreamWriter sw = new StreamWriter(pipeServer))
@@ -250,9 +237,7 @@ public class u6_slider_ctrl : MonoBehaviour
     //         pipeServer.WaitForConnection();
     //         Debug.Log("Connected to pipe server.");
     //     }
-    //     pipeStreamWriter.WriteLine("Your message from Unity");
-    //     pipeStreamWriter.Flush(); // Flush the buffer to ensure the message is sent immediately
-    //     Debug.Log("Message sent.");
+  
 
     //     // catch (Exception ex)
     //     // {
@@ -262,32 +247,40 @@ public class u6_slider_ctrl : MonoBehaviour
 
     private IEnumerator StartServerCoroutine()
     {
-        if (udpServer == null)
-        {
-            udpServer = new UdpClient(serverPort);
-            udpServer.EnableBroadcast = true;
+        try{
+            if (udpServer == null)
+            {
+                udpServer = new UdpClient(serverPort);
+                udpServer.EnableBroadcast = true;
+            }
+
+            // Broadcast address and port
+            IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
+            int networkBroadcastPort = 12345;
+
+            // Send a broadcast message
+            string broadcastMessage = "DISCOVER";
+            byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
+            udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
+            pipeStreamWriter.WriteLine(broadcastMessage);
+            pipeStreamWriter.Flush(); 
+            // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
+                // yield return StartCoroutine(WaitForPipeConnection(pipeServer));
+                // Debug.Log("Connected.");
+                // Send a message to the responder
+                // using (StreamWriter sw = new StreamWriter(pipeServer))
+                // {sw.WriteLine("Your message from Unity");}
+                // Debug.Log("Message sent.");
+                // pipeServer.Disconnect();
+            Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
         }
-
-        // Broadcast address and port
-        IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
-        int networkBroadcastPort = 12345;
-
-        // Send a broadcast message
-        string broadcastMessage = "DISCOVER";
-        byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
-        udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-        pipeStreamWriter.WriteLine(broadcastMessage);
-        pipeStreamWriter.Flush(); 
-        // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
-            // yield return StartCoroutine(WaitForPipeConnection(pipeServer));
-            // Debug.Log("Connected.");
-            // Send a message to the responder
-            // using (StreamWriter sw = new StreamWriter(pipeServer))
-            // {sw.WriteLine("Your message from Unity");}
-            // Debug.Log("Message sent.");
-            // pipeServer.Disconnect();
-        Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error starting server: {ex.Message}");
+        }
+        yield return null; 
     }
+
 
     // private IEnumerator WaitForPipeConnection(NamedPipeServerStream pipeServer)
     // {var waitForConnection = new WaitUntil(() => pipeServer.IsConnected);
@@ -321,7 +314,7 @@ public class u6_slider_ctrl : MonoBehaviour
     {
      // Implement logic to stop networking (e.g., close connections, stop threads)
         // Disconnect and stop the server
-        // pipeServer.Disconnect();
+        pipeServer.Disconnect();
         
     }
 
