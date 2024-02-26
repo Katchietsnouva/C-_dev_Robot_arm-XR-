@@ -131,9 +131,8 @@ public class u6_slider_ctrl : MonoBehaviour
         while (true)
         {
             if (IsNetworkingEnabled())
-            Debug.Log("worked eventually");
             {
-                if (isServer)
+                if (isServerServerEnabled())
                 {
                     StartServer();
                 }
@@ -169,21 +168,18 @@ public class u6_slider_ctrl : MonoBehaviour
     // Linked to button_EnableNetworking
     public void ToggleNetworking()
     {
-        bool newState = !IsNetworkingEnabled();
+        bool networkState = !IsNetworkingEnabled();
+        Debug.Log("Network State: " + networkState + ", Server State: " + isServerServerEnabled());
         // isNetworkingEnabled = !isNetworkingEnabled;
-        button_EnableNetworking.GetComponent<Image>().color = newState ? Color.green : Color.white;
+        button_EnableNetworking.GetComponent<Image>().color = networkState ? Color.green : Color.white;
     }
     private bool IsNetworkingEnabled()
     {
         return button_EnableNetworking.GetComponent<Image>().color == Color.green;
     }
-
-    // Linked  to button_SetMod
-    //if (isServer && isNetworkingEnabled)
-    // public void ToggleClientServerMode(bool isNetworkingEnabled)
     public void ToggleClientServerMode()
     {
-        isServer = !isServer; // Toggle server mode
+        bool isServer = !isServerServerEnabled(); // Toggle server mode
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
         Debug.Log("Pressed. isServer: " + isServerServerEnabled() + ", isNetworkingEnabled: " + IsNetworkingEnabled());
         if (isServer)
@@ -201,6 +197,11 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         return button_SetMode.GetComponent<Image>().color == Color.red;
     }
+
+    // Linked  to button_SetMod
+    //if (isServer && isNetworkingEnabled)
+    // public void ToggleClientServerMode(bool isNetworkingEnabled)
+
 
     private void StartServer()
     {
