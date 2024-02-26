@@ -162,6 +162,7 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             if (IsNetworkingEnabled())
             {
+                Debug.Log( "Net status " + IsNetworkingEnabled());
                 if (isServerServerEnabled())
                 {
                     // StartServer();
@@ -333,7 +334,7 @@ public class u6_slider_ctrl : MonoBehaviour
             }
         }
     }
-    
+
     // private IEnumerator ReceiveMessagesCoroutine()
     // {
     //     while (true)
