@@ -273,16 +273,6 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
     
-    private void OnDestroy()
-    {
-        // Clean up resources when the GameObject is destroyed
-        if (udpServer != null)
-        {
-            udpServer.Close();
-            // Disconnect and stop the server
-            // pipeServer.Disconnect();
-        }
-    }
     // SERVER realated interactions
     private void StopNetworking()
     {
