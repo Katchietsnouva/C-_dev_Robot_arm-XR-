@@ -145,6 +145,7 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
     
+    
     private IEnumerator NetworkingCoroutine()
     {
         while (true)
@@ -153,7 +154,8 @@ public class u6_slider_ctrl : MonoBehaviour
             {
                 if (isServerServerEnabled())
                 {
-                    StartServer();
+                    // StartServer();
+                    yield return StartCoroutine(StartServerCoroutine());
                     Debug.Log("Server Mode");
                 }
                 else
@@ -164,6 +166,7 @@ public class u6_slider_ctrl : MonoBehaviour
             }
             yield return new WaitForSeconds(1f); // Adjust the interval as needed
         }
+        
         // while (true)
         // {
         //     if (!isServer)
@@ -191,7 +194,6 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         bool networkState = !IsNetworkingEnabled();
         Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
-        // isNetworkingEnabled = !isNetworkingEnabled;
         button_EnableNetworking.GetComponent<Image>().color = networkState ? Color.green : Color.white;
     }
     private bool IsNetworkingEnabled()
@@ -203,54 +205,104 @@ public class u6_slider_ctrl : MonoBehaviour
         bool isServer = !isServerServerEnabled(); // Toggle server mode
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
         Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
+        if (isServer)
+        {   Debug.Log("Server Mode toggler");
+            // StartServerCoroutine();
+        }
+        else
+        {   Debug.Log("Client Mode toggler");
+            // SetClientMode();
+        }
     }
     private bool isServerServerEnabled()
     {
         return button_SetMode.GetComponent<Image>().color == Color.red;
     }
 
-    // Linked  to button_SetMod
     //if (isServer && isNetworkingEnabled)
     // public void ToggleClientServerMode(bool isNetworkingEnabled)
-    private void StartServer()
+    // private void StartServer()
+    // private IEnumerator StartSererCoroutine()
+    // {
+    //     // try
+    //     // {
+    //     if (udpServer == null)
+    //     {
+    //         udpServer = new UdpClient(serverPort);
+    //         udpServer.EnableBroadcast = true;
+    //     }
+    //     // Broadcast address and port
+    //     IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
+    //     int networkBroadcastPort = 12345;
+
+    //     // Send a broadcast message
+    //     string broadcastMessage = "DISCOVER";
+    //     byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
+    //     udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
+    //     Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
+        
+    //     // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
+    //     // using (StreamWriter sw = new StreamWriter(pipeServer))
+    //     //     {sw.WriteLine("Your message from Unity");}
+
+    //     if (!pipeServer.IsConnected)
+    //     {
+    //         pipeServer.WaitForConnection();
+    //         Debug.Log("Connected to pipe server.");
+    //     }
+    //     pipeStreamWriter.WriteLine("Your message from Unity");
+    //     pipeStreamWriter.Flush(); // Flush the buffer to ensure the message is sent immediately
+    //     Debug.Log("Message sent.");
+
+    //     // catch (Exception ex)
+    //     // {
+    //     //     Debug.LogError($"Error starting server: {ex.Message}");
+    //     // }
+    // }
+
+    private IEnumerator StartServerCoroutine()
     {
-        try
+        if (udpServer == null)
         {
-            if (udpServer == null)
-            {
-                udpServer = new UdpClient(serverPort);
-                udpServer.EnableBroadcast = true;
-            }
-            // Broadcast address and port
-            IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
-            int networkBroadcastPort = 12345;
+            udpServer = new UdpClient(serverPort);
+            udpServer.EnableBroadcast = true;
+        }
 
-            // Send a broadcast message
-            string broadcastMessage = "DISCOVER";
-            byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
-            udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-            Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
-            
-            // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
-            // using (StreamWriter sw = new StreamWriter(pipeServer))
-            //     {sw.WriteLine("Your message from Unity");}
+        // Broadcast address and port
+        IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
+        int networkBroadcastPort = 12345;
 
-            if (!pipeServer.IsConnected)
+        // Send a broadcast message
+        string broadcastMessage = "DISCOVER";
+        byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
+        udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
+
+        using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
+        {
+            Debug.Log("Waiting for connection...");
+            yield return StartCoroutine(WaitForPipeConnection(pipeServer));
+
+            Debug.Log("Connected.");
+
+            // Send a message to the responder
+            using (StreamWriter sw = new StreamWriter(pipeServer))
             {
-                pipeServer.WaitForConnection();
-                Debug.Log("Connected to pipe server.");
+                sw.WriteLine("Your message from Unity");
             }
-            pipeStreamWriter.WriteLine("Your message from Unity");
-            pipeStreamWriter.Flush(); // Flush the buffer to ensure the message is sent immediately
+
             Debug.Log("Message sent.");
-            
+            pipeServer.Disconnect();
         }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error starting server: {ex.Message}");
-        }
+
+        Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
     }
 
+    private IEnumerator WaitForPipeConnection(NamedPipeServerStream pipeServer)
+    {
+        var waitForConnection = new WaitUntil(() => pipeServer.IsConnected);
+
+        yield return waitForConnection;
+    }
     private void ListenForResponses()
     {
         try
