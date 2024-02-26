@@ -21,10 +21,14 @@ using System.Net.NetworkInformation;
 using Newtonsoft.Json;
 
 
+using System;
+using System.IO.Pipes;
 
+    
 public class u6_slider_ctrl : MonoBehaviour
 {
     // SERVER related interactions
+    private const string pipeName = "UnityToResponderPipe";
     private UdpClient udpServer; 
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
@@ -207,18 +211,33 @@ public class u6_slider_ctrl : MonoBehaviour
             IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
             int networkBroadcastPort = 12345;
 
-            // Local loopback address and port
-            IPAddress localhostAddress = IPAddress.Parse("127.0.0.1");
-            int localhostPort = 12345;
+            // // Local loopback address and port
+            // IPAddress localhostAddress = IPAddress.Parse("127.0.0.1");
+            // int localhostPort = 12346;
 
             // Send a broadcast message
             string broadcastMessage = "DISCOVER";
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-            // Send a broadcast message to local loopback
-            udpServer.Send(bytes, bytes.Length, new IPEndPoint(localhostAddress, localhostPort));
             
-            Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort} and {localhostAddress}:{localhostPort}");
+            using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
+            {
+                Debug.Log("Waiting for connection...");
+                pipeServer.WaitForConnection();
+
+                Debug.Log("Connected.");
+
+                // Send a message to the responder
+                using (StreamWriter sw = new StreamWriter(pipeServer))
+                {
+                    sw.WriteLine("Your message from Unity");
+                }
+
+                Debug.Log("Message sent.");
+            }
+
+            Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
+            // Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort} and {localhostAddress}:{localhostPort}");
         }
         catch (Exception ex)
         {
