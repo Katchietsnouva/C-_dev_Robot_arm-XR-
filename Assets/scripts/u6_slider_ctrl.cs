@@ -23,6 +23,8 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isServer = false;
     private int serverPort = 12345;
     private UdpClient udpServer; 
+    private NamedPipeServerStream pipeServer;
+    private StreamWriter pipeStreamWriter;
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
 
@@ -122,8 +124,24 @@ public class u6_slider_ctrl : MonoBehaviour
         // SERVER realated interactions
         button_EnableNetworking = GameObject.Find("Button_EnableNetworking").GetComponent<Button>();
         button_SetMode = GameObject.Find("Button_SetMode").GetComponent<Button>();
+        //  pipe-related objects
+        pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+        pipeStreamWriter = new StreamWriter(pipeServer);
+
         StartCoroutine(NetworkingCoroutine());
-        
+    }
+    private void OnDestroy()
+    {
+        // Clean up resources when the GameObject is destroyed
+        if (udpServer != null)
+        {
+            udpServer.Close();
+        }
+
+        if (pipeServer != null)
+        {
+            pipeServer.Close();
+        }
     }
     
     private IEnumerator NetworkingCoroutine()
@@ -135,10 +153,12 @@ public class u6_slider_ctrl : MonoBehaviour
                 if (isServerServerEnabled())
                 {
                     StartServer();
+                    Debug.Log("Server Mode");
                 }
                 else
                 {
                     // Implement client logic here if needed
+                    Debug.Log("Client Mode");
                 }
             }
             yield return new WaitForSeconds(1f); // Adjust the interval as needed
@@ -169,7 +189,7 @@ public class u6_slider_ctrl : MonoBehaviour
     public void ToggleNetworking()
     {
         bool networkState = !IsNetworkingEnabled();
-        Debug.Log("Network State: " + networkState + ", Server State: " + isServerServerEnabled());
+        Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
         // isNetworkingEnabled = !isNetworkingEnabled;
         button_EnableNetworking.GetComponent<Image>().color = networkState ? Color.green : Color.white;
     }
@@ -181,17 +201,7 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         bool isServer = !isServerServerEnabled(); // Toggle server mode
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
-        Debug.Log("Pressed. isServer: " + isServerServerEnabled() + ", isNetworkingEnabled: " + IsNetworkingEnabled());
-        if (isServer)
-        {
-            Debug.Log("Server Mode");
-            // StartCoroutine(StartServerCoroutine());
-        }
-        else
-        {
-            Debug.Log("Client Mode");
-            // SetClientMode();
-        }
+        Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
     }
     private bool isServerServerEnabled()
     {
@@ -201,8 +211,6 @@ public class u6_slider_ctrl : MonoBehaviour
     // Linked  to button_SetMod
     //if (isServer && isNetworkingEnabled)
     // public void ToggleClientServerMode(bool isNetworkingEnabled)
-
-
     private void StartServer()
     {
         try
@@ -235,6 +243,7 @@ public class u6_slider_ctrl : MonoBehaviour
                 }
 
                 Debug.Log("Message sent.");
+                pipeServer.Disconnect();
             }
 
             Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
