@@ -33,7 +33,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isServer = false;
     // private bool isClientMode = false;
     // UDP Server fields
-    private int serverPort = 12345;
+    private int serverPort = 12344;
 
     // private TcpListener tcpListener;
     // private TcpClient tcpClient;
@@ -205,7 +205,7 @@ public class u6_slider_ctrl : MonoBehaviour
             }
             // Broadcast address and port
             IPAddress broadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
-            int broadcastPort = 12345;
+            int broadcastPort = 12344;
 
             // Send a broadcast message
             string broadcastMessage = "DISCOVER";
