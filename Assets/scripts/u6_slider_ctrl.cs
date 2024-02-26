@@ -162,7 +162,7 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             if (IsNetworkingEnabled())
             {
-                Debug.Log( "Net status " + IsNetworkingEnabled());
+                Debug.Log( "Net status " );
                 if (isServerServerEnabled())
                 {
                     // StartServer();
@@ -187,8 +187,8 @@ public class u6_slider_ctrl : MonoBehaviour
     public void ToggleNetworking()
     {
         bool networkState = !IsNetworkingEnabled();
-        Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
         button_EnableNetworking.GetComponent<Image>().color = networkState ? Color.green : Color.white;
+        Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
     }
     private bool IsNetworkingEnabled()
     {
