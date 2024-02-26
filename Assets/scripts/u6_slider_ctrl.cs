@@ -181,16 +181,16 @@ public class u6_slider_ctrl : MonoBehaviour
                 if (!isServerServerEnabled())
                 {
                     // Implement client logic here if needed
-                    StopServer()
+                    StopServer();
                     Debug.Log("Client Mode");
                 }
                 else{
-                    Debug.Log("some "isServerServerEnabled" error ")
+                    Debug.Log("some isServerServerEnabled error ");
                 }
             }
             if (!IsNetworkingEnabled())
             {            
-                StopNetworking()
+                StopNetworking();
             }
             yield return new WaitForSeconds(1f); // Adjust the interval as needed
         }
@@ -285,7 +285,7 @@ public class u6_slider_ctrl : MonoBehaviour
     // SERVER realated interactions
     private void StopNetworking()
     {
-        StopServer()
+        StopServer();
     }
 
     private void StopServer()
