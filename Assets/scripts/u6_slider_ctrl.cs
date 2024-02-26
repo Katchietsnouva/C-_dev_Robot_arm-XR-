@@ -262,8 +262,10 @@ public class u6_slider_ctrl : MonoBehaviour
             string broadcastMessage = "DISCOVER";
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-            pipeStreamWriter.WriteLine(broadcastMessage);
-            pipeStreamWriter.Flush(); 
+            if (pipeServer.IsConnected){
+                pipeStreamWriter.WriteLine(broadcastMessage);
+                pipeStreamWriter.Flush(); 
+            }
             // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
                 // yield return StartCoroutine(WaitForPipeConnection(pipeServer));
                 // Debug.Log("Connected.");
