@@ -204,16 +204,21 @@ public class u6_slider_ctrl : MonoBehaviour
                 udpServer.EnableBroadcast = true;
             }
             // Broadcast address and port
-            IPAddress broadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
-            int broadcastPort = 12345;
+            IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
+            int networkBroadcastPort = 12345;
+
+            // Local loopback address and port
+            IPAddress localhostAddress = IPAddress.Parse("127.0.0.1");
+            int localhostPort = 12345;
 
             // Send a broadcast message
             string broadcastMessage = "DISCOVER";
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
-            udpServer.Send(bytes, bytes.Length, new IPEndPoint(broadcastAddress, broadcastPort));
-            // udpClient.Send(bytes, bytes.Length, new IPEndPoint(broadcastAddress, broadcastPort));
-
-            Debug.Log($"Broadcast message '{broadcastMessage}' sent to {broadcastAddress}:{broadcastPort}");
+            udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
+            // Send a broadcast message to local loopback
+            udpServer.Send(bytes, bytes.Length, new IPEndPoint(localhostAddress, localhostPort));
+            
+            Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort} and {localhostAddress}:{localhostPort}");
         }
         catch (Exception ex)
         {
