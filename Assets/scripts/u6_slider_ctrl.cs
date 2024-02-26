@@ -276,33 +276,24 @@ public class u6_slider_ctrl : MonoBehaviour
         string broadcastMessage = "DISCOVER";
         byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
         udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-
-        using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
-        {
-            Debug.Log("Waiting for connection...");
-            yield return StartCoroutine(WaitForPipeConnection(pipeServer));
-
-            Debug.Log("Connected.");
-
+        pipeStreamWriter.WriteLine(broadcastMessage);
+        pipeStreamWriter.Flush(); 
+        // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
+            // yield return StartCoroutine(WaitForPipeConnection(pipeServer));
+            // Debug.Log("Connected.");
             // Send a message to the responder
-            using (StreamWriter sw = new StreamWriter(pipeServer))
-            {
-                sw.WriteLine("Your message from Unity");
-            }
-
-            Debug.Log("Message sent.");
-            pipeServer.Disconnect();
-        }
-
+            // using (StreamWriter sw = new StreamWriter(pipeServer))
+            // {sw.WriteLine("Your message from Unity");}
+            // Debug.Log("Message sent.");
+            // pipeServer.Disconnect();
         Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
     }
 
-    private IEnumerator WaitForPipeConnection(NamedPipeServerStream pipeServer)
-    {
-        var waitForConnection = new WaitUntil(() => pipeServer.IsConnected);
+    // private IEnumerator WaitForPipeConnection(NamedPipeServerStream pipeServer)
+    // {var waitForConnection = new WaitUntil(() => pipeServer.IsConnected);
+    // yield return waitForConnection;
+    // }
 
-        yield return waitForConnection;
-    }
     private void ListenForResponses()
     {
         try
