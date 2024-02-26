@@ -269,6 +269,25 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
     
+    private void OnDestroy()
+    {
+        // Clean up resources when the GameObject is destroyed
+        if (udpServer != null)
+        {
+            udpServer.Close();
+            // Disconnect and stop the server
+            pipeServer.Disconnect();
+        }
+    }
+    // SERVER realated interactions
+    private void StopNetworking()
+    {
+     // Implement logic to stop networking (e.g., close connections, stop threads)
+        Disconnect and stop the server
+        pipeServer.Disconnect();
+        
+    }
+
     private void SetClientMode()
     {
     //     tcpClient = new TcpClient();
@@ -278,25 +297,6 @@ public class u6_slider_ctrl : MonoBehaviour
     }
 
 
- 
-    // SERVER realated interactions
-    private void StopNetworking()
-    {
-        // Disconnect and stop the server
-        // pipeServer.Disconnect();
-        
-        // Implement logic to stop networking (e.g., close connections, stop threads)
-        // For example, you can check if _tcpListener or _tcpClient is not null and close them.
-        // if (tcpListener != null)
-        // {
-        //     tcpListener.Stop();
-        // }
-
-        // if (tcpClient != null)
-        // {
-        //     tcpClient.Close();
-        // }
-    }
     private void ListenForClients()
     {
         while (true)
@@ -309,14 +309,7 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        // Clean up resources when the GameObject is destroyed
-        if (udpServer != null)
-        {
-            udpServer.Close();
-        }
-    }
+
     private void HandleClient(object obj)
     {
         TcpClient client = (TcpClient)obj;
