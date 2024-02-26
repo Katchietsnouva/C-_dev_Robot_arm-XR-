@@ -1,3 +1,84 @@
+            // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
+                // yield return StartCoroutine(WaitForPipeConnection(pipeServer));
+                // Debug.Log("Connected.");
+                // Send a message to the responder
+                // using (StreamWriter sw = new StreamWriter(pipeServer))
+                // {sw.WriteLine("Your message from Unity");}
+                // Debug.Log("Message sent.");
+                // pipeServer.Disconnect();   
+   
+   
+   
+   
+
+
+    
+    // private IEnumerator WaitForPipeConnection(NamedPipeServerStream pipeServer)
+    // {var waitForConnection = new WaitUntil(() => pipeServer.IsConnected);
+    // yield return waitForConnection;
+    // }
+
+
+    //if (isServer && isNetworkingEnabled)
+    // public void ToggleClientServerMode(bool isNetworkingEnabled)
+    // private void StartServer()
+    // private IEnumerator StartSererCoroutine()
+        
+    //     // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
+    //     // using (StreamWriter sw = new StreamWriter(pipeServer))
+    //     //     {sw.WriteLine("Your message from Unity");}
+
+    //     if (!pipeServer.IsConnected)
+    //     {
+    //         pipeServer.WaitForConnection();
+    //         Debug.Log("Connected to pipe server.");
+    //     }
+  
+
+    //     // catch (Exception ex)
+    //     // {
+    //     //     Debug.LogError($"Error starting server: {ex.Message}");
+    //     // }
+    // }
+
+
+
+
+
+
+
+
+
+     
+        // while (true)
+        // {
+        //     if (!isServer)
+        //     {
+        //         StartServer();
+        //     }
+        //     yield return new WaitForSeconds(1f); // Adjust the interval as needed
+
+        //     if (udpServer == null) // Only start if it's not already running
+        //     {
+        //         udpServer = new UdpClient(serverPort);
+        //         while (isServer)
+        //         {
+        //             ListenForResponses();
+        //             yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
+        //         }
+        //     }
+        //     // Stop the server when isServer is false
+        //     udpServer.Close();
+        //     udpServer = null; // Reset to null after closing
+        //     }   
+
+
+
+
+
+
+
+        
     public void ToggleClientServerMode()
     {
         isServer = !isServer; // Toggle server mode

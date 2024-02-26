@@ -27,6 +27,9 @@ public class u6_slider_ctrl : MonoBehaviour
     private StreamWriter pipeStreamWriter;
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
+    // private NamedPipeClientStream pipeClient;
+    // private StreamReader pipeStreamReader;
+
 
     // private TcpListener tcpListener;
     // private TcpClient tcpClient;
@@ -127,8 +130,11 @@ public class u6_slider_ctrl : MonoBehaviour
         //  pipe-related objects
         pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
         pipeStreamWriter = new StreamWriter(pipeServer);
+        // pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.In);
+        // pipeStreamReader = new StreamReader(pipeClient);
 
         StartCoroutine(NetworkingCoroutine());
+        // StartCoroutine(ReceiveMessagesCoroutine());
     }
     private void OnDestroy()
     {
@@ -143,6 +149,10 @@ public class u6_slider_ctrl : MonoBehaviour
             pipeServer.Disconnect();
             pipeServer.Close();
         }
+        // if (pipeClient != null)
+        // {
+        //     pipeClient.Close();
+        // }
     }
     
     
@@ -170,28 +180,7 @@ public class u6_slider_ctrl : MonoBehaviour
             // }
             yield return new WaitForSeconds(1f); // Adjust the interval as needed
         }
-        
-        // while (true)
-        // {
-        //     if (!isServer)
-        //     {
-        //         StartServer();
-        //     }
-        //     yield return new WaitForSeconds(1f); // Adjust the interval as needed
-
-        //     if (udpServer == null) // Only start if it's not already running
-        //     {
-        //         udpServer = new UdpClient(serverPort);
-        //         while (isServer)
-        //         {
-        //             ListenForResponses();
-        //             yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
-        //         }
-        //     }
-        //     // Stop the server when isServer is false
-        //     udpServer.Close();
-        //     udpServer = null; // Reset to null after closing
-        //     }
+       
     }
     // Linked to button_EnableNetworking
     public void ToggleNetworking()
@@ -223,27 +212,7 @@ public class u6_slider_ctrl : MonoBehaviour
         return button_SetMode.GetComponent<Image>().color == Color.red;
     }
 
-    //if (isServer && isNetworkingEnabled)
-    // public void ToggleClientServerMode(bool isNetworkingEnabled)
-    // private void StartServer()
-    // private IEnumerator StartSererCoroutine()
-        
-    //     // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
-    //     // using (StreamWriter sw = new StreamWriter(pipeServer))
-    //     //     {sw.WriteLine("Your message from Unity");}
 
-    //     if (!pipeServer.IsConnected)
-    //     {
-    //         pipeServer.WaitForConnection();
-    //         Debug.Log("Connected to pipe server.");
-    //     }
-  
-
-    //     // catch (Exception ex)
-    //     // {
-    //     //     Debug.LogError($"Error starting server: {ex.Message}");
-    //     // }
-    // }
 
     private IEnumerator StartServerCoroutine()
     {
@@ -266,14 +235,7 @@ public class u6_slider_ctrl : MonoBehaviour
                 pipeStreamWriter.WriteLine(broadcastMessage);
                 pipeStreamWriter.Flush(); 
             }
-            // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
-                // yield return StartCoroutine(WaitForPipeConnection(pipeServer));
-                // Debug.Log("Connected.");
-                // Send a message to the responder
-                // using (StreamWriter sw = new StreamWriter(pipeServer))
-                // {sw.WriteLine("Your message from Unity");}
-                // Debug.Log("Message sent.");
-                // pipeServer.Disconnect();
+
             Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
         }
         catch (Exception ex)
@@ -283,11 +245,6 @@ public class u6_slider_ctrl : MonoBehaviour
         yield return null; 
     }
 
-
-    // private IEnumerator WaitForPipeConnection(NamedPipeServerStream pipeServer)
-    // {var waitForConnection = new WaitUntil(() => pipeServer.IsConnected);
-    // yield return waitForConnection;
-    // }
 
     private void ListenForResponses()
     {
@@ -376,6 +333,26 @@ public class u6_slider_ctrl : MonoBehaviour
             }
         }
     }
+    
+    // private IEnumerator ReceiveMessagesCoroutine()
+    // {
+    //     while (true)
+    //     {
+    //         if (isNetworkingEnabled)
+    //         {
+    //             if (!isServer)
+    //             {
+    //                 // Implement client logic here if needed
+    //                 if (pipeClient.IsConnected)
+    //                 {
+    //                     string receivedMessage = pipeStreamReader.ReadLine();
+    //                     Debug.Log($"Received message from Unity: {receivedMessage}");
+    //                 }
+    //             }
+    //         }
+    //         yield return null; // Adjust the interval as needed
+    //     }
+    // }
 
     // Optional: Implement a method to update sliders based on received network data
     private void UpdateSlidersFromNetworkData(string data)
