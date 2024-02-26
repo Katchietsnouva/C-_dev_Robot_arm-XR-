@@ -168,8 +168,7 @@ public class u6_slider_ctrl : MonoBehaviour
         if (isServer)
         {
             Debug.Log("Server Mode");
-            StartServer();
-            StartCoroutine(ServerCoroutine());
+            StartCoroutine(StartServerCoroutine());
         }
         else
         {
@@ -179,29 +178,36 @@ public class u6_slider_ctrl : MonoBehaviour
         button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
     }
 
-    private IEnumerator ServerCoroutine()
+    private IEnumerator StartServerCoroutine()
     {
-        if (udpServer == null) // Only start if it's not already running
+        while (true)
         {
-            udpServer = new UdpClient(serverPort);
-            while (isServer)
+            if (!isServer)
             {
-                ListenForResponses();
-                yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
+                StartServer();
             }
-        }
-        // Stop the server when isServer is false
-        udpServer.Close();
-        udpServer = null; // Reset to null after closing
+            yield return new WaitForSeconds(1f); // Adjust the interval as needed
+
+            if (udpServer == null) // Only start if it's not already running
+            {
+                udpServer = new UdpClient(serverPort);
+                while (isServer)
+                {
+                    ListenForResponses();
+                    yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
+                }
+            }
+            // Stop the server when isServer is false
+            udpServer.Close();
+            udpServer = null; // Reset to null after closing
+            }
+            
     }
 
     private void StartServer()
     {
         try
         {
-            // No need to create a new UdpClient here
-            // UdpClient udpClient = new UdpClient();
-            // udpClient.EnableBroadcast = true;
             if (udpServer == null)
             {
                 udpServer = new UdpClient(serverPort);
@@ -210,10 +216,6 @@ public class u6_slider_ctrl : MonoBehaviour
             // Broadcast address and port
             IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
             int networkBroadcastPort = 12345;
-
-            // // Local loopback address and port
-            // IPAddress localhostAddress = IPAddress.Parse("127.0.0.1");
-            // int localhostPort = 12346;
 
             // Send a broadcast message
             string broadcastMessage = "DISCOVER";
@@ -237,7 +239,7 @@ public class u6_slider_ctrl : MonoBehaviour
             }
 
             Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
-            // Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort} and {localhostAddress}:{localhostPort}");
+            
         }
         catch (Exception ex)
         {
@@ -280,6 +282,9 @@ public class u6_slider_ctrl : MonoBehaviour
     // SERVER realated interactions
     private void StopNetworking()
     {
+        // Disconnect and stop the server
+        // pipeServer.Disconnect();
+        
         // Implement logic to stop networking (e.g., close connections, stop threads)
         // For example, you can check if _tcpListener or _tcpClient is not null and close them.
         // if (tcpListener != null)
