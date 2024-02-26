@@ -140,6 +140,7 @@ public class u6_slider_ctrl : MonoBehaviour
 
         if (pipeServer != null)
         {
+            pipeServer.Disconnect();
             pipeServer.Close();
         }
     }
@@ -228,25 +229,20 @@ public class u6_slider_ctrl : MonoBehaviour
             string broadcastMessage = "DISCOVER";
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-            
-            using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
-            {
-                Debug.Log("Waiting for connection...");
-                pipeServer.WaitForConnection();
-
-                Debug.Log("Connected.");
-
-                // Send a message to the responder
-                using (StreamWriter sw = new StreamWriter(pipeServer))
-                {
-                    sw.WriteLine("Your message from Unity");
-                }
-
-                Debug.Log("Message sent.");
-                pipeServer.Disconnect();
-            }
-
             Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
+            
+            // using (NamedPipeServerStream pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out))
+            // using (StreamWriter sw = new StreamWriter(pipeServer))
+            //     {sw.WriteLine("Your message from Unity");}
+
+            if (!pipeServer.IsConnected)
+            {
+                pipeServer.WaitForConnection();
+                Debug.Log("Connected to pipe server.");
+            }
+            pipeStreamWriter.WriteLine("Your message from Unity");
+            pipeStreamWriter.Flush(); // Flush the buffer to ensure the message is sent immediately
+            Debug.Log("Message sent.");
             
         }
         catch (Exception ex)
