@@ -26,6 +26,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isServerRunning = false;
     private NamedPipeServerStream pipeServer;
     private StreamWriter pipeStreamWriter;
+    // string broadcastMessage = "DISCOVER";
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
     // private NamedPipeClientStream pipeClient;
@@ -234,7 +235,7 @@ public class u6_slider_ctrl : MonoBehaviour
             Debug.LogWarning("Server is already running.");
             yield break;
         }
-
+        string broadcastMessage = " ";
         bool pipeOperationSuccess = false;
 
         try
@@ -250,13 +251,14 @@ public class u6_slider_ctrl : MonoBehaviour
 
             IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); 
             int networkBroadcastPort = 12345;
-            string broadcastMessage = "DISCOVER";
+            broadcastMessage = "DISCOVER";
 
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
             Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
-
-            yield return StartCoroutine(SendMessageThroughPipe(broadcastMessage));
+            pipeOperationSuccess = true;
+            // yield return null; 
+            // yield return StartCoroutine(SendMessageThroughPipe(broadcastMessage));
             // yield return SendMessageThroughPipe(broadcastMessage);
         }
         // catch (Exception ex)
@@ -276,6 +278,12 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             isServerRunning = false;
             // StopPipeServer();
+        }
+        if (pipeOperationSuccess)
+        {
+            yield return null;
+            yield return StartCoroutine(SendMessageThroughPipe(broadcastMessage));
+            // yield return SendMessageThroughPipe(broadcastMessage);
         }
         // yield return null; 
         // yield return new WaitForSeconds(1f);
