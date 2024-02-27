@@ -178,13 +178,14 @@ public class u6_slider_ctrl : MonoBehaviour
                 if (isServerServerEnabled())
                 {
                     // StartServer();
-                    //yield return StartCoroutine(StartServerCoroutine());
+                    yield return StartCoroutine(StartServerCoroutine());
                     Debug.Log("Server Mode");
                 }
                 if (!isServerServerEnabled())
                 {
                     // Implement client logic here if needed
-                    //StopServer();
+                    StopServer();
+                    //SetClientMode();
                     Debug.Log("Client Mode");
                 }
                 else{
@@ -194,7 +195,7 @@ public class u6_slider_ctrl : MonoBehaviour
             else if (!IsNetworkingEnabled())
             {            
                 //StopNetworking();
-                Debug.Log("nothing");
+                Debug.Log("Network Disabled");
             }
             else
             {
@@ -221,13 +222,9 @@ public class u6_slider_ctrl : MonoBehaviour
         button_SetMode.GetComponent<Image>().color = isNotServer ? Color.red : Color.blue;
         Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
         if (isServerServerEnabled())
-        {   Debug.Log("Server Mode toggler");
-            // StartServerCoroutine();
-        }
+        {Debug.Log("Server Mode toggler");}
         else
-        {   Debug.Log("Client Mode toggler");
-            // SetClientMode();
-        }
+        {Debug.Log("Client Mode toggler");}
     }
     private bool isServerServerEnabled()
     {
