@@ -201,7 +201,7 @@ public class u6_slider_ctrl : MonoBehaviour
             {
                 Debug.Log("Fool! Some IsNetworkingEnabled error ");
             }
-            yield return new WaitForSeconds(1f); // Adjust the interval as needed
+            yield return new WaitForSeconds(1f);
         }
        
     }
@@ -235,17 +235,18 @@ public class u6_slider_ctrl : MonoBehaviour
 
     private IEnumerator StartServerCoroutine()
     {
+        Debug.Log("Starting StartServerCoroutine");
         try{
             if (udpServer == null)
             {
                 udpServer = new UdpClient(serverPort);
                 udpServer.EnableBroadcast = true;
             }
-            if (pipeServer ==null)
-            {
-                pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
-                pipeStreamWriter = new StreamWriter(pipeServer);
-            }
+            // if (pipeServer ==null)
+            // {
+            //     pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+            //     pipeStreamWriter = new StreamWriter(pipeServer);
+            // }
 
             // Broadcast address and port
             IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
@@ -256,11 +257,11 @@ public class u6_slider_ctrl : MonoBehaviour
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
             
-            if (pipeServer != null && pipeServer.IsConnected)
-            {
-                pipeStreamWriter.WriteLine(broadcastMessage);
-                pipeStreamWriter.Flush(); 
-            }
+            // if (pipeServer != null && pipeServer.IsConnected)
+            // {
+            //     pipeStreamWriter.WriteLine(broadcastMessage);
+            //     pipeStreamWriter.Flush(); 
+            // }
 
             Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
         }
@@ -269,6 +270,7 @@ public class u6_slider_ctrl : MonoBehaviour
             Debug.LogError($"Error starting server: {ex.Message}");
         }
         yield return null; 
+        // yield return new WaitForSeconds(1f);
     }
 
 
@@ -307,7 +309,8 @@ public class u6_slider_ctrl : MonoBehaviour
             udpServer.Close();
             udpServer = null;
         }
-
+        udpServer.Close();
+        udpServer = null;
         if (pipeServer != null)
         {
             if (pipeServer.IsConnected)
