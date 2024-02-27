@@ -13,6 +13,8 @@ using System.Text;
 using System.Net.NetworkInformation;
 using Newtonsoft.Json;
 using System.IO.Pipes;
+using System.Threading.Tasks;
+using System.Threading;
 
     
 public class u6_slider_ctrl : MonoBehaviour
@@ -26,6 +28,8 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isServerRunning = false;
     private NamedPipeServerStream pipeServer;
     private StreamWriter pipeStreamWriter;
+    private bool isStartingServerProcess = false;
+    private bool isWaitingForConnection = false;
     // string broadcastMessage = "DISCOVER";
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
@@ -141,6 +145,40 @@ public class u6_slider_ctrl : MonoBehaviour
         
         // StartCoroutine(ReceiveMessagesCoroutine());
     }
+
+    
+    void Update()
+    {
+        // StartCoroutine(NetworkingCoroutine());
+
+        if (isRecording)
+        {
+            RecordKeyframe();
+        }
+        if (!isRecording && keyframes.Count > 0)
+        {
+            //for windows
+            SaveKeyframesTo_txt_File();
+            //for android
+            SaveKeyframesToFile();
+        }
+        // server related code
+        if (!CheckIfServer())
+        {
+            // Implement client logic here
+            // Read slider changes and send them to the server
+            // Example: Send slider values to the server
+        }
+    }
+    // server related code
+    private bool CheckIfServer()
+    {
+        // Implement logic to check if the device should act as a server
+        // Return true for server, false for client
+        // Example: Use a tickle button or any other input method
+        return false; // Change this based on your logic
+    }
+
     private void OnDestroy()
     {
         // Clean up resources when the GameObject is destroyed
@@ -148,21 +186,7 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             udpServer.Close();
         }
-
-        if (pipeServer != null)
-        {
-            if (pipeServer.IsConnected)
-            {
-                pipeServer.Disconnect();
-            }
-            pipeServer.Close();
-        }
-
-        if (pipeServer != null)
-        {
-            pipeServer.Disconnect();
-            pipeServer.Close();
-        }
+        StopPipeServer();
     }
     
     
@@ -172,10 +196,12 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             if (IsNetworkingEnabled())
             {
-                if (isServerServerEnabled())
+                if (isServerServerEnabled() && !isStartingServerProcess)
                 {
                     // StartServer();
+                    isStartingServerProcess = true;
                     yield return StartCoroutine(StartServerCoroutine());
+                    isStartingServerProcess = false;
                 }
                 if (!isServerServerEnabled())
                 {
@@ -289,27 +315,95 @@ public class u6_slider_ctrl : MonoBehaviour
         // yield return new WaitForSeconds(1f);
     }
 
-    private void StartPipeServer()
+    // private void StartPipeServer()
+    // {
+    //     if (pipeServer == null)
+    //     {
+    //         try
+    //         {
+    //             // Start the named pipe server with a timeout
+    //             int timeoutMilliseconds = 500; // Adjust the timeout as needed
+    //             DateTime startTime = DateTime.Now;
+
+    //             while ((DateTime.Now - startTime).TotalMilliseconds < timeoutMilliseconds)
+    //             {
+    //                 try
+    //                 {
+    //                     pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+    //                     pipeStreamWriter = new StreamWriter(pipeServer);
+    //                     pipeServer.WaitForConnection();
+    //                     break; // Break the loop if connection succeeds
+    //                 }
+    //                 catch (Exception ex)
+    //                 {
+    //                     Debug.LogError($"Error starting pipe server: {ex.Message}");
+    //                     StopPipeServer();
+    //                 }
+
+    //                 // Add a delay before retrying
+    //                 Thread.Sleep(100);
+    //             }
+    //         }
+    //         catch (Exception ex)
+    //         {
+    //             Debug.LogError($"Error starting pipe server: {ex.Message}");
+    //             StopPipeServer();
+    //         }
+    //     }
+    // }
+
+    private async void StartPipeServer()
     {
         // if (pipeServer ==null)
         if (pipeServer == null)
         {
             try
             {
-                // Start the named pipe server
-                pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
-                pipeStreamWriter = new StreamWriter(pipeServer);
-                // pipeServer.WaitForConnection();  
+                isWaitingForConnection = true;
+
+                // Start the named pipe server in a separate thread
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+                        pipeStreamWriter = new StreamWriter(pipeServer);
+                        pipeServer.WaitForConnection();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError($"Error starting pipe server: {ex.Message}");
+                        StopPipeServer();
+                    }
+                    finally
+                    {
+                        isWaitingForConnection = false;
+                    }
+                });
+                // Wait for a specified timeout
+                float timeout = 1.0f; // Set your desired timeout
+                float elapsedTime = 0.0f;
+                while (isWaitingForConnection && elapsedTime < timeout)
+                {
+                    await Task.Delay(100); // Adjust the delay as needed
+                    elapsedTime += 0.1f;   // Adjust the increment as needed
+                }
+                // If the timeout is reached, stop waiting
+                if (isWaitingForConnection)
+                {
+                    Debug.LogWarning("Timed out waiting for connection");
+                    StopPipeServer();
+                }
             }
             catch (Exception ex)
             {
                 Debug.LogError($"Error starting pipe server: {ex.Message}");
+                StopPipeServer();
             }
             // yield return null;
         }
-        
     }
-    
+
     private IEnumerator SendMessageThroughPipe(string message)
     {
 
@@ -331,6 +425,9 @@ public class u6_slider_ctrl : MonoBehaviour
                 {
                     // Handle the case when the pipe is not connected
                     Debug.LogWarning("Pipe is not connected. Message not sent.");
+                    //AREA OF INTEREST IS HERE BELOW 
+                    // StopPipeServer();
+                    ReconnectPipeServer();
                 }
             }
         }
@@ -344,6 +441,22 @@ public class u6_slider_ctrl : MonoBehaviour
         if (success)
         {
             // Do something after the message is sent, if needed
+        }
+    }
+
+    private void ReconnectPipeServer()
+    {
+        try
+        {
+            // Close existing connections
+            StopPipeServer();
+
+            // Attempt to reconnect
+            StartPipeServer();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error reconnecting pipe server: {ex.Message}");
         }
     }
 
@@ -369,24 +482,30 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         try
         {
-            // Stop the named pipe server
             if (pipeStreamWriter != null)
             {
                 pipeStreamWriter.Close();
+                pipeStreamWriter = null;
             }
 
-            if (pipeServer != null && pipeServer.IsConnected)
+            if (pipeServer != null)
             {
-                pipeServer.Disconnect();
+                if (pipeServer.IsConnected)
+                {
+                    // Close the pipe gracefully
+                    pipeServer.WaitForPipeDrain();
+                    pipeServer.Disconnect();
+                }
+                pipeServer.Close();
+                pipeServer = null;
             }
-            pipeServer.Close();
-            pipeServer = null;
         }
         catch (Exception ex)
         {
-            Debug.LogError($"Error stopping pipe server: {ex.Message}");
+            Debug.Log($"Error stopping pipe server: {ex.Message}");
         }
     }
+
 
 
     private void ListenForResponses()
@@ -534,36 +653,6 @@ public class u6_slider_ctrl : MonoBehaviour
     public void ResetToInitialValues()
     {
         Start(); // Call the Start function to reset to initial values
-    }
-
-    void Update()
-    {
-        if (isRecording)
-        {
-            RecordKeyframe();
-        }
-        if (!isRecording && keyframes.Count > 0)
-        {
-            //for windows
-            SaveKeyframesTo_txt_File();
-            //for android
-            SaveKeyframesToFile();
-        }
-        // server related code
-        if (!CheckIfServer())
-        {
-            // Implement client logic here
-            // Read slider changes and send them to the server
-            // Example: Send slider values to the server
-        }
-    }
-    // server related code
-    private bool CheckIfServer()
-    {
-        // Implement logic to check if the device should act as a server
-        // Return true for server, false for client
-        // Example: Use a tickle button or any other input method
-        return false; // Change this based on your logic
     }
 
 
