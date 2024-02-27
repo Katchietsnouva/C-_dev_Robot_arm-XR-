@@ -128,8 +128,8 @@ public class u6_slider_ctrl : MonoBehaviour
         button_EnableNetworking = GameObject.Find("Button_EnableNetworking").GetComponent<Button>();
         button_SetMode = GameObject.Find("Button_SetMode").GetComponent<Button>();
         //  pipe-related objects
-        pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
-        pipeStreamWriter = new StreamWriter(pipeServer);
+        // pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+        // pipeStreamWriter = new StreamWriter(pipeServer);
         // pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.In);
         // pipeStreamReader = new StreamReader(pipeClient);
 
@@ -199,8 +199,8 @@ public class u6_slider_ctrl : MonoBehaviour
     // Linked to button_EnableNetworking
     public void ToggleNetworking()
     {
-        bool networkState = !IsNetworkingEnabled();
-        button_EnableNetworking.GetComponent<Image>().color = networkState ? Color.green : Color.white;
+        bool networkStateOff = !IsNetworkingEnabled();
+        button_EnableNetworking.GetComponent<Image>().color = networkStateOff ? Color.white : Color.green;
         Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
     }
     private bool IsNetworkingEnabled()
@@ -209,10 +209,10 @@ public class u6_slider_ctrl : MonoBehaviour
     }
     public void ToggleClientServerMode()
     {
-        bool isServer = !isServerServerEnabled(); // Toggle server mode
-        button_SetMode.GetComponent<Image>().color = isServer ? Color.red : Color.blue;
+        bool isNotServer = !isServerServerEnabled(); // Toggle server mode
+        button_SetMode.GetComponent<Image>().color = isNotServer ? Color.blue : Color.red;
         Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
-        if (isServer)
+        if (isServerServerEnabled())
         {   Debug.Log("Server Mode toggler");
             // StartServerCoroutine();
         }
@@ -236,6 +236,11 @@ public class u6_slider_ctrl : MonoBehaviour
                 udpServer = new UdpClient(serverPort);
                 udpServer.EnableBroadcast = true;
             }
+            if (pipeServer ==null)
+            {
+                pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+                pipeStreamWriter = new StreamWriter(pipeServer);
+            }
 
             // Broadcast address and port
             IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
@@ -245,7 +250,9 @@ public class u6_slider_ctrl : MonoBehaviour
             string broadcastMessage = "DISCOVER";
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-            if (pipeServer.IsConnected){
+            
+            if (pipeServer != null && pipeServer.IsConnected)
+            {
                 pipeStreamWriter.WriteLine(broadcastMessage);
                 pipeStreamWriter.Flush(); 
             }
