@@ -162,10 +162,6 @@ public class u6_slider_ctrl : MonoBehaviour
             pipeServer.Disconnect();
             pipeServer.Close();
         }
-        // if (pipeClient != null)
-        // {
-        //     pipeClient.Close();
-        // }
     }
     
     
@@ -240,41 +236,26 @@ public class u6_slider_ctrl : MonoBehaviour
             Debug.LogWarning("Server is already running.");
             yield break;
         }
-        try{
+        try
+        {
             isServerRunning = true;
-
+        
             if (udpServer == null)
             {
                 udpServer = new UdpClient(serverPort);
                 udpServer.EnableBroadcast = true;
             }
-            // if (pipeServer ==null)
-            // {
-            //     pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
-            //     pipeStreamWriter = new StreamWriter(pipeServer);
-            // }
+            StartPipeServer();
 
-            // Broadcast address and port
-            IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); // Replace with your network's broadcast address
+            IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); 
             int networkBroadcastPort = 12345;
-
-            // Send a broadcast message
+e
             string broadcastMessage = "DISCOVER";
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-            
-            // if (pipeServer != null && pipeServer.IsConnected)
-            // {
-            //     pipeStreamWriter.WriteLine(broadcastMessage);
-            //     pipeStreamWriter.Flush(); 
-            // }
-
             Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
+            SendMessageThroughPipe(broadcastMessage);
         }
-        // catch (Exception ex)
-        // {
-        //     Debug.LogError($"Error starting server: {ex.Message}");
-        // }
         catch (SocketException ex)
         {
             if (ex.SocketErrorCode == SocketError.AddressAlreadyInUse)
@@ -289,14 +270,82 @@ public class u6_slider_ctrl : MonoBehaviour
         finally
         {
             isServerRunning = false;
+            StopPipeServer();
         }
         yield return null; 
         // yield return new WaitForSeconds(1f);
     }
 
+    StartPipeServer()
+    {
+        // if (pipeServer ==null)
+        try
+        {
+            // Start the named pipe server
+            pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+            pipeStreamWriter = new StreamWriter(pipeServer);
+            // pipeServer.WaitForConnection();  
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error starting pipe server: {ex.Message}");
+        }
+    }
+    
+    private void StopPipeServer()
+    {
+        try
+        {
+            // Stop the named pipe server
+            if (pipeStreamWriter != null)
+            {
+                pipeStreamWriter.Close();
+            }
+
+            if (pipeServer != null && pipeServer.IsConnected)
+            {
+                pipeServer.Disconnect();
+            }
+
+            pipeServer.Close();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error stopping pipe server: {ex.Message}");
+        }
+    }
+
+    private void SendMessageThroughPipe(string message)
+    {
+        try
+        {
+            // Send a message through the named pipe
+            if (pipeStreamWriter != null)
+            {
+                // Check if the pipe is connected before writing
+                if (pipeServer != null && pipeServer.IsConnected)
+                {
+                    pipeStreamWriter.WriteLine(message);
+                    pipeStreamWriter.Flush();
+                    Debug.Log($"Message '{message}' sent through the pipe.");
+                }
+                else
+                {
+                    // Handle the case when the pipe is not connected
+                    Debug.LogWarning("Pipe is not connected. Message not sent.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error sending message through pipe: {ex.Message}");
+        }
+    }
+
     private void StopNetworking()
     {
         StopServer();
+        StopPipeServer();
     }
 
     private void StopServer()
