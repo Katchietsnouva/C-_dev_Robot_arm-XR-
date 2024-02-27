@@ -188,7 +188,7 @@ public class u6_slider_ctrl : MonoBehaviour
                     Debug.Log("some isServerServerEnabled error ");
                 }
             }
-            if (!IsNetworkingEnabled())
+            else if (!IsNetworkingEnabled())
             {            
                 //StopNetworking();
                 Debug.Log("nothing");
