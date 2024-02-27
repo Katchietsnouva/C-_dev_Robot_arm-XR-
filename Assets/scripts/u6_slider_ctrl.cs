@@ -127,6 +127,8 @@ public class u6_slider_ctrl : MonoBehaviour
         // SERVER realated interactions
         button_EnableNetworking = GameObject.Find("Button_EnableNetworking").GetComponent<Button>();
         button_SetMode = GameObject.Find("Button_SetMode").GetComponent<Button>();
+        button_EnableNetworking.GetComponent<Image>().color = Color.white;
+        button_SetMode.GetComponent<Image>().color = Color.blue;
         //  pipe-related objects
         // pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
         // pipeStreamWriter = new StreamWriter(pipeServer);
@@ -134,6 +136,7 @@ public class u6_slider_ctrl : MonoBehaviour
         // pipeStreamReader = new StreamReader(pipeClient);
 
         StartCoroutine(NetworkingCoroutine());
+        
         // StartCoroutine(ReceiveMessagesCoroutine());
     }
     private void OnDestroy()
