@@ -372,7 +372,7 @@ public class u6_slider_ctrl : MonoBehaviour
                     }
                     catch (Exception ex)
                     {
-                        Debug.LogError($"Error starting pipe server: {ex.Message}");
+                        Debug.Log($"1 Error starting pipe server: {ex.Message}");
                         StopPipeServer();
                     }
                     finally
@@ -397,7 +397,7 @@ public class u6_slider_ctrl : MonoBehaviour
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Error starting pipe server: {ex.Message}");
+                Debug.Log($"2 Error starting pipe server: {ex.Message}");
                 StopPipeServer();
             }
             // yield return null;
