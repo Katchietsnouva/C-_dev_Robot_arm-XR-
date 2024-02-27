@@ -198,7 +198,7 @@ public class u6_slider_ctrl : MonoBehaviour
             }
             else
             {
-                Debug.Log("fool");
+                Debug.Log("Fool! Some IsNetworkingEnabled error ");
             }
             yield return new WaitForSeconds(1f); // Adjust the interval as needed
         }
