@@ -171,12 +171,10 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             if (IsNetworkingEnabled())
             {
-                Debug.Log( "Net status " );
                 if (isServerServerEnabled())
                 {
                     // StartServer();
                     yield return StartCoroutine(StartServerCoroutine());
-                    Debug.Log("Server Mode");
                 }
                 if (!isServerServerEnabled())
                 {
@@ -185,9 +183,9 @@ public class u6_slider_ctrl : MonoBehaviour
                     //SetClientMode();
                     Debug.Log("Client Mode");
                 }
-                else{
-                    Debug.Log("some isServerServerEnabled error ");
-                }
+                // else{
+                //     Debug.Log("some isServerServerEnabled error ");
+                // }
             }
             else if (!IsNetworkingEnabled())
             {            
@@ -236,6 +234,9 @@ public class u6_slider_ctrl : MonoBehaviour
             Debug.LogWarning("Server is already running.");
             yield break;
         }
+
+        bool pipeOperationSuccess = false;
+
         try
         {
             isServerRunning = true;
@@ -250,13 +251,18 @@ public class u6_slider_ctrl : MonoBehaviour
             IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); 
             int networkBroadcastPort = 12345;
             string broadcastMessage = "DISCOVER";
+
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
-            //udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-            //Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
-            SendMessageThroughPipe(broadcastMessage);
+            udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
+            Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
+
+            yield return StartCoroutine(SendMessageThroughPipe(broadcastMessage));
+            // yield return SendMessageThroughPipe(broadcastMessage);
         }
+        // catch (Exception ex)
         catch (SocketException ex)
         {
+            // Debug.Log($"Error : {ex.Message}");
             if (ex.SocketErrorCode == SocketError.AddressAlreadyInUse)
             {
                 Debug.LogWarning($"Port {serverPort} is already in use.");
@@ -271,7 +277,7 @@ public class u6_slider_ctrl : MonoBehaviour
             isServerRunning = false;
             // StopPipeServer();
         }
-        yield return null; 
+        // yield return null; 
         // yield return new WaitForSeconds(1f);
     }
 
@@ -279,24 +285,27 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         // if (pipeServer ==null)
         if (pipeServer == null)
+        {
+            try
             {
-                try
-                {
-                    // Start the named pipe server
-                    pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
-                    pipeStreamWriter = new StreamWriter(pipeServer);
-                    // pipeServer.WaitForConnection();  
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"Error starting pipe server: {ex.Message}");
-                }
-                // yield return null;
+                // Start the named pipe server
+                pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+                pipeStreamWriter = new StreamWriter(pipeServer);
+                // pipeServer.WaitForConnection();  
             }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error starting pipe server: {ex.Message}");
+            }
+            // yield return null;
+        }
+        
     }
     
-    private void SendMessageThroughPipe(string message)
+    private IEnumerator SendMessageThroughPipe(string message)
     {
+
+        bool success = false;
         try
         {
             // Send a message through the named pipe
@@ -308,6 +317,7 @@ public class u6_slider_ctrl : MonoBehaviour
                     pipeStreamWriter.WriteLine(message);
                     pipeStreamWriter.Flush();
                     Debug.Log($"Message '{message}' sent through the pipe.");
+                    success = true;
                 }
                 else
                 {
@@ -316,9 +326,16 @@ public class u6_slider_ctrl : MonoBehaviour
                 }
             }
         }
+        
         catch (Exception ex)
         {
             Debug.LogError($"Error sending message through pipe: {ex.Message}");
+        }
+        yield return new WaitForSeconds(0.1f);
+
+        if (success)
+        {
+            // Do something after the message is sent, if needed
         }
     }
 

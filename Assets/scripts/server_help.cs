@@ -1,3 +1,9 @@
+
+// The error is occurring because the yield return statement must be in the body of the try block or the catch block, not outside of both. In C#, the yield return statement cannot exist in a block that has a try block followed by a catch block.
+
+// To resolve this, you can move the yield return statement into the try block after the message is sent. Here's the modified StartServerCoroutine method:
+
+
 // private bool isServerRunning = false;  // This flag tells us whether the server is currently running or not.
 
 // private IEnumerator StartServerCoroutine()
@@ -203,5 +209,95 @@
 //     catch (Exception ex)
 //     {
 //         Debug.LogError($"Error sending message through pipe: {ex.Message}");
+//     }
+// }
+
+
+
+
+// private IEnumerator SendMessageThroughPipe(string message)
+// {
+//     bool success = false;
+//     try
+//     {
+//         // Send a message through the named pipe
+//         if (pipeStreamWriter != null)
+//         {
+//             // Check if the pipe is connected before writing
+//             if (pipeServer != null && pipeServer.IsConnected)
+//             {
+//                 pipeStreamWriter.WriteLine(message);
+//                 pipeStreamWriter.Flush();
+//                 Debug.Log($"Message '{message}' sent through the pipe.");
+//                 success = true;
+//             }
+//             else
+//             {
+//                 // Handle the case when the pipe is not connected
+//                 Debug.LogWarning("Pipe is not connected. Message not sent.");
+//             }
+//         }
+//     }
+//     catch (Exception ex)
+//     {
+//         Debug.LogError($"Error sending message through pipe: {ex.Message}");
+//     }
+
+//     yield return new WaitForSeconds(0.1f);
+
+//     if (success)
+//     {
+//         // Do something after the message is sent, if needed
+//     }
+// }
+
+// private IEnumerator StartServerCoroutine()
+// {
+//     Debug.Log("Starting StartServerCoroutine");
+//     if (isServerRunning)
+//     {
+//         Debug.LogWarning("Server is already running.");
+//         yield break;
+//     }
+
+//     bool pipeOperationSuccess = false;
+
+//     try
+//     {
+//         isServerRunning = true;
+
+//         if (udpServer == null)
+//         {
+//             udpServer = new UdpClient(serverPort);
+//             udpServer.EnableBroadcast = true;
+//         }
+
+//         StartPipeServer();
+
+//         IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255");
+//         int networkBroadcastPort = 12345;
+//         string broadcastMessage = "DISCOVER";
+
+//         yield return StartCoroutine(SendMessageThroughPipe(broadcastMessage));
+
+//         byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
+//         udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
+//         Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
+//     }
+//     catch (SocketException ex)
+//     {
+//         if (ex.SocketErrorCode == SocketError.AddressAlreadyInUse)
+//         {
+//             Debug.LogWarning($"Port {serverPort} is already in use.");
+//         }
+//         else
+//         {
+//             Debug.LogError($"Error starting server: {ex.Message}");
+//         }
+//     }
+//     finally
+//     {
+//         isServerRunning = false;
+//         StopPipeServer();
 //     }
 // }
