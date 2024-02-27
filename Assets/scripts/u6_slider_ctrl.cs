@@ -231,8 +231,6 @@ public class u6_slider_ctrl : MonoBehaviour
         return button_SetMode.GetComponent<Image>().color == Color.red;
     }
 
-
-
     private IEnumerator StartServerCoroutine()
     {
         Debug.Log("Starting StartServerCoroutine");
@@ -309,8 +307,8 @@ public class u6_slider_ctrl : MonoBehaviour
             udpServer.Close();
             udpServer = null;
         }
-        udpServer.Close();
-        udpServer = null;
+        // udpServer.Close();
+        // udpServer = null;
         if (pipeServer != null)
         {
             if (pipeServer.IsConnected)
