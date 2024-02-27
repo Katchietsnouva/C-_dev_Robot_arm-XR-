@@ -175,13 +175,13 @@ public class u6_slider_ctrl : MonoBehaviour
                 if (isServerServerEnabled())
                 {
                     // StartServer();
-                    yield return StartCoroutine(StartServerCoroutine());
+                    //yield return StartCoroutine(StartServerCoroutine());
                     Debug.Log("Server Mode");
                 }
                 if (!isServerServerEnabled())
                 {
                     // Implement client logic here if needed
-                    StopServer();
+                    //StopServer();
                     Debug.Log("Client Mode");
                 }
                 else{
@@ -190,7 +190,12 @@ public class u6_slider_ctrl : MonoBehaviour
             }
             if (!IsNetworkingEnabled())
             {            
-                StopNetworking();
+                //StopNetworking();
+                Debug.Log("nothing");
+            }
+            else
+            {
+                Debug.Log("fool");
             }
             yield return new WaitForSeconds(1f); // Adjust the interval as needed
         }
@@ -205,7 +210,7 @@ public class u6_slider_ctrl : MonoBehaviour
     }
     private bool IsNetworkingEnabled()
     {
-        return button_EnableNetworking.GetComponent<Image>().color == Color.green;
+        return button_EnableNetworking.GetComponent<Image>().color == Color.white;
     }
     public void ToggleClientServerMode()
     {
