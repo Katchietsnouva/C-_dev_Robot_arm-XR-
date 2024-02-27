@@ -23,6 +23,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isServer = false;
     private int serverPort = 12345;
     private UdpClient udpServer; 
+    private bool isServerRunning = false;
     private NamedPipeServerStream pipeServer;
     private StreamWriter pipeStreamWriter;
     [SerializeField] private Button button_EnableNetworking;
@@ -234,7 +235,14 @@ public class u6_slider_ctrl : MonoBehaviour
     private IEnumerator StartServerCoroutine()
     {
         Debug.Log("Starting StartServerCoroutine");
+        if (isServerRunning)
+        {
+            Debug.LogWarning("Server is already running.");
+            yield break;
+        }
         try{
+            isServerRunning = true;
+
             if (udpServer == null)
             {
                 udpServer = new UdpClient(serverPort);
@@ -263,12 +271,52 @@ public class u6_slider_ctrl : MonoBehaviour
 
             Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
         }
-        catch (Exception ex)
+        // catch (Exception ex)
+        // {
+        //     Debug.LogError($"Error starting server: {ex.Message}");
+        // }
+        catch (SocketException ex)
         {
-            Debug.LogError($"Error starting server: {ex.Message}");
+            if (ex.SocketErrorCode == SocketError.AddressAlreadyInUse)
+            {
+                Debug.LogWarning($"Port {serverPort} is already in use.");
+            }
+            else
+            {
+                Debug.LogError($"Error starting server: {ex.Message}");
+            }
+        }
+        finally
+        {
+            isServerRunning = false;
         }
         yield return null; 
         // yield return new WaitForSeconds(1f);
+    }
+
+    private void StopNetworking()
+    {
+        StopServer();
+    }
+
+    private void StopServer()
+    {
+        if (udpServer != null)
+        {
+            udpServer.Close();
+            udpServer = null;
+        }
+        // udpServer.Close();
+        // udpServer = null;
+        if (pipeServer != null)
+        {
+            if (pipeServer.IsConnected)
+            {
+                pipeServer.Disconnect();
+            }
+            pipeServer.Close();
+            pipeServer = null;
+        }
     }
 
 
@@ -294,31 +342,6 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
     
-    // SERVER realated interactions
-    private void StopNetworking()
-    {
-        StopServer();
-    }
-
-    private void StopServer()
-    {
-        if (udpServer != null)
-        {
-            udpServer.Close();
-            udpServer = null;
-        }
-        // udpServer.Close();
-        // udpServer = null;
-        if (pipeServer != null)
-        {
-            if (pipeServer.IsConnected)
-            {
-                pipeServer.Disconnect();
-            }
-            pipeServer.Close();
-            pipeServer = null;
-        }
-    }
 
     
     private void SetClientMode()
