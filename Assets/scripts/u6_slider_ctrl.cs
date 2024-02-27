@@ -204,18 +204,18 @@ public class u6_slider_ctrl : MonoBehaviour
     // Linked to button_EnableNetworking
     public void ToggleNetworking()
     {
-        bool networkStateOff = !IsNetworkingEnabled();
-        button_EnableNetworking.GetComponent<Image>().color = networkStateOff ? Color.white : Color.green;
+        bool networkStateON = !IsNetworkingEnabled();
+        button_EnableNetworking.GetComponent<Image>().color = networkStateON ? Color.green : Color.white;
         Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
     }
     private bool IsNetworkingEnabled()
     {
-        return button_EnableNetworking.GetComponent<Image>().color == Color.white;
+        return button_EnableNetworking.GetComponent<Image>().color == Color.green;
     }
     public void ToggleClientServerMode()
     {
         bool isNotServer = !isServerServerEnabled(); // Toggle server mode
-        button_SetMode.GetComponent<Image>().color = isNotServer ? Color.blue : Color.red;
+        button_SetMode.GetComponent<Image>().color = isNotServer ? Color.red : Color.blue;
         Debug.Log("Network State: " + IsNetworkingEnabled() + ", Server State: " + isServerServerEnabled());
         if (isServerServerEnabled())
         {   Debug.Log("Server Mode toggler");
