@@ -216,7 +216,7 @@ public class u6_slider_ctrl : MonoBehaviour
             }
             else if (!IsNetworkingEnabled())
             {            
-                //StopNetworking();
+                StopNetworking();
                 Debug.Log("Network Disabled");
             }
             else
@@ -426,8 +426,8 @@ public class u6_slider_ctrl : MonoBehaviour
                     // Handle the case when the pipe is not connected
                     Debug.LogWarning("Pipe is not connected. Message not sent.");
                     //AREA OF INTEREST IS HERE BELOW 
-                    // StopPipeServer();
-                    ReconnectPipeServer();
+                    StopPipeServer();
+                    // ReconnectPipeServer();
                 }
             }
         }
