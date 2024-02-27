@@ -249,11 +249,10 @@ public class u6_slider_ctrl : MonoBehaviour
 
             IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); 
             int networkBroadcastPort = 12345;
-e
             string broadcastMessage = "DISCOVER";
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
-            udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
-            Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
+            //udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
+            //Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
             SendMessageThroughPipe(broadcastMessage);
         }
         catch (SocketException ex)
@@ -270,51 +269,32 @@ e
         finally
         {
             isServerRunning = false;
-            StopPipeServer();
+            // StopPipeServer();
         }
         yield return null; 
         // yield return new WaitForSeconds(1f);
     }
 
-    StartPipeServer()
+    private void StartPipeServer()
     {
         // if (pipeServer ==null)
-        try
-        {
-            // Start the named pipe server
-            pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
-            pipeStreamWriter = new StreamWriter(pipeServer);
-            // pipeServer.WaitForConnection();  
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error starting pipe server: {ex.Message}");
-        }
+        if (pipeServer == null)
+            {
+                try
+                {
+                    // Start the named pipe server
+                    pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+                    pipeStreamWriter = new StreamWriter(pipeServer);
+                    // pipeServer.WaitForConnection();  
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error starting pipe server: {ex.Message}");
+                }
+                // yield return null;
+            }
     }
     
-    private void StopPipeServer()
-    {
-        try
-        {
-            // Stop the named pipe server
-            if (pipeStreamWriter != null)
-            {
-                pipeStreamWriter.Close();
-            }
-
-            if (pipeServer != null && pipeServer.IsConnected)
-            {
-                pipeServer.Disconnect();
-            }
-
-            pipeServer.Close();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error stopping pipe server: {ex.Message}");
-        }
-    }
-
     private void SendMessageThroughPipe(string message)
     {
         try
@@ -357,14 +337,29 @@ e
         }
         // udpServer.Close();
         // udpServer = null;
-        if (pipeServer != null)
+        StopPipeServer();
+    }
+
+    private void StopPipeServer()
+    {
+        try
         {
-            if (pipeServer.IsConnected)
+            // Stop the named pipe server
+            if (pipeStreamWriter != null)
+            {
+                pipeStreamWriter.Close();
+            }
+
+            if (pipeServer != null && pipeServer.IsConnected)
             {
                 pipeServer.Disconnect();
             }
             pipeServer.Close();
             pipeServer = null;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error stopping pipe server: {ex.Message}");
         }
     }
 
