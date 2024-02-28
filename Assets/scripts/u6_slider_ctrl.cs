@@ -14,7 +14,6 @@ using System.Net.NetworkInformation;
 using Newtonsoft.Json;
 using System.IO.Pipes;
 using System.Threading.Tasks;
-using System.Threading.Tasks;
 
     
 public class u6_slider_ctrl : MonoBehaviour
@@ -32,6 +31,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isWaitingForConnection = false;
     private readonly object pipeLock = new object();
     bool pipeOperationSuccess = false;
+    string broadcastMessage = " ";
     // string broadcastMessage = "DISCOVER";
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
@@ -171,6 +171,11 @@ public class u6_slider_ctrl : MonoBehaviour
             // Read slider changes and send them to the server
             // Example: Send slider values to the server
         }
+        if (isServerRunning)
+        {
+            // Serialize the object to JSON
+            broadcastMessage = CollectSliderValues();
+        }
     }
     // server related code
     private bool CheckIfServer()
@@ -260,9 +265,7 @@ public class u6_slider_ctrl : MonoBehaviour
             Debug.LogWarning("Server is already running.");
             yield break;
         }
-        string broadcastMessage = " ";
         
-
         try
         {
             isServerRunning = true;
@@ -272,11 +275,13 @@ public class u6_slider_ctrl : MonoBehaviour
                 udpServer = new UdpClient(serverPort);
                 udpServer.EnableBroadcast = true;
             }
-            StartPipeServer();
 
+            StartPipeServer();
+            
             IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); 
             int networkBroadcastPort = 12345;
-            broadcastMessage = "DISCOVER";
+            //broadcastMessage = "DISCOVER";
+            // broadcastMessage = jsonMessage;
 
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
@@ -285,6 +290,12 @@ public class u6_slider_ctrl : MonoBehaviour
             // yield return null; 
             // yield return StartCoroutine(SendMessageThroughPipe(broadcastMessage));
             // yield return SendMessageThroughPipe(broadcastMessage);
+            // Send message through named pipe
+            // yield return StartCoroutine(SendMessageThroughPipe(broadcastMessage));
+
+            // Add a small delay to control the loop frequency
+            // yield return new WaitForSeconds(1.0f);
+            
         }
         // catch (Exception ex)StartServerCoroutine
         catch (SocketException ex)
@@ -313,6 +324,33 @@ public class u6_slider_ctrl : MonoBehaviour
         // yield return null; 
         // yield return new WaitForSeconds(1f);
     }
+
+    private string CollectSliderValues()
+    {
+        // Collect slider values and create a JSON object
+        float slider1Value = slider1.value;
+        float slider2Value = slider2.value;
+        float slider3Value = slider3.value;
+        float slider4Value = slider4.value;
+        float slider5Value = slider5.value;
+        float slider6Value = slider6.value;
+
+        var sliderValues = new
+        {
+            Slider1 = slider1Value,
+            Slider2 = slider2Value,
+            Slider3 = slider3Value,
+            Slider4 = slider4Value,
+            Slider5 = slider5Value,
+            Slider6 = slider6Value
+        };
+
+        // Serialize the object to JSON
+        return JsonConvert.SerializeObject(sliderValues);
+    }
+
+
+
 
 
     private  void StartPipeServer()
@@ -398,10 +436,10 @@ public class u6_slider_ctrl : MonoBehaviour
                     pipeStreamWriter.Flush();
                     Debug.Log($"Message '{message}' sent through the pipe.");
                     success = true;
-                }
+                } 
                 else
                 {
-                    // Handle the case when the pipe is not connected
+                    // Handle the case when the pipe is not connected 
                     Debug.LogWarning("Pipe is not connected. Message not sent.");
                     //AREA OF INTEREST IS HERE BELOW 
                     StopPipeServer();
@@ -412,7 +450,8 @@ public class u6_slider_ctrl : MonoBehaviour
         
         catch (Exception ex)
         {
-            Debug.LogError($"Error sending message through pipe: {ex.Message}");
+            Debug.Log($"Error sending message through pipe: {ex.Message}");
+            StopPipeServer();
         }
         yield return new WaitForSeconds(0.1f);
 
@@ -1031,19 +1070,9 @@ public class u6_slider_ctrl : MonoBehaviour
                 writer.WriteLine($"{keyframe.Slider1} {keyframe.Slider2} {keyframe.Slider3} {keyframe.Slider4} {keyframe.Slider5} {keyframe.Slider6}");
             }
         }
-
         Debug.Log("Keyframes saved to file: " + keyframesFilePath_to_txt);
     }
-
-
 }
-
-
-
-
-
-
-
 public struct RobotKeyframe
 {
     public float Slider1;
