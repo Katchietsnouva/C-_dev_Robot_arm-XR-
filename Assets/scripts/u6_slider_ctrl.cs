@@ -372,14 +372,14 @@ public class u6_slider_ctrl : MonoBehaviour
                     });
 
                     // Wait for a specified timeout
-                    float timeout = 1.0f; // Set your desired timeout
+                    float timeout = 4.0f; // Set your desired timeout
                     float elapsedTime = 0.0f;
 
                     // Polling loop to check if the connection has been established or the timeout is reached
                     while (isWaitingForConnection && elapsedTime < timeout)
                     {
-                        Task.Delay(100); // Adjust the delay as needed
-                        elapsedTime += 0.1f;   // Adjust the increment as needed
+                        Task.Delay(400); // Adjust the delay as needed
+                        elapsedTime += 0.4f;   // Adjust the increment as needed
                     }
 
                     // If the timeout is reached, stop waiting and log a warning
