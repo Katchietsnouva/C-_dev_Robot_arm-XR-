@@ -171,7 +171,9 @@ public class u6_slider_ctrl : MonoBehaviour
             // Read slider changes and send them to the server
             // Example: Send slider values to the server
         }
-        if (isServerRunning)
+        // print(isServerRunning);
+        // if (!isServerRunning)
+        if (IsNetworkingEnabled() && isServerServerEnabled())
         {
             // Serialize the object to JSON
             broadcastMessage = CollectSliderValues();
@@ -277,7 +279,7 @@ public class u6_slider_ctrl : MonoBehaviour
             }
 
             StartPipeServer();
-            
+
             IPAddress networkBroadcastAddress = IPAddress.Parse("192.168.0.255"); 
             int networkBroadcastPort = 12345;
             //broadcastMessage = "DISCOVER";
@@ -317,7 +319,8 @@ public class u6_slider_ctrl : MonoBehaviour
         }
         if (pipeOperationSuccess)
         {
-            yield return null;
+            // yield return null;
+            yield return new WaitForSeconds(1.0f); 
             yield return StartCoroutine(SendMessageThroughPipe(broadcastMessage));
             // yield return SendMessageThroughPipe(broadcastMessage);
         }
