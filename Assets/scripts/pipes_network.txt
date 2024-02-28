@@ -1,0 +1,90 @@
+
+
+    // private void StartPipeServer()
+    // {
+    //     if (pipeServer == null)
+    //     {
+    //         try
+    //         {
+    //             // Start the named pipe server with a timeout
+    //             int timeoutMilliseconds = 500; // Adjust the timeout as needed
+    //             DateTime startTime = DateTime.Now;
+
+    //             while ((DateTime.Now - startTime).TotalMilliseconds < timeoutMilliseconds)
+    //             {
+    //                 try
+    //                 {
+    //                     pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+    //                     pipeStreamWriter = new StreamWriter(pipeServer);
+    //                     pipeServer.WaitForConnection();
+    //                     break; // Break the loop if connection succeeds
+    //                 }
+    //                 catch (Exception ex)
+    //                 {
+    //                     Debug.Log($"1 Error starting pipe server: {ex.Message}");
+    //                     StopPipeServer();
+    //                 }
+
+    //                 // Add a delay before retrying
+    //                 Thread.Sleep(100);
+    //             }
+    //         }
+    //         catch (Exception ex)
+    //         {
+    //             Debug.Log($"2 Error starting pipe server: {ex.Message}");
+    //             StopPipeServer();
+    //         }
+    //     }
+    // }
+
+    // private async void StartPipeServer()
+    // {
+    //     // if (pipeServer ==null)
+    //     if (pipeServer == null)
+    //     {
+    //         try
+    //         {
+    //             isWaitingForConnection = true;
+
+    //             // Start the named pipe server in a separate thread
+    //             await Task.Run(() =>
+    //             {
+    //                 try
+    //                 {
+    //                     pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+    //                     pipeStreamWriter = new StreamWriter(pipeServer);
+    //                     pipeServer.WaitForConnection();
+    //                 }
+    //                 catch (Exception ex)
+    //                 {
+    //                     Debug.Log($"1 Error starting pipe server: {ex.Message}");
+    //                     StopPipeServer();
+    //                 }
+    //                 finally
+    //                 {
+    //                     isWaitingForConnection = false;
+    //                 }
+    //             });
+    //             // Wait for a specified timeout
+    //             float timeout = 1.0f; // Set your desired timeout
+    //             float elapsedTime = 0.0f;
+    //             while (isWaitingForConnection && elapsedTime < timeout)
+    //             {
+    //                 await Task.Delay(100); // Adjust the delay as needed
+    //                 elapsedTime += 0.1f;   // Adjust the increment as needed
+    //             }
+    //             // If the timeout is reached, stop waiting
+    //             if (isWaitingForConnection)
+    //             {
+    //                 Debug.LogWarning("Timed out waiting for connection");
+    //                 StopPipeServer();
+    //             }
+    //         }
+    //         catch (Exception ex)
+    //         {
+    //             Debug.Log($"2 Error starting pipe server: {ex.Message}");
+    //             StopPipeServer();
+    //         }
+    //         // yield return null;
+    //     }
+    // }
