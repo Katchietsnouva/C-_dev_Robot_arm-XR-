@@ -348,6 +348,7 @@ public class u6_slider_ctrl : MonoBehaviour
             Slider5 = slider5Value,
             Slider6 = slider6Value
         };
+        messageIndex++;
 
         // Serialize the object to JSON
         return JsonConvert.SerializeObject(sliderValues);
