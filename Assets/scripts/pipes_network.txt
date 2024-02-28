@@ -88,3 +88,85 @@
     //         // yield return null;
     //     }
     // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private  void StartPipeServer()
+    {
+        // Check if the pipe server is already initialized
+        if (pipeServer == null)
+        {
+            try
+            {
+                lock (pipeLock)
+                {   
+                    // Set a flag indicating that the server is waiting for a connection
+                    isWaitingForConnection = true;
+
+                    // Start the named pipe server in a separate thread using Task.Run
+                    Task.Run(() =>
+                    {
+                        try
+                        {
+                            // Inside the separate thread, initialize the named pipe server
+                            pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
+                            pipeStreamWriter = new StreamWriter(pipeServer);
+
+                            // Wait for a client connection
+
+                            pipeServer.WaitForConnection();
+                        }
+                        catch (Exception ex)
+                        {
+                            // Handle any exceptions that may occur during pipe server initialization
+                            Debug.Log($"1 Error starting pipe server: {ex.Message}");
+                            StopPipeServer();
+                        }
+                        finally
+                        {
+                            // After the connection attempt, update the waiting flag
+                            isWaitingForConnection = false;
+                        }
+                    });
+
+                    // Wait for a specified timeout
+                    float timeout = 4.0f; // Set your desired timeout
+                    float elapsedTime = 0.0f;
+
+                    // Polling loop to check if the connection has been established or the timeout is reached
+                    while (isWaitingForConnection && elapsedTime < timeout)
+                    {
+                        Task.Delay(400); // Adjust the delay as needed
+                        elapsedTime += 0.4f;   // Adjust the increment as needed
+                    }
+
+                    // If the timeout is reached, stop waiting and log a warning
+                    if (isWaitingForConnection)
+                    {
+                        Debug.LogWarning("Timed out waiting for connection");
+                        StopPipeServer();
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during the overall process
+                Debug.Log($"2 Error starting pipe server: {ex.Message}");
+                StopPipeServer();
+            }
+        }
+    }

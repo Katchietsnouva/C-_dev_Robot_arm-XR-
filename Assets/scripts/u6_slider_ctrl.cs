@@ -30,6 +30,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private bool isStartingServerProcess = false;
     private bool isWaitingForConnection = false;
     private readonly object pipeLock = new object();
+    bool pipeOperationSuccess = false;
     // string broadcastMessage = "DISCOVER";
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
@@ -259,7 +260,7 @@ public class u6_slider_ctrl : MonoBehaviour
             yield break;
         }
         string broadcastMessage = " ";
-        bool pipeOperationSuccess = false;
+        
 
         try
         {
@@ -279,7 +280,7 @@ public class u6_slider_ctrl : MonoBehaviour
             byte[] bytes = Encoding.ASCII.GetBytes(broadcastMessage);
             udpServer.Send(bytes, bytes.Length, new IPEndPoint(networkBroadcastAddress, networkBroadcastPort));
             Debug.Log($"Broadcast messages '{broadcastMessage}' sent to {networkBroadcastAddress}:{networkBroadcastPort}");
-            pipeOperationSuccess = true;
+            // pipeOperationSuccess = true;
             // yield return null; 
             // yield return StartCoroutine(SendMessageThroughPipe(broadcastMessage));
             // yield return SendMessageThroughPipe(broadcastMessage);
@@ -333,6 +334,8 @@ public class u6_slider_ctrl : MonoBehaviour
     //     }
     // }
 
+
+
     private  void StartPipeServer()
     {
         // Check if the pipe server is already initialized
@@ -340,10 +343,9 @@ public class u6_slider_ctrl : MonoBehaviour
         {
             try
             {
-                lock (pipeLock)
-                {   
-                    // Set a flag indicating that the server is waiting for a connection
-                    isWaitingForConnection = true;
+                // lock (pipeLock)
+                // {   
+                    
 
                     // Start the named pipe server in a separate thread using Task.Run
                     Task.Run(() =>
@@ -357,6 +359,7 @@ public class u6_slider_ctrl : MonoBehaviour
                             // Wait for a client connection
 
                             pipeServer.WaitForConnection();
+                            pipeOperationSuccess = true;
                         }
                         catch (Exception ex)
                         {
@@ -388,7 +391,7 @@ public class u6_slider_ctrl : MonoBehaviour
                         Debug.LogWarning("Timed out waiting for connection");
                         StopPipeServer();
                     }
-                }
+                // }
                 
             }
             catch (Exception ex)
@@ -490,11 +493,8 @@ public class u6_slider_ctrl : MonoBehaviour
                 pipeServer.Dispose();  // M
                 pipeServer = null;
             }
-            pipeServer.WaitForPipeDrain();
-            pipeServer.Disconnect();
-            pipeServer.Close();
-            pipeServer.Dispose();
-            pipeServer = null;
+            pipeOperationSuccess = false;
+
         }
         catch (Exception ex)
         {
