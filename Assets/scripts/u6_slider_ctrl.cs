@@ -32,6 +32,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private readonly object pipeLock = new object();
     bool pipeOperationSuccess = false;
     string broadcastMessage = " ";
+    private int messageIndex = 0;
     // string broadcastMessage = "DISCOVER";
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
