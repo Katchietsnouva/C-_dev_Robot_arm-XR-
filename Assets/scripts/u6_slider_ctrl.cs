@@ -313,28 +313,6 @@ public class u6_slider_ctrl : MonoBehaviour
         // yield return new WaitForSeconds(1f);
     }
 
-    //   private void StartPipeServer()
-    // {
-    //     // if (pipeServer ==null)
-    //     if (pipeServer == null)
-    //     {
-    //         try
-    //         {
-    //             // Start the named pipe server
-    //             pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
-    //             pipeStreamWriter = new StreamWriter(pipeServer);
-    //             pipeServer.WaitForConnection();  
-    //         }
-    //         catch (Exception ex)
-    //         {
-    //             Debug.Log($"Error starting pipe server: {ex.Message}");
-    //             StopPipeServer();
-    //         }
-    //         // yield return null;
-    //     }
-    // }
-
-
 
     private  void StartPipeServer()
     {
