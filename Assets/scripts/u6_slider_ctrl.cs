@@ -33,6 +33,8 @@ public class u6_slider_ctrl : MonoBehaviour
     bool pipeOperationSuccess = false;
     string broadcastMessage = " ";
     private int messageIndex = 0;
+    private int frameCounter = 0;
+    private int framesBetweenMessages = 60; 
     // string broadcastMessage = "DISCOVER";
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
@@ -153,10 +155,19 @@ public class u6_slider_ctrl : MonoBehaviour
     void Update()
     {
         // StartCoroutine(NetworkingCoroutine());
+         frameCounter++;
+
         if (IsNetworkingEnabled() && isServerServerEnabled())
         {
-            // Serialize the object to JSON
-            broadcastMessage = CollectSliderValues();
+            // Check if enough frames have passed before sending the next message
+            if (frameCounter >= framesBetweenMessages)
+            {
+                // Serialize the object to JSON
+                broadcastMessage = CollectSliderValues();
+
+                // Reset the frame counter
+                frameCounter = 0;
+            }
         }
 
         if (isRecording)
