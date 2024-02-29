@@ -34,7 +34,7 @@ public class u6_slider_ctrl : MonoBehaviour
     string broadcastMessage = " ";
     private int messageIndex = 0;
     private int frameCounter = 0;
-    private int framesBetweenMessages = 60; 
+private int framesBetweenMessages = 60; 
     // string broadcastMessage = "DISCOVER";
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
@@ -104,7 +104,7 @@ public class u6_slider_ctrl : MonoBehaviour
         // for android 
         keyframesFilePath_to_txt = GetFilePath();
         // for windows 
-        // keyframesFilePath_to_txt = Application.dataPath + "/Keyframes.txt";
+        keyframesFilePath_to_txt = Application.dataPath + "/Keyframes.txt";
         // Instance = this;
         slider1 = GameObject.Find("Slider1").GetComponent<Slider>();
         slider2 = GameObject.Find("Slider2").GetComponent<Slider>();
