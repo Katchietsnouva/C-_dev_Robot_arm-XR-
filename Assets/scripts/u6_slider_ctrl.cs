@@ -153,6 +153,11 @@ public class u6_slider_ctrl : MonoBehaviour
     void Update()
     {
         // StartCoroutine(NetworkingCoroutine());
+        if (IsNetworkingEnabled() && isServerServerEnabled())
+        {
+            // Serialize the object to JSON
+            broadcastMessage = CollectSliderValues();
+        }
 
         if (isRecording)
         {
@@ -341,21 +346,21 @@ public class u6_slider_ctrl : MonoBehaviour
 
         var sliderValues = new
         {
-            Slider1 = slider1Value,
-            Slider2 = slider2Value,
-            Slider3 = slider3Value,
-            Slider4 = slider4Value,
-            Slider5 = slider5Value,
-            Slider6 = slider6Value
+            msgIndex = messageIndex,
+            sliderData = new
+            {
+                Slider1 = slider1Value,
+                Slider2 = slider2Value,
+                Slider3 = slider3Value,
+                Slider4 = slider4Value,
+                Slider5 = slider5Value,
+                Slider6 = slider6Value
+            }
         };
         messageIndex++;
 
-        // Serialize the object to JSON
         return JsonConvert.SerializeObject(sliderValues);
     }
-
-
-
 
 
     private  void StartPipeServer()
