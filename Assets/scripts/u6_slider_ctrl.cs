@@ -544,59 +544,69 @@ public class u6_slider_ctrl : MonoBehaviour
     private IEnumerator ReceiveData()
     {
         Debug.LogWarning("Client starting");
-        yield return  new WaitForSeconds(4f);
+        yield return new WaitForSeconds(4f);
         if (client_part_hasExecuted)
         {
             Debug.LogWarning("Client is already running.");
             yield break;
         }
-        try
+        // try
+        if (!client_part_hasExecuted)
         {
             client_part_hasExecuted = true;// Set the flag to true to prevent further executions
-            if (pipeClient == null)
-            {
-                try{
-                    pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In);
-                    StreamReader sr = new StreamReader(pipeClient);
-                    // pipeClient.WaitForConnection();
-                    pipeClient.Connect();
-                    Debug.Log("Waiting to be onnected to pipe.");
-                    yield return  new WaitForSeconds(4f);
-                    if (pipeClient.IsConnected)
-                    {
-                        Debug.Log("Connected to pipe.");
-                    }
-                    while (pipeClient.IsConnected)
-                    {
-                        string data = sr.ReadLine(); // Adjust this line based on your data format
+            Debug.Log("Test 1 complete. Waiting to be Connected to pipe.");
 
-                        if (!string.IsNullOrEmpty(data))
-                        {
-                            Debug.Log($"Received data from server: {data}");
-                        }
-                        yield return  new WaitForSeconds(1f);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Handle any exceptions that may occur during pipe server initialization
-                    Debug.Log($"1 Error starting pipe client: {ex.Message}");
-                    // StopPipeClient();
-                }
-                finally
-                {
 
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            // Handle any exceptions that may occur during the overall process
-            Debug.Log($"2 Error starting pipe server: {ex.Message}");
-            // StopPipeClient();
+            // if (pipeClient == null)
+            // {
+            //     // try{
+            //         pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In);
+            //         StreamReader sr = new StreamReader(pipeClient);
+            //         // pipeClient.WaitForConnection();
+            //         pipeClient.Connect();
+            //         Debug.Log("Waiting to be onnected to pipe.");
+            //         yield return new WaitForSeconds(4f);
+            //         if (pipeClient.IsConnected)
+            //         {
+            //             Debug.Log("Connected to pipe.");
+            //         }
+
+
+
+                    // while (pipeClient.IsConnected)
+                    // {
+                    //     string data = sr.ReadLine(); // Adjust this line based on your data format
+
+                    //     if (!string.IsNullOrEmpty(data))
+                    //     {
+                    //         Debug.Log($"Received data from server: {data}");
+                    //     }
+                    //     yield return  new WaitForSeconds(1f);
+                    // }
+                // }
+            //     catch (Exception ex)
+            //     {
+            //         // Handle any exceptions that may occur during pipe server initialization
+            //         Debug.Log($"1 Error starting pipe client: {ex.Message}");
+            //         // StopPipeClient();
+            //     }
+            //     finally
+            //     {
+
+            //     }
+            // }
+        // }
+        // catch (Exception ex)
+        // {
+        //     // Handle any exceptions that may occur during the overall process
+        //     Debug.Log($"2 Error starting pipe server: {ex.Message}");
+        //     // StopPipeClient();
         }
         // yield return  new WaitForSeconds(1f);
     }
+
+
+
             // if (!hasExecuted)
             // {
                 
