@@ -160,7 +160,6 @@ public class u6_slider_ctrl : MonoBehaviour
     {
         // StartCoroutine(NetworkingCoroutine());
          frameCounter++;
-
         if (IsNetworkingEnabled() && isServerServerEnabled())
         {
             // Check if enough frames have passed before sending the next message
@@ -194,11 +193,7 @@ public class u6_slider_ctrl : MonoBehaviour
         }
         // print(isServerRunning);
         // if (!isServerRunning)
-        if (IsNetworkingEnabled() && isServerServerEnabled())
-        {
-            // Serialize the object to JSON
-            broadcastMessage = CollectSliderValues();
-        }
+
     }
     // server related code
     private bool CheckIfServer()
@@ -240,7 +235,7 @@ public class u6_slider_ctrl : MonoBehaviour
                     // StopServer();
                     //SetClientMode();
                     yield return StartCoroutine(ReceiveData());
-                    Debug.Log("Client Mode");
+                    // Debug.Log("Client Mode");
                 }
                 // else{
                 //     Debug.Log("some isServerServerEnabled error ");
@@ -543,8 +538,8 @@ public class u6_slider_ctrl : MonoBehaviour
 
     private IEnumerator ReceiveData()
     {
-        Debug.LogWarning("Client starting");
-        yield return new WaitForSeconds(4f);
+        // Debug.LogWarning("Client starting");
+        // yield return new WaitForSeconds(4f);
         if (client_part_hasExecuted)
         {
             Debug.LogWarning("Client is already running.");
