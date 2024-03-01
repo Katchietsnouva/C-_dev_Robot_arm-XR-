@@ -151,6 +151,8 @@ public class u6_slider_ctrl : MonoBehaviour
         // pipeStreamReader = new StreamReader(pipeClient);
 
         StartCoroutine(NetworkingCoroutine());
+        // StartCoroutine(ReceiveData());
+        receiveDataExecutionCount = 0;
         
         // StartCoroutine(ReceiveMessagesCoroutine());
     }
@@ -167,7 +169,6 @@ public class u6_slider_ctrl : MonoBehaviour
             {
                 // Serialize the object to JSON
                 broadcastMessage = CollectSliderValues();
-
                 // Reset the frame counter
                 frameCounter = 0;
             }
@@ -246,9 +247,9 @@ public class u6_slider_ctrl : MonoBehaviour
                 StopServer();
                 Debug.Log("Network Disabled");
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(10f);
         }
-       
+        yield return new WaitForSeconds(1f);
     }
     // Linked to button_EnableNetworking
     public void ToggleNetworking()
@@ -535,10 +536,12 @@ public class u6_slider_ctrl : MonoBehaviour
     }
 
     // private bool client256_part_hasExecuted = false;
+    private int receiveDataExecutionCount = 0;
 
     private IEnumerator ReceiveData()
     {
-        // Debug.LogWarning("Client starting");
+        Debug.LogWarning("Client starting");
+        receiveDataExecutionCount++;
         // yield return new WaitForSeconds(4f);
         if (client_part_hasExecuted)
         {
@@ -546,11 +549,15 @@ public class u6_slider_ctrl : MonoBehaviour
             yield break;
         }
         // try
-        if (!client_part_hasExecuted)
+        if (pipeClient == null)
         {
+            // if (!client_part_hasExecuted)
+        if (receiveDataExecutionCount == 1)
+        {
+            Debug.Log("This is the first execution of ReceiveData.");
+
             client_part_hasExecuted = true;// Set the flag to true to prevent further executions
             Debug.Log("Test 1 complete. Waiting to be Connected to pipe.");
-
 
             // if (pipeClient == null)
             // {
@@ -598,7 +605,9 @@ public class u6_slider_ctrl : MonoBehaviour
         //     // StopPipeClient();
         }
         // yield return  new WaitForSeconds(1f);
+        }
     }
+        
 
 
 
