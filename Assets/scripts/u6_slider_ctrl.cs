@@ -487,10 +487,7 @@ private int framesBetweenMessages = 60;
     {
         try
         {
-            // Close existing connections
             StopPipeServer();
-
-            // Attempt to reconnect
             StartPipeServer();
         }
         catch (Exception ex)
@@ -541,6 +538,50 @@ private int framesBetweenMessages = 60;
             Debug.Log($"Error stopping pipe server: {ex.Message}");
         }
     }
+
+
+    
+    IEnumerator ReceiveData()
+    {
+        pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.In);
+
+        while (true)
+        {
+            try
+            {
+                pipeClient.Connect();
+
+                StreamReader sr = new StreamReader(pipeClient);
+
+                while (true)
+                {
+                    string data = sr.ReadLine();
+
+                    if (!string.IsNullOrEmpty(data))
+                    {
+                        Debug.Log($"Received data from server: {data}");
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+                // Handle connection errors if needed
+                yield return null;
+            }
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (pipeClient != null)
+        {
+            pipeClient.Close();
+            pipeClient.Dispose();
+        }
+    }
+
+
+
 
 
 
