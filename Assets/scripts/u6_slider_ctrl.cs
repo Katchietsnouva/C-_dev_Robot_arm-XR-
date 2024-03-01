@@ -31,6 +31,8 @@ public class u6_slider_ctrl : MonoBehaviour
     private StreamWriter pipeStreamWriter;
     private bool isStartingServerProcess = false;
     private bool isWaitingForConnection = false;
+    private bool client_part_hasExecuted = false;
+    private bool isWaitingFor_Client_Part_Connection = false;
     private readonly object pipeLock = new object();
     bool pipeOperationSuccess = false;
     string broadcastMessage = " ";
@@ -537,22 +539,60 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
+    private bool client_part_hasExecuted = false;
+
     private IEnumerator ReceiveData()
     {
-        Debug.Log("ReceiveData method called");
-        using (pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In))
+        Debug.LogWarning("Client starting");
+        if (client_part_hasExecuted)
         {
-            StreamReader sr = new StreamReader(pipeClient);
-            pipeClient.Connect();
-            Debug.Log($"Unity connected to pipe successfully");
-            // if (pipeClient.IsConnected)
-            //     {
-            //         string data = sr.ReadLine(); 
-            //         Debug.Log($"Received data from server: {data}");
-            //     }
+            Debug.LogWarning("Client is already running.");
+            yield break;
         }
-        yield return null;
+        try
+        {
+            client_part_hasExecuted = true;// Set the flag to true to prevent further executions
+            if (pipeClient == null)
+            {
+                try{
+                    pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In)
+                    StreamReader sr = new StreamReader(pipeClient);
+                    pipeClient.WaitForConnection();
+                }
+                catch (Exception ex)
+                {
+                    // Handle any exceptions that may occur during pipe server initialization
+                    Debug.Log($"1 Error starting pipe client: {ex.Message}");
+                    StopPipeClient();
+                }
+                finally
+                {
+                    // After the connection attempt, update the waiting flag
+                    // isWaitingFor_Client_Part_Connection = false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle any exceptions that may occur during the overall process
+            Debug.Log($"2 Error starting pipe server: {ex.Message}");
+            StopPipeServer();
+        }
+            // if (!hasExecuted)
+            // {
+                
+            //     Debug.Log("ReceiveData method called");
+            //     using (pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In))
+            //     {
+            //         StreamReader sr = new StreamReader(pipeClient);
+            //         pipeClient.Connect();
+            //         Debug.Log($"Unity connected to pipe successfully");
+            //         yield return  new WaitForSeconds(1f);
+            //     }
+            // }
+        // }
     }
+
     
     // float timeout = 4.0f; // Set your desired timeout
     // float elapsedTime = 0.0f;
