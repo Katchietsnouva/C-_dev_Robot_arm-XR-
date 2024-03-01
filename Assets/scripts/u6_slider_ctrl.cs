@@ -20,6 +20,7 @@ public class u6_slider_ctrl : MonoBehaviour
 {
     // SERVER related interactions
     private const string pipeName = "UnityToResponderPipe";
+    private const string pipeName2 = "ResponderToUnityPipe";
     private bool isNetworkingEnabled = false;
     private bool isServer = false;
     private int serverPort = 12345;
@@ -34,7 +35,7 @@ public class u6_slider_ctrl : MonoBehaviour
     string broadcastMessage = " ";
     private int messageIndex = 0;
     private int frameCounter = 0;
-private int framesBetweenMessages = 60; 
+    private int framesBetweenMessages = 60; 
     // string broadcastMessage = "DISCOVER";
     [SerializeField] private Button button_EnableNetworking;
     [SerializeField] private Button button_SetMode;
@@ -384,8 +385,6 @@ private int framesBetweenMessages = 60;
             {
                 // lock (pipeLock)
                 // {   
-                    
-
                     // Start the named pipe server in a separate thread using Task.Run
                     Task.Run(() =>
                     {
@@ -394,9 +393,7 @@ private int framesBetweenMessages = 60;
                             // Inside the separate thread, initialize the named pipe server
                             pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.Out);
                             pipeStreamWriter = new StreamWriter(pipeServer);
-
                             // Wait for a client connection
-
                             pipeServer.WaitForConnection();
                             pipeOperationSuccess = true;
                         }
@@ -543,12 +540,14 @@ private int framesBetweenMessages = 60;
     
     IEnumerator ReceiveData()
     {
-        pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.In);
+        pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In);
 
         while (true)
         {
             try
             {
+                private const string pipeName2 = "ResponderToUnityPipe";
+                private NamedPipeClientStream pipeClient;
                 pipeClient.Connect();
 
                 StreamReader sr = new StreamReader(pipeClient);
@@ -563,23 +562,28 @@ private int framesBetweenMessages = 60;
                     }
                 }
             }
-            catch (System.Exception)
+            // catch (System.Exception)
             catch (Exception ex)
             {
                 // Handle connection errors if needed
                 Debug.Log($"Error stopping pipe server: {ex.Message}");
             }
+            finally
+            {
+                // After the connection attempt, update the waiting flag
+                isWaitingForConnection2 = false;
+            }
         }
     }
 
-    private void OnApplicationQuit()
-    {
-        if (pipeClient != null)
-        {
-            pipeClient.Close();
-            pipeClient.Dispose();
-        }
-    }
+    // private void OnApplicationQuit()
+    // {
+    //     if (pipeClient != null)
+    //     {
+    //         pipeClient.Close();
+    //         pipeClient.Dispose();
+    //     }
+    // }
 
 
 
