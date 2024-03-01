@@ -537,65 +537,80 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
-private IEnumerator ReceiveData()
-{
-    float timeout = 4.0f; // Set your desired timeout
-    float elapsedTime = 0.0f;
-
-    // Coroutine to handle the actual data reception
-    void ReceiveDataCoroutine()
+    private IEnumerator ReceiveData()
     {
-        try
+        Debug.Log("ReceiveData method called");
+        using (pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In))
         {
-            using (pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In))
-            {
-                pipeClient.Connect();
-                StreamReader sr = new StreamReader(pipeClient);
-
-                while (elapsedTime < timeout)
-                {
-                    if (pipeClient.IsConnected)
-                    {
-                        string data = sr.ReadLine();  // Use ReadLine for simplicity
-
-                        if (!string.IsNullOrEmpty(data))
-                        {
-                            Debug.Log($"Received data from server: {data}");
-                        }
-                    }
-                    else
-                    {
-                        // Handle the case when the pipe is not connected 
-                        Debug.LogWarning("Pipe is not connected. Waiting for reconnection...");
-                    }
-
-                    // Increment the elapsed time
-                    elapsedTime += Time.deltaTime;
-
-                    // Add a short delay to control the loop frequency outside the try-catch block
-                    // yield return null;
-                }
-            }
+            StreamReader sr = new StreamReader(pipeClient);
+            pipeClient.Connect();
+            Debug.Log($"Unity connected to pipe successfully");
+            // if (pipeClient.IsConnected)
+            //     {
+            //         string data = sr.ReadLine(); 
+            //         Debug.Log($"Received data from server: {data}");
+            //     }
         }
-        catch (Exception ex)
-        {
-            // Handle connection errors if needed
-            Debug.LogError($"Error receiving data: {ex.Message}");
-        }
-        finally
-        {
-            // Add any cleanup logic if needed
-        }
+        yield return null;
     }
+    
+    // float timeout = 4.0f; // Set your desired timeout
+    // float elapsedTime = 0.0f;
 
-    // Call the ReceiveDataCoroutine without using yield return
-    while (elapsedTime < timeout)
-    {
-        ReceiveDataCoroutine();
-        // Add any additional logic here if needed
-        yield return null; // To avoid Unity warning about the yield return
-    }
-}
+    // // Coroutine to handle the actual data reception
+    // void ReceiveDataCoroutine()
+    // {
+    //     try
+    //     {
+    //         using (pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In))
+    //         {
+    //             pipeClient.Connect();
+    //             StreamReader sr = new StreamReader(pipeClient);
+
+    //             while (elapsedTime < timeout)
+    //             {
+    //                 if (pipeClient.IsConnected)
+    //                 {
+    //                     string data = sr.ReadLine();  // Use ReadLine for simplicity
+
+    //                     if (!string.IsNullOrEmpty(data))
+    //                     {
+    //                         Debug.Log($"Received data from server: {data}");
+    //                     }
+    //                 }
+    //                 else
+    //                 {
+    //                     // Handle the case when the pipe is not connected 
+    //                     Debug.LogWarning("Pipe is not connected. Waiting for reconnection...");
+    //                 }
+
+    //                 // Increment the elapsed time
+    //                 elapsedTime += Time.deltaTime;
+
+    //                 // Add a short delay to control the loop frequency outside the try-catch block
+    //                 // yield return null;
+    //             }
+    //         }
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         // Handle connection errors if needed
+    //         Debug.LogError($"Error receiving data: {ex.Message}");
+    //     }
+    //     finally
+    //     {
+    //         // Add any cleanup logic if needed
+    //     }
+    // }
+
+    // // Call the ReceiveDataCoroutine without using yield return
+    // while (elapsedTime < timeout)
+    // {
+    //     ReceiveDataCoroutine();
+    //     // Add any additional logic here if needed
+        // yield return null; // To avoid Unity warning about the yield return
+    // }
+// }
 
 
 
