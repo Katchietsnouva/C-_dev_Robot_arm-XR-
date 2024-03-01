@@ -227,7 +227,7 @@ public class u6_slider_ctrl : MonoBehaviour
                 {
                     // StartServer();
                     // isStartingServerProcess = true;
-                    // yield return StartCoroutine(StartServerCoroutine());
+                    yield return StartCoroutine(StartServerCoroutine());
                     // isStartingServerProcess = false;
                 }
                 if (!isServerServerEnabled())
@@ -247,7 +247,7 @@ public class u6_slider_ctrl : MonoBehaviour
                 StopServer();
                 Debug.Log("Network Disabled");
             }
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(1f);
         }
         yield return new WaitForSeconds(1f);
     }
