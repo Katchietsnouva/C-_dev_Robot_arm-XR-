@@ -564,9 +564,10 @@ private int framesBetweenMessages = 60;
                 }
             }
             catch (System.Exception)
+            catch (Exception ex)
             {
                 // Handle connection errors if needed
-                yield return null;
+                Debug.Log($"Error stopping pipe server: {ex.Message}");
             }
         }
     }
