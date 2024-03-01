@@ -235,6 +235,7 @@ private int framesBetweenMessages = 60;
                     // Implement client logic here if needed
                     StopServer();
                     //SetClientMode();
+                    StartCoroutine(ReceiveData());
                     Debug.Log("Client Mode");
                 }
                 // else{
