@@ -27,6 +27,7 @@ public class u6_slider_ctrl : MonoBehaviour
     private UdpClient udpServer; 
     private bool isServerRunning = false;
     private NamedPipeServerStream pipeServer;
+    private NamedPipeClientStream pipeClient;
     private StreamWriter pipeStreamWriter;
     private bool isStartingServerProcess = false;
     private bool isWaitingForConnection = false;
@@ -228,15 +229,15 @@ public class u6_slider_ctrl : MonoBehaviour
                 {
                     // StartServer();
                     // isStartingServerProcess = true;
-                    yield return StartCoroutine(StartServerCoroutine());
+                    // yield return StartCoroutine(StartServerCoroutine());
                     // isStartingServerProcess = false;
                 }
                 if (!isServerServerEnabled())
                 {
                     // Implement client logic here if needed
-                    StopServer();
+                    // StopServer();
                     //SetClientMode();
-                    StartCoroutine(ReceiveData());
+                    yield return StartCoroutine(ReceiveData());
                     Debug.Log("Client Mode");
                 }
                 // else{
@@ -536,45 +537,68 @@ public class u6_slider_ctrl : MonoBehaviour
         }
     }
 
+private IEnumerator ReceiveData()
+{
+    float timeout = 4.0f; // Set your desired timeout
+    float elapsedTime = 0.0f;
 
-    
-    IEnumerator ReceiveData()
+    // Coroutine to handle the actual data reception
+    void ReceiveDataCoroutine()
     {
-        pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In);
-
-        while (true)
+        try
         {
-            try
+            using (pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In))
             {
-                private const string pipeName2 = "ResponderToUnityPipe";
-                private NamedPipeClientStream pipeClient;
                 pipeClient.Connect();
-
                 StreamReader sr = new StreamReader(pipeClient);
 
-                while (true)
+                while (elapsedTime < timeout)
                 {
-                    string data = sr.ReadLine();
-
-                    if (!string.IsNullOrEmpty(data))
+                    if (pipeClient.IsConnected)
                     {
-                        Debug.Log($"Received data from server: {data}");
+                        string data = sr.ReadLine();  // Use ReadLine for simplicity
+
+                        if (!string.IsNullOrEmpty(data))
+                        {
+                            Debug.Log($"Received data from server: {data}");
+                        }
                     }
+                    else
+                    {
+                        // Handle the case when the pipe is not connected 
+                        Debug.LogWarning("Pipe is not connected. Waiting for reconnection...");
+                    }
+
+                    // Increment the elapsed time
+                    elapsedTime += Time.deltaTime;
+
+                    // Add a short delay to control the loop frequency outside the try-catch block
+                    // yield return null;
                 }
             }
-            // catch (System.Exception)
-            catch (Exception ex)
-            {
-                // Handle connection errors if needed
-                Debug.Log($"Error stopping pipe server: {ex.Message}");
-            }
-            finally
-            {
-                // After the connection attempt, update the waiting flag
-                isWaitingForConnection2 = false;
-            }
+        }
+        catch (Exception ex)
+        {
+            // Handle connection errors if needed
+            Debug.LogError($"Error receiving data: {ex.Message}");
+        }
+        finally
+        {
+            // Add any cleanup logic if needed
         }
     }
+
+    // Call the ReceiveDataCoroutine without using yield return
+    while (elapsedTime < timeout)
+    {
+        ReceiveDataCoroutine();
+        // Add any additional logic here if needed
+        yield return null; // To avoid Unity warning about the yield return
+    }
+}
+
+
+
 
     // private void OnApplicationQuit()
     // {
