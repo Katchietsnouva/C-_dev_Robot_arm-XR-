@@ -538,75 +538,54 @@ public class u6_slider_ctrl : MonoBehaviour
     // private bool client256_part_hasExecuted = false;
     private int receiveDataExecutionCount = 0;
 
-    private IEnumerator ReceiveData()
+private IEnumerator ReceiveData()
+{
+    Debug.LogWarning("Client starting");
+    receiveDataExecutionCount++;
+    Debug.Log(receiveDataExecutionCount);
+
+    if (pipeClient == null)
     {
-        Debug.LogWarning("Client starting");
-        receiveDataExecutionCount++;
-        // yield return new WaitForSeconds(4f);
-        if (client_part_hasExecuted)
-        {
-            Debug.LogWarning("Client is already running.");
-            yield break;
-        }
-        // try
-        if (pipeClient == null)
-        {
-            // if (!client_part_hasExecuted)
         if (receiveDataExecutionCount == 1)
         {
             Debug.Log("This is the first execution of ReceiveData.");
 
-            client_part_hasExecuted = true;// Set the flag to true to prevent further executions
+            client_part_hasExecuted = true; // Set the flag to true to prevent further executions
             Debug.Log("Test 1 complete. Waiting to be Connected to pipe.");
 
-            // if (pipeClient == null)
-            // {
-            //     // try{
-            //         pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In);
-            //         StreamReader sr = new StreamReader(pipeClient);
-            //         // pipeClient.WaitForConnection();
-            //         pipeClient.Connect();
-            //         Debug.Log("Waiting to be onnected to pipe.");
-            //         yield return new WaitForSeconds(4f);
-            //         if (pipeClient.IsConnected)
-            //         {
-            //             Debug.Log("Connected to pipe.");
-            //         }
+            Task.Run(() =>
+            {
+                // This code will run on a separate thread
+                try
+                {
+                    pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In);
+                    StreamReader sr = new StreamReader(pipeClient);
+                    pipeClient.Connect();
+                    Debug.Log("Connected to pipe.");
 
+                    // Add the rest of your code for reading data or any other operations
+                    while (pipeClient.IsConnected)
+                    {
+                        string data = sr.ReadLine(); // Adjust this line based on your data format
 
-
-                    // while (pipeClient.IsConnected)
-                    // {
-                    //     string data = sr.ReadLine(); // Adjust this line based on your data format
-
-                    //     if (!string.IsNullOrEmpty(data))
-                    //     {
-                    //         Debug.Log($"Received data from server: {data}");
-                    //     }
-                    //     yield return  new WaitForSeconds(1f);
-                    // }
-                // }
-            //     catch (Exception ex)
-            //     {
-            //         // Handle any exceptions that may occur during pipe server initialization
-            //         Debug.Log($"1 Error starting pipe client: {ex.Message}");
-            //         // StopPipeClient();
-            //     }
-            //     finally
-            //     {
-
-            //     }
-            // }
-        // }
-        // catch (Exception ex)
-        // {
-        //     // Handle any exceptions that may occur during the overall process
-        //     Debug.Log($"2 Error starting pipe server: {ex.Message}");
-        //     // StopPipeClient();
-        }
-        // yield return  new WaitForSeconds(1f);
+                        if (!string.IsNullOrEmpty(data))
+                        {
+                            Debug.Log($"Received data from server: {data}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log($"Error in separate thread: {ex.Message}");
+                }
+            });
         }
     }
+
+    // Add the following line to satisfy the IEnumerator return type
+    yield break;
+}
+
         
 
 
