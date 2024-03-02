@@ -610,12 +610,12 @@ public class u6_slider_ctrl : MonoBehaviour
 
         // Access individual values
         // float slider1Value = robotKeyframe1.sliderData.Slider1;
-        float slider1.value = robotKeyframe1.sliderData.Slider1;
-        float slider2.value = robotKeyframe1.sliderData.Slider2;
-        float slider3.value = robotKeyframe1.sliderData.Slider3;
-        float slider4.value = robotKeyframe1.sliderData.Slider4;
-        float slider5.value = robotKeyframe1.sliderData.Slider5;
-        float slider6.value = robotKeyframe1.sliderData.Slider6;
+        slider1.value = robotKeyframe1.sliderData.Slider1;
+        slider2.value = robotKeyframe1.sliderData.Slider2;
+        slider3.value = robotKeyframe1.sliderData.Slider3;
+        slider4.value = robotKeyframe1.sliderData.Slider4;
+        slider5.value = robotKeyframe1.sliderData.Slider5;
+        slider6.value = robotKeyframe1.sliderData.Slider6;
 
         // Print values to the Unity debug log
         Debug.Log($"Slider1: {slider1}");
