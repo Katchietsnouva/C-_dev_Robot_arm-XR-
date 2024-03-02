@@ -104,6 +104,27 @@ public class u6_slider_ctrl : MonoBehaviour
     // private Color initialColor = Color.white;  // Set the initial color to white
     private ColorBlock buttonColors;
 
+    private static u6_slider_ctrl _instance;
+    private static readonly Queue<Action> _actions = new Queue<Action>();
+
+
+    public static u6_slider_ctrl Instance()
+    {
+        if (_instance == null)
+        {
+            _instance = FindObjectOfType<u6_slider_ctrl>();
+
+            if (_instance == null)
+            {
+                GameObject obj = new GameObject("u6_slider_ctrl");
+                _instance = obj.AddComponent<u6_slider_ctrl>();
+            }
+        }
+
+        return _instance;
+    }
+
+
     void Start()
     {
         // for android 
@@ -161,8 +182,15 @@ public class u6_slider_ctrl : MonoBehaviour
     
     void Update()
     {
+        lock (_actions)
+        {
+            while (_actions.Count > 0)
+            {
+                _actions.Dequeue().Invoke();
+            }
+        }
         // StartCoroutine(NetworkingCoroutine());
-         frameCounter++;
+        frameCounter++;
         if (IsNetworkingEnabled() && isServerServerEnabled())
         {
             // Check if enough frames have passed before sending the next message
@@ -195,8 +223,17 @@ public class u6_slider_ctrl : MonoBehaviour
         }
         // print(isServerRunning);
         // if (!isServerRunning)
-
     }
+
+    public void Enqueue(Action action)
+    {
+        lock (_actions)
+        {
+            _actions.Enqueue(action);
+        }
+    }
+
+
     // server related code
     private bool CheckIfServer()
     {
