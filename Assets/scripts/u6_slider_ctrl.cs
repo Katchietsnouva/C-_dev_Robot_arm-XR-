@@ -587,19 +587,19 @@ public class u6_slider_ctrl : MonoBehaviour
         yield break;
     }
 
-    private void SetRobotPositions(RobotKeyframe keyframe)
-    { // Update sliders based on keyframe values
-        // Assuming you have a method like AlterJoints, update the sliders based on keyframe values
-        slider1.value = keyframe.Slider1;
-        slider2.value = keyframe.Slider2;
-        slider3.value = keyframe.Slider3;
-        slider4.value = keyframe.Slider4;
-        slider5.value = keyframe.Slider5;
-        slider6.value = keyframe.Slider6;
+    // private void SetRobotPositions(RobotKeyframe keyframe)
+    // { // Update sliders based on keyframe values
+    //     // Assuming you have a method like AlterJoints, update the sliders based on keyframe values
+    //     slider1.value = keyframe.Slider1;
+    //     slider2.value = keyframe.Slider2;
+    //     slider3.value = keyframe.Slider3;
+    //     slider4.value = keyframe.Slider4;
+    //     slider5.value = keyframe.Slider5;
+    //     slider6.value = keyframe.Slider6;
 
-        // Call the method that updates the robot's joint positions
-        AlterJoints();
-    }
+    //     // Call the method that updates the robot's joint positions
+    //     AlterJoints();
+    // }
 
 
 
@@ -609,21 +609,22 @@ public class u6_slider_ctrl : MonoBehaviour
         RobotKeyframe1 robotKeyframe1 = JsonConvert.DeserializeObject<RobotKeyframe1>(jsonData);
 
         // Access individual values
-        float slider1Value = robotKeyframe1.sliderData.Slider1;
-        float slider2Value = robotKeyframe1.sliderData.Slider2;
-        float slider3Value = robotKeyframe1.sliderData.Slider3;
-        float slider4Value = robotKeyframe1.sliderData.Slider4;
-        float slider5Value = robotKeyframe1.sliderData.Slider5;
-        float slider6Value = robotKeyframe1.sliderData.Slider6;
+        // float slider1Value = robotKeyframe1.sliderData.Slider1;
+        float slider1.value = robotKeyframe1.sliderData.Slider1;
+        float slider2.value = robotKeyframe1.sliderData.Slider2;
+        float slider3.value = robotKeyframe1.sliderData.Slider3;
+        float slider4.value = robotKeyframe1.sliderData.Slider4;
+        float slider5.value = robotKeyframe1.sliderData.Slider5;
+        float slider6.value = robotKeyframe1.sliderData.Slider6;
 
         // Print values to the Unity debug log
-        Debug.Log($"Slider1: {slider1Value}");
-        Debug.Log($"Slider2: {slider2Value}");
-        Debug.Log($"Slider3: {slider3Value}");
-        Debug.Log($"Slider4: {slider4Value}");
-        Debug.Log($"Slider5: {slider5Value}");
-        Debug.Log($"Slider6: {slider6Value}");
-
+        Debug.Log($"Slider1: {slider1}");
+        Debug.Log($"Slider2: {slider2}");
+        Debug.Log($"Slider3: {slider3}");
+        Debug.Log($"Slider4: {slider4}");
+        Debug.Log($"Slider5: {slider5}");
+        Debug.Log($"Slider6: {slider6}");
+        AlterJoints();
         // Use the received values as needed in your Unity application
     }
 
