@@ -587,13 +587,41 @@ public class u6_slider_ctrl : MonoBehaviour
         yield break;
     }
 
-    // public class ReceivedData
-    // {
-    //     public int msgIndex;
-    //     public SliderData sliderData;
-    // }
 
-    // public class SliderData
+
+
+
+
+
+
+
+
+    private void SetRobotPositions_from_Remote(string jsonData)
+    {
+        // Parse JSON data into the RobotKeyframe struct
+        RobotKeyframe1 robotKeyframe1 = JsonConvert.DeserializeObject<RobotKeyframe1>(jsonData);
+
+        // Access individual values
+        float slider1Value = robotKeyframe1.sliderData.Slider1;
+        float slider2Value = robotKeyframe1.sliderData.Slider2;
+        float slider3Value = robotKeyframe1.sliderData.Slider3;
+        float slider4Value = robotKeyframe1.sliderData.Slider4;
+        float slider5Value = robotKeyframe1.sliderData.Slider5;
+        float slider6Value = robotKeyframe1.sliderData.Slider6;
+
+        // Print values to the Unity debug log
+        Debug.Log($"Slider1: {slider1Value}");
+        Debug.Log($"Slider2: {slider2Value}");
+        Debug.Log($"Slider3: {slider3Value}");
+        Debug.Log($"Slider4: {slider4Value}");
+        Debug.Log($"Slider5: {slider5Value}");
+        Debug.Log($"Slider6: {slider6Value}");
+
+        // Use the received values as needed in your Unity application
+    }
+
+
+    // public struct SliderData
     // {
     //     public float Slider1;
     //     public float Slider2;
@@ -602,67 +630,65 @@ public class u6_slider_ctrl : MonoBehaviour
     //     public float Slider5;
     //     public float Slider6;
     // }
-    public class SliderData
-    {
-        public float Slider1;
-        public float Slider2;
-        public float Slider3;
-        public float Slider4;
-        public float Slider5;
-        public float Slider6;
-    }
 
-    [System.Serializable]
-    public class ServerData
-    {
-        public int msgIndex;
-        public SliderData sliderData;
-    }
+    // // [System.Serializable]
+    // public class ServerData
+    // {
+    //     public int msgIndex;
+    //     public SliderData sliderData;
+    // }
 
-    private void SetRobotPositions_from_Remote(string jsonData)
-    {
-        // Deserialize the received JSON data
-        // ReceivedData receivedData = JsonUtility.FromJson<ReceivedData>(jsonData);
-        ServerData serverData = JsonUtility.FromJson<ServerData>(jsonData);
-        
+    // private void SetRobotPositions_from_Remote(string jsonData)
+    // {
+    //     // Deserialize the received JSON data
+    //     // ReceivedData receivedData = JsonUtility.FromJson<ReceivedData>(jsonData);
+    //     ServerData serverData = JsonUtility.FromJson<ServerData>(jsonData);
 
-        // // Update sliders based on data values
-        float slider1.value = receivedData.sliderData.Slider1;
-        float slider2.value = receivedData.sliderData.Slider2;
-        float slider3.value = receivedData.sliderData.Slider3;
-        float slider4.value = receivedData.sliderData.Slider4;
-        float slider5.value = receivedData.sliderData.Slider5;
-        float slider6.value = receivedData.sliderData.Slider6;
+    //     // // Update sliders based on data values
+    //     // int msgIndex = serverData.msgIndex;
+    //     slider1.value = serverData.sliderData.Slider1;
+    //     // float slider1 = serverData.sliderData.Slider1;
+    //     float slider2 = serverData.sliderData.Slider2;
+    //     float slider3 = serverData.sliderData.Slider3;
+    //     float slider4 = serverData.sliderData.Slider4;
+    //     float slider5 = serverData.sliderData.Slider5;
+    //     float slider6 = serverData.sliderData.Slider6;
 
-        // AlterJoints();
-        
-        // float slider1Value = slider1.value;
-        // float slider2Value = slider2.value;
-        // float slider3Value = slider3.value;
-        // float slider4Value = slider4.value;
-        // float slider5Value = slider5.value;
-        // float slider6Value = slider6.value;
+    //     // AlterJoints();
 
-        // int msgIndex = serverData.msgIndex;
-        // double slider1Value = serverData.sliderData.Slider1;
-        // double slider2Value = serverData.sliderData.Slider2;
-        // double slider3Value = serverData.sliderData.Slider3;
-        // double slider4Value = serverData.sliderData.Slider4;
-        // double slider5Value = serverData.sliderData.Slider5;
-        // double slider6Value = serverData.sliderData.Slider6;
+    //     // Debug.Log($"msgIndex: {msgIndex}");
+    //     Debug.Log($"Slider1: {slider1}");
+    //     Debug.Log($"Slider2: {slider2}");
+    //     Debug.Log($"Slider3: {slider3}");
+    //     Debug.Log($"Slider4: {slider4}");
+    //     Debug.Log($"Slider5: {slider5}");
+    //     Debug.Log($"Slider6: {slider6}");
+    // }
 
-        // Print values to the Unity debug log
-        // Debug.Log($"msgIndex: {msgIndex}");
-        Debug.Log($"Slider1: {slider1Value}");
-        Debug.Log($"Slider2: {slider2Value}");
-        Debug.Log($"Slider3: {slider3Value}");
-        Debug.Log($"Slider4: {slider4Value}");
-        Debug.Log($"Slider5: {slider5Value}");
-        Debug.Log($"Slider6: {slider6Value}");
+
+
+
+
+
+
+
+
+
+
+    // private void SetRobotPositions(RobotKeyframe keyframe)
+    // { // Update sliders based on keyframe values
+    //     // Assuming you have a method like AlterJoints, update the sliders based on keyframe values
+    //     slider1.value = keyframe.Slider1;
+    //     slider2.value = keyframe.Slider2;
+    //     slider3.value = keyframe.Slider3;
+    //     slider4.value = keyframe.Slider4;
+    //     slider5.value = keyframe.Slider5;
+    //     slider6.value = keyframe.Slider6;
+
+    //     // Call the method that updates the robot's joint positions
+    //     AlterJoints();
+    // }
     
-    }
-
-        
 
 
 
@@ -1327,3 +1353,33 @@ public struct RobotKeyframe
         Slider6 = s6;
     }
 }
+
+
+    public struct RobotKeyframe1
+    {
+        public SliderData sliderData; // Define a struct for slider data
+
+        public RobotKeyframe1(float s1, float s2, float s3, float s4, float s5, float s6)
+        {
+            sliderData = new SliderData
+            {
+                Slider1 = s1,
+                Slider2 = s2,
+                Slider3 = s3,
+                Slider4 = s4,
+                Slider5 = s5,
+                Slider6 = s6
+            };
+        }
+    }
+
+    // Define a struct for slider data
+    public struct SliderData
+    {
+        public float Slider1;
+        public float Slider2;
+        public float Slider3;
+        public float Slider4;
+        public float Slider5;
+        public float Slider6;
+    }
