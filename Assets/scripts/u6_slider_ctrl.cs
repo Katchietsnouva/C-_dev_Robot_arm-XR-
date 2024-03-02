@@ -571,7 +571,7 @@ public class u6_slider_ctrl : MonoBehaviour
                             if (!string.IsNullOrEmpty(jsonData))
                             {
                                 Debug.Log($"Received data from server: {jsonData}");
-                                SetRobotPositions_from_Remote(string jsonData);
+                                SetRobotPositions_from_Remote(jsonData);
                             }
                         }
                     }
@@ -595,14 +595,14 @@ public class u6_slider_ctrl : MonoBehaviour
 
     public class SliderData
     {
-        public double Slider1;
-        public double Slider2;
-        public double Slider3;
-        public double Slider4;
-        public double Slider5;
-        public double Slider6;
+        public float Slider1;
+        public float Slider2;
+        public float Slider3;
+        public float Slider4;
+        public float Slider5;
+        public float Slider6;
     }
-    
+
     private void SetRobotPositions_from_Remote(string jsonData)
     {
         // Deserialize the received JSON data
