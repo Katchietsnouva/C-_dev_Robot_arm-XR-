@@ -587,12 +587,19 @@ public class u6_slider_ctrl : MonoBehaviour
         yield break;
     }
 
+    private void SetRobotPositions(RobotKeyframe keyframe)
+    { // Update sliders based on keyframe values
+        // Assuming you have a method like AlterJoints, update the sliders based on keyframe values
+        slider1.value = keyframe.Slider1;
+        slider2.value = keyframe.Slider2;
+        slider3.value = keyframe.Slider3;
+        slider4.value = keyframe.Slider4;
+        slider5.value = keyframe.Slider5;
+        slider6.value = keyframe.Slider6;
 
-
-
-
-
-
+        // Call the method that updates the robot's joint positions
+        AlterJoints();
+    }
 
 
 
