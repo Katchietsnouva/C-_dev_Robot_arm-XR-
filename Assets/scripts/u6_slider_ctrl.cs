@@ -538,53 +538,87 @@ public class u6_slider_ctrl : MonoBehaviour
     // private bool client256_part_hasExecuted = false;
     private int receiveDataExecutionCount = 0;
 
-private IEnumerator ReceiveData()
-{
-    Debug.LogWarning("Client starting");
-    receiveDataExecutionCount++;
-    Debug.Log(receiveDataExecutionCount);
-
-    if (pipeClient == null)
+    private IEnumerator ReceiveData()
     {
-        if (receiveDataExecutionCount == 1)
+        Debug.LogWarning("Client starting");
+        receiveDataExecutionCount++;
+        Debug.Log(receiveDataExecutionCount);
+
+        if (pipeClient == null)
         {
-            Debug.Log("This is the first execution of ReceiveData.");
-
-            client_part_hasExecuted = true; // Set the flag to true to prevent further executions
-            Debug.Log("Test 1 complete. Waiting to be Connected to pipe.");
-
-            Task.Run(() =>
+            if (receiveDataExecutionCount == 1)
             {
-                // This code will run on a separate thread
-                try
+                Debug.Log("This is the first execution of ReceiveData.");
+
+                client_part_hasExecuted = true; // Set the flag to true to prevent further executions
+                Debug.Log("Test 1 complete. Waiting to be Connected to pipe.");
+
+                Task.Run(() =>
                 {
-                    pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In);
-                    StreamReader sr = new StreamReader(pipeClient);
-                    pipeClient.Connect();
-                    Debug.Log("Connected to pipe.");
-
-                    // Add the rest of your code for reading data or any other operations
-                    while (pipeClient.IsConnected)
+                    // This code will run on a separate thread
+                    try
                     {
-                        string data = sr.ReadLine(); // Adjust this line based on your data format
+                        pipeClient = new NamedPipeClientStream(".", pipeName2, PipeDirection.In);
+                        StreamReader sr = new StreamReader(pipeClient);
+                        pipeClient.Connect();
+                        Debug.Log("Connected to pipe.");
 
-                        if (!string.IsNullOrEmpty(data))
+                        // Add the rest of your code for reading data or any other operations
+                        while (pipeClient.IsConnected)
                         {
-                            Debug.Log($"Received data from server: {data}");
+                            string jsonData = sr.ReadLine(); // Adjust this line based on your data format
+
+                            if (!string.IsNullOrEmpty(jsonData))
+                            {
+                                Debug.Log($"Received data from server: {jsonData}");
+                                SetRobotPositions_from_Remote(string jsonData);
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log($"Error in separate thread: {ex.Message}");
-                }
-            });
+                    catch (Exception ex)
+                    {
+                        Debug.Log($"Error in separate thread: {ex.Message}");
+                    }
+                });
+            }
         }
+
+        // Add the following line to satisfy the IEnumerator return type
+        yield break;
     }
 
-    // Add the following line to satisfy the IEnumerator return type
-    yield break;
-}
+    public class ReceivedData
+    {
+        public int msgIndex;
+        public SliderData sliderData;
+    }
+
+    public class SliderData
+    {
+        public double Slider1;
+        public double Slider2;
+        public double Slider3;
+        public double Slider4;
+        public double Slider5;
+        public double Slider6;
+    }
+    
+    private void SetRobotPositions_from_Remote(string jsonData)
+    {
+        // Deserialize the received JSON data
+        ReceivedData receivedData = JsonUtility.FromJson<ReceivedData>(jsonData);
+
+        // Update sliders based on data values
+        slider1.value = receivedData.sliderData.Slider1;
+        slider2.value = receivedData.sliderData.Slider2;
+        slider3.value = receivedData.sliderData.Slider3;
+        slider4.value = receivedData.sliderData.Slider4;
+        slider5.value = receivedData.sliderData.Slider5;
+        slider6.value = receivedData.sliderData.Slider6;
+
+        // Call the method that updates the robot's joint positions
+        AlterJoints();
+    }
 
         
 
