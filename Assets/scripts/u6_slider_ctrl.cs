@@ -570,7 +570,7 @@ public class u6_slider_ctrl : MonoBehaviour
 
                             if (!string.IsNullOrEmpty(jsonData))
                             {
-                                Debug.Log($"Received data from server: {jsonData}");
+                                // Debug.Log($"Received data from server: {jsonData}");
                                 SetRobotPositions_from_Remote(jsonData);
                             }
                         }
@@ -587,45 +587,32 @@ public class u6_slider_ctrl : MonoBehaviour
         yield break;
     }
 
-    // private void SetRobotPositions(RobotKeyframe keyframe)
-    // { // Update sliders based on keyframe values
-    //     // Assuming you have a method like AlterJoints, update the sliders based on keyframe values
-    //     slider1.value = keyframe.Slider1;
-    //     slider2.value = keyframe.Slider2;
-    //     slider3.value = keyframe.Slider3;
-    //     slider4.value = keyframe.Slider4;
-    //     slider5.value = keyframe.Slider5;
-    //     slider6.value = keyframe.Slider6;
-
-    //     // Call the method that updates the robot's joint positions
-    //     AlterJoints();
-    // }
-
-
-
     private void SetRobotPositions_from_Remote(string jsonData)
     {
         // Parse JSON data into the RobotKeyframe struct
         RobotKeyframe1 robotKeyframe1 = JsonConvert.DeserializeObject<RobotKeyframe1>(jsonData);
+         // Schedule AlterJoints on the main thread
+        UnityMainThreadDispatcher.Instance().Enqueue(() => 
+        {
+            // Access individual values
+            // float slider1Value = robotKeyframe1.sliderData.Slider1;
+            slider1.value = robotKeyframe1.sliderData.Slider1;
+            slider2.value = robotKeyframe1.sliderData.Slider2;
+            slider3.value = robotKeyframe1.sliderData.Slider3;
+            slider4.value = robotKeyframe1.sliderData.Slider4;
+            slider5.value = robotKeyframe1.sliderData.Slider5;
+            slider6.value = robotKeyframe1.sliderData.Slider6;
 
-        // Access individual values
-        // float slider1Value = robotKeyframe1.sliderData.Slider1;
-        slider1.value = robotKeyframe1.sliderData.Slider1;
-        slider2.value = robotKeyframe1.sliderData.Slider2;
-        slider3.value = robotKeyframe1.sliderData.Slider3;
-        slider4.value = robotKeyframe1.sliderData.Slider4;
-        slider5.value = robotKeyframe1.sliderData.Slider5;
-        slider6.value = robotKeyframe1.sliderData.Slider6;
-
-        // Print values to the Unity debug log
-        Debug.Log($"Slider1: {slider1}");
-        Debug.Log($"Slider2: {slider2}");
-        Debug.Log($"Slider3: {slider3}");
-        Debug.Log($"Slider4: {slider4}");
-        Debug.Log($"Slider5: {slider5}");
-        Debug.Log($"Slider6: {slider6}");
-        AlterJoints();
-        // Use the received values as needed in your Unity application
+            // Print values to the Unity debug log
+            // Debug.Log($"Slider1: {slider1.value}");
+            // Debug.Log($"Slider2: {slider2.value}");
+            // Debug.Log($"Slider3: {slider3.value}");
+            // Debug.Log($"Slider4: {slider4.value}");
+            // Debug.Log($"Slider5: {slider5.value}");
+            // Debug.Log($"Slider6: {slider6.value}");
+            AlterJoints();
+            // Use the received values as needed in your Unity application
+        });
     }
 
 
