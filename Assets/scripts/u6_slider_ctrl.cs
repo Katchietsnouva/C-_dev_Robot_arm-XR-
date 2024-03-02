@@ -587,37 +587,79 @@ public class u6_slider_ctrl : MonoBehaviour
         yield break;
     }
 
-    public class ReceivedData
+    // public class ReceivedData
+    // {
+    //     public int msgIndex;
+    //     public SliderData sliderData;
+    // }
+
+    // public class SliderData
+    // {
+    //     public float Slider1;
+    //     public float Slider2;
+    //     public float Slider3;
+    //     public float Slider4;
+    //     public float Slider5;
+    //     public float Slider6;
+    // }
+    public class SliderData
+    {
+        public double Slider1;
+        public double Slider2;
+        public double Slider3;
+        public double Slider4;
+        public double Slider5;
+        public double Slider6;
+    }
+
+    [System.Serializable]
+    public class ServerData
     {
         public int msgIndex;
         public SliderData sliderData;
     }
 
-    public class SliderData
-    {
-        public float Slider1;
-        public float Slider2;
-        public float Slider3;
-        public float Slider4;
-        public float Slider5;
-        public float Slider6;
-    }
-
     private void SetRobotPositions_from_Remote(string jsonData)
     {
         // Deserialize the received JSON data
-        ReceivedData receivedData = JsonUtility.FromJson<ReceivedData>(jsonData);
+        // ReceivedData receivedData = JsonUtility.FromJson<ReceivedData>(jsonData);
+        ServerData serverData = JsonUtility.FromJson<ServerData>(jsonData);
+        
 
-        // Update sliders based on data values
-        slider1.value = receivedData.sliderData.Slider1;
-        slider2.value = receivedData.sliderData.Slider2;
-        slider3.value = receivedData.sliderData.Slider3;
-        slider4.value = receivedData.sliderData.Slider4;
-        slider5.value = receivedData.sliderData.Slider5;
-        slider6.value = receivedData.sliderData.Slider6;
+        // // Update sliders based on data values
+        float slider1.value = receivedData.sliderData.Slider1;
+        float slider2.value = receivedData.sliderData.Slider2;
+        float slider3.value = receivedData.sliderData.Slider3;
+        float slider4.value = receivedData.sliderData.Slider4;
+        float slider5.value = receivedData.sliderData.Slider5;
+        float slider6.value = receivedData.sliderData.Slider6;
 
-        // Call the method that updates the robot's joint positions
-        AlterJoints();
+        // AlterJoints();
+        
+        // float slider1Value = slider1.value;
+        // float slider2Value = slider2.value;
+        // float slider3Value = slider3.value;
+        // float slider4Value = slider4.value;
+        // float slider5Value = slider5.value;
+        // float slider6Value = slider6.value;
+
+        // int msgIndex = serverData.msgIndex;
+        // double slider1Value = serverData.sliderData.Slider1;
+        // double slider2Value = serverData.sliderData.Slider2;
+        // double slider3Value = serverData.sliderData.Slider3;
+        // double slider4Value = serverData.sliderData.Slider4;
+        // double slider5Value = serverData.sliderData.Slider5;
+        // double slider6Value = serverData.sliderData.Slider6;
+
+        // Print values to the Unity debug log
+        // Debug.Log($"msgIndex: {msgIndex}");
+        Debug.Log($"Slider1: {slider1Value}");
+        Debug.Log($"Slider2: {slider2Value}");
+        Debug.Log($"Slider3: {slider3Value}");
+        Debug.Log($"Slider4: {slider4Value}");
+        Debug.Log($"Slider5: {slider5Value}");
+        Debug.Log($"Slider6: {slider6Value}");
+    
     }
 
         
@@ -696,7 +738,7 @@ public class u6_slider_ctrl : MonoBehaviour
     //     // Add any additional logic here if needed
         // yield return null; // To avoid Unity warning about the yield return
     // }
-// }
+    // }
 
 
 
